@@ -1,0 +1,12 @@
+.container-footer {
+    max-width: 1200px; /* largura fixa ideal para desktop */
+    width: 100%;
+    margin: 0 auto;
+    /* background-color: #0033A1; */
+    background-color:rgba(35, 132, 255, 30%);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding-left: 0px;
+    padding-right: 0px;
+}
