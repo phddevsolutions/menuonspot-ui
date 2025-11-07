@@ -1,15 +1,36 @@
-/* === Layout principal da secção index === */
-#index-section-placeholder {
-  margin-top: 75px; /* espaço para o header fixo */
+/* === BASE === */
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  background-color: #f8f9fa;
+  font-family: 'Figtree', 'Open Sans', sans-serif;
 }
 
-/* A área onde estão os 3 painéis */
+/* Header fixo no topo */
+#header-placeholder {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  z-index: 1000;
+  background-color: #0d6efd; /* bg-primary */
+  color: white;
+}
+
+/* Espaço abaixo do header fixo */
+#index-section-placeholder {
+  margin-top: 75px;
+}
+
+/* === LAYOUT PRINCIPAL (3 colunas) === */
 #index-section-placeholder > .container-fluid {
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 95px); /* ocupa viewport menos header/footer */
+  height: calc(100vh - 95px); /* 100vh menos header/footer */
   background-color: gainsboro;
-  overflow: hidden; /* impede scroll duplo do container */
+  overflow: hidden; /* evita scroll global desnecessário */
 }
 
 /* Painel esquerdo */
@@ -20,7 +41,7 @@
   overflow-y: auto;
 }
 
-/* Painel central — o único com scroll prioritário */
+/* Painel central */
 #menu-placeholder {
   flex: 1;
   background-color: white;
@@ -36,14 +57,43 @@
   overflow-y: auto;
 }
 
-/* Footer fixo na parte inferior (se quiseres ver sempre) */
+/* === ESCONDER AS BARRAS DE SCROLL (mas manter o movimento) === */
+
+/* Chrome, Edge, Safari */
+#filter-placeholder::-webkit-scrollbar,
+#menu-placeholder::-webkit-scrollbar,
+#company-placeholder::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Firefox */
+#filter-placeholder,
+#menu-placeholder,
+#company-placeholder {
+  scrollbar-width: none; /* oculta a barra */
+  -webkit-overflow-scrolling: touch; /* suaviza scroll em mobile */
+}
+
+/* === FOOTER === */
 #footer-placeholder {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100%);
+  transition: all 0.4s ease;
   background-color: #ddd;
   text-align: center;
   padding: 10px;
 }
 
-/* Responsivo: esconder o painel direito em telas pequenas */
+/* Quando o footer deve aparecer */
+#footer-placeholder.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Responsividade */
 @media (max-width: 767.98px) {
   #filter-placeholder {
     flex: 0 0 33%;
@@ -52,8 +102,9 @@
   #menu-placeholder {
     flex: 0 0 67%;
     max-width: 67%;
+    max-height: none; /* o scroll global assume em mobile */
   }
   #company-placeholder {
-    display: none;
+    display: none !important;
   }
 }
