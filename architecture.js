@@ -1,43 +1,41 @@
-function buildArchitecture (callback) {
-  const tasks = []
+async function buildArchitecture (callback) {
+  try {
+    // 1️⃣ Load header
+    const headerRes = await fetch('header.html')
+    document.getElementById('header-placeholder').innerHTML =
+      await headerRes.text()
 
-  // Header
-  tasks.push(
-    fetch('header.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('header-placeholder').innerHTML = data
-      })
-      .catch(err => console.error('Erro ao carregar header.html', err))
-  )
+    // 2️⃣ Load index-section (the container)
+    const sectionRes = await fetch('index-section.html')
+    document.getElementById('index-section-placeholder').innerHTML =
+      await sectionRes.text()
 
-  // Index section
+    // 3️⃣ Now load nested sections (they exist now)
+    const [filterRes, menuRes, companyRes] = await Promise.all([
+      fetch('filter-section.html'),
+      fetch('menu-section.html'),
+      fetch('company-section.html')
+    ])
 
-  tasks.push(
-    fetch('index-section.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('index-section-placeholder').innerHTML = data
+    document.getElementById('filter-placeholder').innerHTML =
+      await filterRes.text()
+    document.getElementById('menu-placeholder').innerHTML = await menuRes.text()
+    document.getElementById('company-placeholder').innerHTML =
+      await companyRes.text()
 
-        loadLanguage(getLanguage())
-      })
-      .catch(err => console.error('Erro ao carregar index-section.html', err))
-  )
+    // 4️⃣ Load footer
+    const footerRes = await fetch('footer.html')
+    document.getElementById('footer-placeholder').innerHTML =
+      await footerRes.text()
 
-  // Footer
-  tasks.push(
-    fetch('footer.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('footer-placeholder').innerHTML = data
-      })
-      .catch(err => console.error('Erro ao carregar footer.html', err))
-  )
-
-  // Espera por todas as tarefas
-  Promise.all(tasks).then(() => {
-    if (typeof callback === 'function') {
-      callback()
+    // 5️⃣ Load languages after all content is inserted
+    if (typeof loadLanguage === 'function') {
+      loadLanguage(getLanguage())
     }
-  })
+
+    // 6️⃣ Callback
+    if (typeof callback === 'function') callback()
+  } catch (err) {
+    console.error('Error building architecture:', err)
+  }
 }
