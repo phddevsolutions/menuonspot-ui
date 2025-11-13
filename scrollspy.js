@@ -1,5 +1,4 @@
 ;(async function () {
-  // Espera pelo menu e pelas sections
   function waitForSections (timeout = 8000) {
     return new Promise(resolve => {
       const checkSections = () => {
@@ -36,15 +35,13 @@
 
   const navLinks = document.querySelectorAll('.navbar a')
   const footerHeight =
-    document.getElementById('footer-placeholder').offsetHeight || 0
-  const navbarHeight = 75 // ajuste conforme altura da navbar
+    document.getElementById('footer-placeholder')?.offsetHeight || 0
+  const navbarHeight = 75
 
-  // ScrollSpy usando getBoundingClientRect e considerando o footer
   const updateActiveLink = () => {
     let current = ''
     sections.forEach(section => {
       const rect = section.getBoundingClientRect()
-      // considera navbar e footer
       if (
         rect.top <= navbarHeight &&
         rect.bottom > navbarHeight + footerHeight
@@ -54,34 +51,27 @@
     })
 
     navLinks.forEach(link => {
-      link.classList.remove('active')
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active')
-      }
+      link.classList.toggle(
+        'active',
+        link.getAttribute('href') === `#${current}`
+      )
     })
   }
 
-  // Scroll listener no container ou window
+  window.addEventListener('scroll', updateActiveLink)
   menu.addEventListener('scroll', updateActiveLink)
-  window.addEventListener('scroll', updateActiveLink) // útil se scroll for global
 
-  // Scroll suave ao clicar nos links
   navLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault()
       const targetId = link.getAttribute('href').substring(1)
       const targetSection = document.getElementById(targetId)
       if (targetSection) {
-        targetSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        })
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     })
   })
 
-  // Inicializa a primeira seleção
   updateActiveLink()
-
-  console.log('✅ scrollspy.js final instalado com sucesso!')
+  console.log('✅ ScrollSpy final instalado!')
 })()

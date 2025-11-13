@@ -4,6 +4,10 @@ async function buildArchitecture (callback) {
     document.getElementById('header-placeholder').innerHTML =
       await headerRes.text()
 
+    if (typeof buildHeader === 'function') {
+      buildHeader()
+    }
+
     const sectionRes = await fetch('index-section.html')
     document.getElementById('index-section-placeholder').innerHTML =
       await sectionRes.text()
@@ -20,6 +24,10 @@ async function buildArchitecture (callback) {
     document.getElementById('menu-placeholder').innerHTML = await menuRes.text()
     // document.getElementById('company-placeholder').innerHTML =
     //   await companyRes.text()
+
+    if (typeof buildMenuSections === 'function') {
+      buildMenuSections('menu-placeholder')
+    }
 
     const footerRes = await fetch('footer.html')
     document.getElementById('footer-placeholder').innerHTML =
