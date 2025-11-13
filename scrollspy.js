@@ -35,13 +35,20 @@
   }
 
   const navLinks = document.querySelectorAll('.navbar a')
+  const footerHeight =
+    document.getElementById('footer-placeholder').offsetHeight || 0
+  const navbarHeight = 75 // ajuste conforme altura da navbar
 
-  // ScrollSpy
+  // ScrollSpy usando getBoundingClientRect e considerando o footer
   const updateActiveLink = () => {
     let current = ''
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 75 // altura navbar
-      if (menu.scrollTop >= sectionTop - section.clientHeight / 3) {
+      const rect = section.getBoundingClientRect()
+      // considera navbar e footer
+      if (
+        rect.top <= navbarHeight &&
+        rect.bottom > navbarHeight + footerHeight
+      ) {
         current = section.id
       }
     })
@@ -54,22 +61,27 @@
     })
   }
 
+  // Scroll listener no container ou window
   menu.addEventListener('scroll', updateActiveLink)
+  window.addEventListener('scroll', updateActiveLink) // útil se scroll for global
 
-  // Scroll suave
+  // Scroll suave ao clicar nos links
   navLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault()
       const targetId = link.getAttribute('href').substring(1)
       const targetSection = document.getElementById(targetId)
       if (targetSection) {
-        menu.scrollTo({
-          top: targetSection.offsetTop - 75,
-          behavior: 'smooth'
+        targetSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
         })
       }
     })
   })
 
-  console.log('✅ scrollspy totalmente funcional instalado!')
+  // Inicializa a primeira seleção
+  updateActiveLink()
+
+  console.log('✅ scrollspy.js final instalado com sucesso!')
 })()

@@ -4,7 +4,6 @@ async function buildArchitecture (callback) {
     document.getElementById('header-placeholder').innerHTML =
       await headerRes.text()
 
-    // 2️⃣ Load index-section (the container)
     const sectionRes = await fetch('index-section.html')
     document.getElementById('index-section-placeholder').innerHTML =
       await sectionRes.text()
@@ -22,7 +21,6 @@ async function buildArchitecture (callback) {
     // document.getElementById('company-placeholder').innerHTML =
     //   await companyRes.text()
 
-    // 4️⃣ Load footer
     const footerRes = await fetch('footer.html')
     document.getElementById('footer-placeholder').innerHTML =
       await footerRes.text()

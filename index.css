@@ -63,23 +63,9 @@ html, body {
   -webkit-overflow-scrolling: touch; /* suaviza scroll em mobile */
 }
 
-/* === FOOTER === */
-#footer-placeholder {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(100%);
-  transition: all 0.4s ease;
-  background-color: #ddd;
-  text-align: center;
-  padding: 10px;
-}
 
-/* Quando o footer deve aparecer */
-#footer-placeholder.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
+
+
 
 /* Responsividade */
 @media (max-width: 767.98px) {
@@ -88,8 +74,7 @@ html, body {
     max-width: 33%;
   }
   #menu-placeholder {
-    flex: 0 0 67%;
-    max-width: 67%;
+   
     max-height: none; /* o scroll global assume em mobile */
   }
   #company-placeholder {
