@@ -1,3 +1,4 @@
+/* === NAVBAR === */
 .navbar {
   display: flex;
   justify-content: space-around;
@@ -5,6 +6,7 @@
   background-color: #fff;
   border-bottom: 2px solid #ddd;
   position: relative;
+  z-index: 1000;
 }
 
 .navbar a {
@@ -16,9 +18,9 @@
   transition: color 0.3s ease;
 }
 
-.navbar a:hover {
-  color: #ff6600; /* efeito hover */
-}
+/* .navbar a:hover {
+  color: #ff6600;
+} */
 
 .navbar a.active {
   color: #ff6600;
@@ -27,28 +29,58 @@
 .navbar a.active::after {
   content: "";
   position: absolute;
-  bottom: -2px; /* ligeiramente abaixo do link */
+  bottom: -2px; /* linha laranja abaixo do link */
   left: 0;
   height: 3px;
   width: 100%;
   background-color: #ff6600;
   border-radius: 2px;
-  transition: all 0.3s ease; /* animação suave */
+  transition: all 0.3s ease;
 }
 
+/* === RESPONSIVO: mobile (smartphones) === */
 @media (max-width: 767px) {
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 5px 10px;
+    flex-direction: column;       /* links em coluna */
+    position: fixed;              /* fixo à esquerda */
+    top: 0;
+    left: 0;
+    width: 120px;                 /* largura ajustada */
+    height: 100vh;
+    background-color: #fff;
+    border-right: 2px solid #ddd;
+    border-bottom: none;
+    padding-top: 20px;
   }
 
   .navbar a {
-    padding: 8px 12px;
+    padding: 12px 10px;
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
   }
 
+  /* Barra lateral laranja para link ativo */
   .navbar a.active::after {
-    bottom: 0;
-    height: 2px;
+    bottom: auto;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 50%;
+    background-color: #ff6600;
+    border-radius: 2px;
   }
+
+  /* Ajusta o conteúdo principal para não ficar atrás da navbar */
+  #index-section-placeholder {
+    margin-left: 120px;  /* mesma largura da navbar */
+  }
+}
+
+/* === CONTEÚDO PRINCIPAL === */
+#index-section-placeholder {
+  flex: 1;
+  background-color: #f8f9fa;
+  transition: margin-left 0.3s ease;
 }
