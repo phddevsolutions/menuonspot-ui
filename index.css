@@ -7,21 +7,9 @@ html, body {
   font-family: 'Figtree', 'Open Sans', sans-serif;
 }
 
-/* Header fixo no topo */
-#header-placeholder {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 75px;
-  z-index: 1000;
-  background-color: #0d6efd; /* bg-primary */
-  color: white;
-}
 
-/* Espaço abaixo do header fixo */
-#index-section-placeholder {
-  margin-top: 75px;
+.height75{
+  height:75px;
 }
 
 /* === LAYOUT PRINCIPAL (3 colunas) === */
@@ -45,7 +33,7 @@ html, body {
 #menu-placeholder {
   flex: 1;
   background-color: white;
-  max-height: calc(100vh - 95px);
+  max-height: calc(100vh - 75px);
   overflow-y: auto;
 }
 

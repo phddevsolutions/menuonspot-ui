@@ -1,6 +1,5 @@
 async function buildArchitecture (callback) {
   try {
-    // 1️⃣ Load header
     const headerRes = await fetch('header.html')
     document.getElementById('header-placeholder').innerHTML =
       await headerRes.text()
@@ -11,17 +10,17 @@ async function buildArchitecture (callback) {
       await sectionRes.text()
 
     // 3️⃣ Now load nested sections (they exist now)
-    const [filterRes, menuRes, companyRes] = await Promise.all([
-      fetch('filter-section.html'),
-      fetch('menu-section.html'),
-      fetch('company-section.html')
+    const [menuRes] = await Promise.all([
+      // fetch('filter-section.html'),
+      fetch('menu-section.html')
+      // fetch('company-section.html')
     ])
 
-    document.getElementById('filter-placeholder').innerHTML =
-      await filterRes.text()
+    // document.getElementById('filter-placeholder').innerHTML =
+    //   await filterRes.text()
     document.getElementById('menu-placeholder').innerHTML = await menuRes.text()
-    document.getElementById('company-placeholder').innerHTML =
-      await companyRes.text()
+    // document.getElementById('company-placeholder').innerHTML =
+    //   await companyRes.text()
 
     // 4️⃣ Load footer
     const footerRes = await fetch('footer.html')

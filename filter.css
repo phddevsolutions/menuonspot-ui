@@ -1,0 +1,25 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px 0;
+    z-index: 1000;
+  }
+
+  .navbar a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s, border-bottom 0.3s;
+    padding-bottom: 5px;
+  }
+
+  .navbar a.active {
+    color: #fff;
+    border-bottom: 3px solid #ff9800;
+  }
