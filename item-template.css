@@ -1,6 +1,7 @@
 .menu-item {
   display: flex;
   align-items: flex-start; /* align text and image at top */
+  border-top:1px dashed red
 }
 
 .menu-item .flex-grow-1 {
