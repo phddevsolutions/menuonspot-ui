@@ -11,21 +11,24 @@ const data = {
           label: 'Coca-Cola',
           description: 'Refrigerante gelado',
           preco: 2.5,
-          urlImagem: IMG_BASE + 'coca-cola.png',
+          urlImagem:
+            'https://cdn-media.choiceqr.com/prod-eat-eatery-119/menu/thumbnail_a-O-i.png',
           ativo: true
         },
         {
           label: 'Suco de Laranja',
           description: 'Suco natural fresco',
           preco: 3.0,
-          urlImagem: IMG_BASE + 'suco-laranja.jpg',
+          urlImagem:
+            'https://cdn-media.choiceqr.com/prod-eat-eatery-119/menu/thumbnail_LkisSec-VTLRGXG-ZtLDcFt_b-G-R.jpeg',
           ativo: true
         },
         {
           label: 'Água Mineral',
           description: 'Água pura e refrescante',
           preco: 1.5,
-          urlImagem: IMG_BASE + 'agua.jpg',
+          urlImagem:
+            'https://cdn-media.choiceqr.com/prod-eat-eatery-119/menu/thumbnail_I-K-H.png',
           ativo: true
         }
       ]
