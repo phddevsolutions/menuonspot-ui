@@ -28,7 +28,12 @@
                      <div id="header-placeholder"></div>
                    <div id="index-section-placeholder"></div> 
                     <div id="footer-placeholder"></div> 
-        
+        <script>
+          // Detecta automaticamente se está no GitHub Pages
+          if (location.hostname === "phddevsolutions.github.io") {
+            document.write('<base href="/menuonspot-ui/">');
+          }
+        </script>
         <script src="architecture.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
