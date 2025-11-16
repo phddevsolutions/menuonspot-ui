@@ -1,4 +1,4 @@
-const IMG_BASE = '/images/'
+const IMG_BASE = './images/'
 const DEFAULT_IMG = IMG_BASE + 'default.png'
 
 const data = {
