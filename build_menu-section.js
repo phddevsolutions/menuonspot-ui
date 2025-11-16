@@ -51,6 +51,8 @@ async function buildMenuSections (containerId) {
         }
 
         itemDiv.querySelector('.item-title').textContent = item.label
+        itemDiv.querySelector('.item-description').textContent =
+          item.description
         itemDiv.querySelector(
           '.item-price'
         ).textContent = `${item.preco.toFixed(2)}€`
