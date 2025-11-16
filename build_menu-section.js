@@ -23,13 +23,13 @@ async function buildMenuSections (containerId) {
     // Título
     const title = document.createElement('div')
     title.className =
-      'text-center fw-bold d-flex align-items-center justify-content-center mb-4'
+      'row text-center text-section align-items-center justify-content-center mb-4'
     title.textContent = menu.label
     section.appendChild(title)
 
     // Container de itens
     const itemsRow = document.createElement('div')
-    itemsRow.className = 'row justify-content-center'
+    itemsRow.className = 'container-fluid justify-content-center'
 
     // Criar itens ativos
     menu.itens

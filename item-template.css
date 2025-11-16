@@ -13,7 +13,11 @@
   margin-left: 1rem; /* gap between text and image */
 }
 
-
+.text-section{
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--theme-colors-700);
+}
 
 .text-description {
     overflow: hidden;
