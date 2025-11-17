@@ -27,39 +27,53 @@
   }
 
   const { menu, sections } = await waitForSections()
-
   if (!menu || !sections.length) {
     console.warn('scrollspy: #menu-placeholder ou sections não encontrados.')
     return
   }
 
   const navLinks = document.querySelectorAll('.navbar a')
-  const footerHeight =
-    document.getElementById('footer-placeholder')?.offsetHeight || 0
   const navbarHeight = 75
 
-  const updateActiveLink = () => {
-    let current = ''
-    sections.forEach(section => {
-      const rect = section.getBoundingClientRect()
-      if (
-        rect.top <= navbarHeight &&
-        rect.bottom > navbarHeight + footerHeight
-      ) {
-        current = section.id
-      }
-    })
+  // Ajusta a última seção para que todos os itens fiquem visíveis
+  const adjustLastSection = () => {
+    const lastSection = sections[sections.length - 1]
+    const containerHeight = menu.clientHeight
+    const sectionHeight = lastSection.scrollHeight
+    if (sectionHeight < containerHeight) {
+      lastSection.style.minHeight = `${containerHeight}px`
+    } else {
+      lastSection.style.minHeight = ''
+    }
+  }
+  adjustLastSection()
+  window.addEventListener('resize', adjustLastSection)
 
-    navLinks.forEach(link => {
+  const updateActiveLink = () => {
+    const scrollTop = menu.scrollTop + navbarHeight
+    let currentSection = sections[0]
+
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i]
+      const sectionTop = section.offsetTop
+      const sectionBottom = sectionTop + section.offsetHeight
+
+      if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+        currentSection = section
+        break
+      }
+    }
+
+    navLinks.forEach(link =>
       link.classList.toggle(
         'active',
-        link.getAttribute('href') === `#${current}`
+        link.getAttribute('href') === `#${currentSection.id}`
       )
-    })
+    )
   }
 
-  window.addEventListener('scroll', updateActiveLink)
   menu.addEventListener('scroll', updateActiveLink)
+  window.addEventListener('resize', updateActiveLink)
 
   navLinks.forEach(link => {
     link.addEventListener('click', e => {
@@ -67,11 +81,15 @@
       const targetId = link.getAttribute('href').substring(1)
       const targetSection = document.getElementById(targetId)
       if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        menu.scrollTo({
+          top: targetSection.offsetTop - navbarHeight,
+          behavior: 'smooth'
+        })
       }
     })
   })
 
+  // Atualiza active ao iniciar
   updateActiveLink()
-  console.log('✅ ScrollSpy final instalado!')
+  console.log('✅ ScrollSpy final estável instalado!')
 })()

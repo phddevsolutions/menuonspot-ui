@@ -42,46 +42,43 @@
 /* === RESPONSIVO: mobile (smartphones) === */
 @media (max-width: 767px) {
   .navbar {
-    flex-direction: column;       /* links em coluna */
-    position: fixed;              /* fixo à esquerda */
+    flex-direction: row;           /* agora fica horizontal */
+    justify-content: space-around; /* mesma lógica do desktop */
+    position: fixed;               /* fixa no topo */
     top: 0;
     left: 0;
-    width: 120px;                 /* largura ajustada */
-    height: 100vh;
+    width: 100%;                   /* ocupa toda a largura */
+    height: 75px;                  /* mesma altura da desktop */
     background-color: #fff;
-    border-right: 2px solid #ddd;
-    border-bottom: none;
-    padding-top: 20px;
+    border-bottom: 2px solid #ddd; /* borda inferior como desktop */
+    border-right: none;            /* remove borda lateral */
+    padding: 0 10px;               /* pequeno padding horizontal */
+    z-index: 1000;
   }
 
   .navbar a {
-    padding: 12px 10px;
-    width: 100%;
-    text-align: left;
+    padding: 10px 10px;            /* ajuste opcional */
+    width: auto;                   /* deixa os links no fluxo normal */
+    text-align: center;
     font-size: 14px;
   }
 
-  /* Barra lateral laranja para link ativo */
+  /* Linha laranja para link ativo (igual ao desktop) */
   .navbar a.active::after {
-    bottom: auto;
+    content: "";
+    position: absolute;
+    bottom: -2px;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 50%;
+    width: 100%;
+    height: 3px;
     background-color: #ff6600;
     border-radius: 2px;
+    transform: none;
   }
 
-  /* Ajusta o conteúdo principal para não ficar atrás da navbar */
+  /* Ajuste do conteúdo principal para não ficar atrás da navbar */
   #index-section-placeholder {
-    margin-left: 120px;  /* mesma largura da navbar */
+    margin-left: 0;                /* remove ajuste antigo */
+    margin-top: 75px;              /* empurra o conteúdo abaixo da navbar */
   }
-}
-
-/* === CONTEÚDO PRINCIPAL === */
-#index-section-placeholder {
-  flex: 1;
-  background-color: #f8f9fa;
-  transition: margin-left 0.3s ease;
 }
