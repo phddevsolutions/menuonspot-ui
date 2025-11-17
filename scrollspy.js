@@ -64,6 +64,11 @@
       }
     }
 
+    // Corrige o último tab quando chegamos ao final do scroll
+    if (menu.scrollTop + menu.clientHeight >= menu.scrollHeight - 1) {
+      currentSection = sections[sections.length - 1]
+    }
+
     navLinks.forEach(link =>
       link.classList.toggle(
         'active',

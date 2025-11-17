@@ -20,49 +20,67 @@ html, body {
 #index-section-placeholder > .container-fluid {
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 95px); /* 100vh menos header/footer */
+   min-height: 0; /* MUITO importante para que filhos com overflow auto respeitem o tamanho */
+  height: calc(100vh - 95px); /* altura total menos header/footer */
   background-color: gainsboro;
-  overflow: hidden; /* evita scroll global desnecessário */
+  overflow: visible; /* permite que os filhos rolem normalmente */
 }
 
-/* Painel esquerdo */
-#filter-placeholder {
-  flex: 0 0 20%;
-  max-width: 20%;
-  background-color: #f5f5f5;
-  overflow-y: auto;
-}
 
-/* Painel central */
+
+/* Container do menu */
 #menu-placeholder {
   flex: 1;
   background-color: white;
   max-height: calc(100vh - 75px);
-  overflow-y: auto;
+  overflow-y: auto; /* aqui é que permite o scroll interno */
+  scroll-behavior: smooth;
+  padding: 0 1rem;
 }
 
-/* Painel direito */
-#company-placeholder {
-  flex: 0 0 20%;
-  max-width: 20%;
-  background-color: #f0f0f0;
-  overflow-y: auto;
+/* Cada seção do menu */
+#menu-placeholder section {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  scroll-margin-top: 75px; /* garante que a seção suba até encostar no navbar ao clicar no tab */
 }
+
+/* Ajuste específico da última seção para mostrar todos os itens */
+#menu-placeholder section:last-child {
+  min-height: auto; /* será ajustado dinamicamente pelo scrollspy.js se necessário */
+}
+
+/* Itens do menu (opcional, deixa visual mais bonito) */
+#menu-placeholder .item-title {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+#menu-placeholder .item-description {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+#menu-placeholder .item-price {
+  font-weight: 700;
+  margin-top: 0.25rem;
+}
+
+
+
 
 /* === ESCONDER AS BARRAS DE SCROLL (mas manter o movimento) === */
 
 /* Chrome, Edge, Safari */
-#filter-placeholder::-webkit-scrollbar,
-#menu-placeholder::-webkit-scrollbar,
-#company-placeholder::-webkit-scrollbar {
+
+#menu-placeholder::-webkit-scrollbar
+ {
   width: 0px;
   background: transparent;
 }
 
 /* Firefox */
-#filter-placeholder,
-#menu-placeholder,
-#company-placeholder {
+#menu-placeholder {
   scrollbar-width: none; /* oculta a barra */
   -webkit-overflow-scrolling: touch; /* suaviza scroll em mobile */
 }
@@ -73,15 +91,9 @@ html, body {
 
 /* Responsividade */
 @media (max-width: 767.98px) {
-  #filter-placeholder {
-    flex: 0 0 33%;
-    max-width: 33%;
-  }
   #menu-placeholder {
-   
-    max-height: none; /* o scroll global assume em mobile */
-  }
-  #company-placeholder {
-    display: none !important;
+    max-height: none; /* permite scroll global */
   }
 }
+
+
