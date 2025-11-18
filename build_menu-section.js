@@ -25,7 +25,7 @@ async function buildMenuSections (containerId) {
     section.appendChild(title)
 
     const itemsRow = document.createElement('div')
-    itemsRow.className = 'container-fluid justify-content-center'
+    itemsRow.className = 'container-fluid justify-content-center p-0'
 
     menu.itens
       .filter(item => item.ativo)

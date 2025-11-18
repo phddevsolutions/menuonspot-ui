@@ -55,7 +55,8 @@ const data = {
           label: 'Mousse de Baunilha',
           description: 'Delicioso sabor de baunilha',
           preco: 4.5,
-          urlImagem: IMG_BASE + 'mousse.jpg',
+          urlImagem:
+            'https://cdn-media.choiceqr.com/prod-eat-eatery-119/menu/thumbnail_JkUbzWR-nEhMdew-CyRMFkX_C-U-K.jpeg',
           ativo: true
         }
       ]
@@ -69,7 +70,8 @@ const data = {
           description:
             'Juicy pork and beef kotlets (patties) served with buttery buckwheat, creamy mushroom sauce, and a side of fresh cucumber and cherry tomatoes.A hearty, homestyle dish — beloved since childhood.',
           preco: 3.5,
-          urlImagem: IMG_BASE + 'coca-cola.png',
+          urlImagem:
+            'https://cdn-media.choiceqr.com/prod-eat-eatery-119/menu/thumbnail_V-E-F.png',
           ativo: true
         },
         {
