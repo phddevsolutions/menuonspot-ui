@@ -1,7 +1,7 @@
 .menu-item {
   display: flex;
   align-items: flex-start; /* align text and image at top */
-  border-top:1px dashed red
+  border-top:1px dashed #e0e0e0
 }
 
 .menu-item .flex-grow-1 {
@@ -31,7 +31,6 @@
     font-weight: 400;
     font-size: 13px;
     line-height: 20px;
-    color: var(--theme-colors-500);
     width: 100%;
     max-width: 100%;
     word-wrap: break-word;
