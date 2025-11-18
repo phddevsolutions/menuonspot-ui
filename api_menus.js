@@ -66,7 +66,8 @@ const data = {
       itens: [
         {
           label: 'Salada Caesar',
-          description: 'Com frango grelhado',
+          description:
+            'Juicy pork and beef kotlets (patties) served with buttery buckwheat, creamy mushroom sauce, and a side of fresh cucumber and cherry tomatoes.A hearty, homestyle dish — beloved since childhood.',
           preco: 3.5,
           urlImagem: IMG_BASE + 'coca-cola.png',
           ativo: true

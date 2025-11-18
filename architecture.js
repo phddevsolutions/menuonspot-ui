@@ -29,9 +29,9 @@ async function buildArchitecture (callback) {
       buildMenuSections('menu-placeholder')
     }
 
-    const footerRes = await fetch('footer.html')
-    document.getElementById('footer-placeholder').innerHTML =
-      await footerRes.text()
+    // const footerRes = await fetch('footer.html')
+    // document.getElementById('footer-placeholder').innerHTML =
+    //   await footerRes.text()
 
     // 5️⃣ Load languages after all content is inserted
     if (typeof loadLanguage === 'function') {
