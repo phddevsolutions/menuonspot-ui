@@ -10,28 +10,23 @@ async function buildMenuSections (containerId) {
     return
   }
 
-  // Container principal
   const wrapper = document.createElement('div')
   wrapper.className = 'container-fluid'
 
   data.menus.forEach(menu => {
-    // Cada seção é independente
     const section = document.createElement('section')
     section.id = menu.id
     section.className = 'py-4'
 
-    // Título
     const title = document.createElement('div')
     title.className =
       'row text-center text-section align-items-center justify-content-center mb-4'
     title.textContent = menu.label
     section.appendChild(title)
 
-    // Container de itens
     const itemsRow = document.createElement('div')
     itemsRow.className = 'container-fluid justify-content-center'
 
-    // Criar itens ativos
     menu.itens
       .filter(item => item.ativo)
       .forEach(item => {
@@ -42,7 +37,6 @@ async function buildMenuSections (containerId) {
         const imgEl = itemDiv.querySelector('.item-img')
         imgEl.src = item.urlImagem
         imgEl.alt = item.label
-
         imgEl.onerror = function () {
           if (!this.dataset.fallbackUsed) {
             this.dataset.fallbackUsed = true
@@ -51,8 +45,8 @@ async function buildMenuSections (containerId) {
         }
 
         itemDiv.querySelector('.item-title').textContent = item.label
-        itemDiv.querySelector('.item-description').textContent =
-          item.description
+        const descEl = itemDiv.querySelector('.item-description')
+        descEl.textContent = item.description
         itemDiv.querySelector(
           '.item-price'
         ).textContent = `${item.preco.toFixed(2)}€`
@@ -61,10 +55,42 @@ async function buildMenuSections (containerId) {
       })
 
     section.appendChild(itemsRow)
-
-    // **Adicionar section diretamente ao wrapper**
     wrapper.appendChild(section)
   })
 
   container.appendChild(wrapper)
+
+  // =========================
+  // FUNÇÃO MAIS/MENOS
+  // =========================
+  document.querySelectorAll('.item-description').forEach(desc => {
+    const maxLength = 100 // ou qualquer limite de caracteres
+    const fullText = desc.textContent
+
+    if (fullText.length > maxLength) {
+      const visibleText = fullText.slice(0, maxLength)
+      const hiddenText = fullText.slice(maxLength)
+
+      desc.textContent = visibleText
+
+      const more = document.createElement('span')
+      more.textContent = '... mais'
+      more.style.color = '#007bff'
+      more.style.cursor = 'pointer'
+
+      more.addEventListener('click', () => {
+        if (desc.textContent.endsWith('... mais')) {
+          desc.textContent = fullText
+          more.textContent = ' menos'
+          desc.appendChild(more)
+        } else {
+          desc.textContent = visibleText
+          more.textContent = '... mais'
+          desc.appendChild(more)
+        }
+      })
+
+      desc.appendChild(more)
+    }
+  })
 }

@@ -20,7 +20,7 @@
     color: var(--theme-colors-700);
 }
 
-.text-description {
+.item-description {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -37,7 +37,7 @@
     word-wrap: break-word;
 }
 
-.text-title {
+.item-title {
    font-size: 16px;
     font-weight: 700;
     margin-bottom: 4px;
@@ -48,7 +48,7 @@
     line-height: 20px;
 }
 
-.text-price {
+.item-price {
     color: #ff6600;
     display: flex;
     align-items: flex-start;
