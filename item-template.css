@@ -33,6 +33,7 @@
     width: 100%;
     max-width: 100%;
     word-wrap: break-word;
+    text-transform: math-auto;
 }
 
 .item-title {
@@ -44,6 +45,7 @@
     hyphens: auto;
     white-space: normal;
     line-height: 20px;
+    text-transform: capitalize;
 }
 
 .item-price {
@@ -55,6 +57,7 @@
     row-gap: 4px;
     column-gap: 8px;
     margin-bottom: 8px;
+    text-transform: uppercase;
 }
 
 .item-img {

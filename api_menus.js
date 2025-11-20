@@ -16,7 +16,7 @@ const data = {
           ativo: true
         },
         {
-          label: 'Suco de Laranja',
+          label: 'Sumo de Laranja',
           description: 'Suco natural fresco',
           preco: 3.0,
           urlImagem:
@@ -84,6 +84,33 @@ const data = {
         {
           label: 'Salada de Frutas',
           description: 'Fresca e saudável',
+          preco: 1.5,
+          urlImagem: IMG_BASE + 'agua.jpg',
+          ativo: true
+        }
+      ]
+    },
+    {
+      label: 'Sopas',
+      id: 'sopas',
+      itens: [
+        {
+          label: 'Sopa de Legumes',
+          description: '',
+          preco: 3.5,
+          urlImagem: IMG_BASE + 'agua.jpg',
+          ativo: true
+        },
+        {
+          label: 'Sopa Grega',
+          description: 'Com queijo feta',
+          preco: 3.0,
+          urlImagem: IMG_BASE + 'suco-laranja.jpg',
+          ativo: true
+        },
+        {
+          label: 'Sopa de Agrião',
+          description: 'da horta para a mesa',
           preco: 1.5,
           urlImagem: IMG_BASE + 'agua.jpg',
           ativo: true
