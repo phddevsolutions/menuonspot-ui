@@ -1,9 +1,10 @@
 ;(async function () {
   function waitForSections (timeout = 8000) {
     return new Promise(resolve => {
-      const checkSections = () => {
+      const check = () => {
         const menu = document.getElementById('menu-placeholder')
         if (!menu) return false
+
         const sections = menu.querySelectorAll('section')
         if (sections.length) {
           resolve({ menu, sections })
@@ -12,9 +13,9 @@
         return false
       }
 
-      if (checkSections()) return
+      if (check()) return
 
-      const observer = new MutationObserver(() => checkSections())
+      const observer = new MutationObserver(check)
       observer.observe(document.body, { childList: true, subtree: true })
 
       setTimeout(() => {
@@ -28,28 +29,53 @@
 
   const { menu, sections } = await waitForSections()
   if (!menu || !sections.length) {
-    console.warn('scrollspy: #menu-placeholder ou sections não encontrados.')
+    console.warn('scrollspy: menu ou sections não encontrados.')
     return
   }
 
   const navLinks = document.querySelectorAll('.navbar a')
-  const navbarHeight = 75
+  const navbar = document.querySelector('.navbar')
+  const navbarHeight = navbar.getBoundingClientRect().height
 
-  // Ajusta a última seção para que todos os itens fiquem visíveis
+  // Garantir que a primeira secção NÃO fica escondida
+  sections[0].style.scrollMarginTop = `${navbarHeight}px`
+
+  // Ajustar ultima secção para ficar colada ao topo quando clicada
   const adjustLastSection = () => {
-    const lastSection = sections[sections.length - 1]
-    const containerHeight = menu.clientHeight
-    const sectionHeight = lastSection.scrollHeight
-    if (sectionHeight < containerHeight) {
-      lastSection.style.minHeight = `${containerHeight}px`
+    const last = sections[sections.length - 1]
+    const visible = menu.clientHeight
+    const sectionHeight = last.scrollHeight
+
+    if (sectionHeight < visible) {
+      last.style.minHeight = `${visible + navbarHeight}px`
+      // last.style.setProperty(
+      //   'padding-bottom',
+      //   `${missingSpace + 10}px`,
+      //   'important'
+      // )
     } else {
-      lastSection.style.minHeight = ''
+      last.style.minHeight = ''
     }
   }
   adjustLastSection()
   window.addEventListener('resize', adjustLastSection)
 
-  const updateActiveLink = () => {
+  // Atualiza active ao fazer scroll
+  let nextSection = null
+
+  const updateActive = () => {
+    if (!nextSection) {
+      return
+    }
+    navLinks.forEach(link => {
+      link.classList.toggle(
+        'active',
+        link.getAttribute('href') === `#${nextSection.id}`
+      )
+    })
+  }
+
+  const updateActiveViaScroll = () => {
     const scrollTop = menu.scrollTop + navbarHeight
     let currentSection = sections[0]
 
@@ -77,24 +103,27 @@
     )
   }
 
-  menu.addEventListener('scroll', updateActiveLink)
-  window.addEventListener('resize', updateActiveLink)
+  menu.addEventListener('scroll', updateActiveViaScroll)
+  window.addEventListener('resize', updateActiveViaScroll)
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', e => {
+  // Clique nos tabs
+  navLinks.forEach(a => {
+    a.addEventListener('click', e => {
       e.preventDefault()
-      const targetId = link.getAttribute('href').substring(1)
-      const targetSection = document.getElementById(targetId)
-      if (targetSection) {
-        menu.scrollTo({
-          top: targetSection.offsetTop - navbarHeight,
-          behavior: 'smooth'
-        })
-      }
+
+      const id = a.getAttribute('href').substring(1)
+      const target = document.getElementById(id)
+
+      if (!target) return
+      nextSection = target
+      const top = target.offsetTop - navbarHeight
+
+      menu.scrollTo({
+        top,
+        behavior: 'smooth'
+      })
     })
   })
 
-  // Atualiza active ao iniciar
-  updateActiveLink()
-  console.log('✅ ScrollSpy final estável instalado!')
+  updateActive()
 })()

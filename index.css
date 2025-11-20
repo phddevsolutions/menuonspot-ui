@@ -38,6 +38,10 @@ html, body {
   padding: 0 1rem;
 }
 
+#menu-placeholder section:first-child {
+  padding-top: 75px !important;
+}
+
 /* Cada seção do menu */
 #menu-placeholder section {
   padding-top: 1rem;
