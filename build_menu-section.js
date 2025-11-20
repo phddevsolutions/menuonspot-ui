@@ -13,50 +13,53 @@ async function buildMenuSections (containerId) {
   const wrapper = document.createElement('div')
   wrapper.className = 'container-fluid'
 
-  data.menus.forEach(menu => {
-    const section = document.createElement('section')
-    section.id = menu.id
-    section.className = 'py-4'
+  data.menus
+    .sort((a, b) => a.label.localeCompare(b.label)) // sort by label
+    .forEach(menu => {
+      const section = document.createElement('section')
+      section.id = menu.id
+      section.className = 'py-4'
 
-    const title = document.createElement('div')
-    title.className =
-      'row text-center text-section align-items-center justify-content-center mb-4'
-    title.textContent = menu.label
-    section.appendChild(title)
+      const title = document.createElement('div')
+      title.className =
+        'row text-center text-section align-items-center justify-content-center mb-4'
+      title.textContent = menu.label
+      section.appendChild(title)
 
-    const itemsRow = document.createElement('div')
-    itemsRow.className = 'container-fluid justify-content-center p-0'
+      const itemsRow = document.createElement('div')
+      itemsRow.className = 'container-fluid justify-content-center p-0'
 
-    menu.itens
-      .filter(item => item.ativo)
-      .forEach(item => {
-        const wrapperDiv = document.createElement('div')
-        wrapperDiv.innerHTML = templateHTML.trim()
-        const itemDiv = wrapperDiv.firstElementChild
+      menu.itens
+        .filter(item => item.ativo)
+        .sort((a, b) => a.label.localeCompare(b.label))   // sort by label
+        .forEach(item => {
+          const wrapperDiv = document.createElement('div')
+          wrapperDiv.innerHTML = templateHTML.trim()
+          const itemDiv = wrapperDiv.firstElementChild
 
-        const imgEl = itemDiv.querySelector('.item-img')
-        imgEl.src = item.urlImagem
-        imgEl.alt = item.label
-        imgEl.onerror = function () {
-          if (!this.dataset.fallbackUsed) {
-            this.dataset.fallbackUsed = true
-            this.src = DEFAULT_IMG
+          const imgEl = itemDiv.querySelector('.item-img')
+          imgEl.src = item.urlImagem
+          imgEl.alt = item.label
+          imgEl.onerror = function () {
+            if (!this.dataset.fallbackUsed) {
+              this.dataset.fallbackUsed = true
+              this.src = DEFAULT_IMG
+            }
           }
-        }
 
-        itemDiv.querySelector('.item-title').textContent = item.label
-        const descEl = itemDiv.querySelector('.item-description')
-        descEl.textContent = item.description
-        itemDiv.querySelector(
-          '.item-price'
-        ).textContent = `${item.preco.toFixed(2)}€`
+          itemDiv.querySelector('.item-title').textContent = item.label
+          const descEl = itemDiv.querySelector('.item-description')
+          descEl.textContent = item.description
+          itemDiv.querySelector(
+            '.item-price'
+          ).textContent = `${item.preco.toFixed(2)}€`
 
-        itemsRow.appendChild(itemDiv)
-      })
+          itemsRow.appendChild(itemDiv)
+        })
 
-    section.appendChild(itemsRow)
-    wrapper.appendChild(section)
-  })
+      section.appendChild(itemsRow)
+      wrapper.appendChild(section)
+    })
 
   container.appendChild(wrapper)
 
