@@ -62,6 +62,7 @@
 
   // Atualiza active ao fazer scroll
   let nextSection = null
+  let isScrollingByClick = -20
 
   const updateActive = () => {
     if (!nextSection) {
@@ -76,6 +77,11 @@
   }
 
   const updateActiveViaScroll = () => {
+    // if (isScrollingByClick > 0) {
+    //   isScrollingByClick = isScrollingByClick - 1
+    //   return
+    // }
+    // isScrollingByClick = -20
     const scrollTop = menu.scrollTop + navbarHeight
     let currentSection = sections[0]
 
@@ -84,41 +90,48 @@
       const sectionTop = section.offsetTop
       const sectionBottom = sectionTop + section.offsetHeight
 
+      // if (
+      //   scrollTop + navbarHeight >= sectionTop &&
+      //   scrollTop + navbarHeight < sectionBottom
+      // ) {
+      //   //if (menu.scrollTop + menu.clientHeight >= menu.scrollHeight - 1) {
+      //   currentSection = sections[sections.length - 1]
+      // }
+
       if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
         currentSection = section
         break
       }
     }
 
-    // Corrige o último tab quando chegamos ao final do scroll
-    if (menu.scrollTop + menu.clientHeight >= menu.scrollHeight - 1) {
-      currentSection = sections[sections.length - 1]
-    }
-
-    navLinks.forEach(link =>
-      link.classList.toggle(
-        'active',
+    navLinks.forEach(link => {
+      const setActiveClass =
         link.getAttribute('href') === `#${currentSection.id}`
-      )
-    )
+      link.classList.toggle('active', setActiveClass)
+      if (setActiveClass) nextSection = currentSection
+    })
+
     updateActive()
   }
 
   menu.addEventListener('scroll', updateActiveViaScroll)
   window.addEventListener('resize', updateActiveViaScroll)
 
-  // Clique nos tabs
+  // Clique nos links
   navLinks.forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault()
-
       const id = a.getAttribute('href').substring(1)
       const target = document.getElementById(id)
-
       if (!target) return
-      nextSection = target
-      const top = target.offsetTop - navbarHeight
 
+      const top = target.offsetTop - navbarHeight + 5
+      // isScrollingByClick = 20
+      // Atualiza active imediatamente
+      nextSection = target
+      //  updateActive()
+
+      // Scroll suave nativo sem bloquear o scrollspy
       menu.scrollTo({
         top,
         behavior: 'smooth'
