@@ -270,6 +270,423 @@ const data = {
           porEncomenda: 0
         }
       ]
+    },
+    {
+      label: 'Waffles',
+      id: 'waffles',
+      itens: [
+        {
+          label: 'Simples',
+          description: 'Waffle simples, sem adicionais',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Nutella',
+          description: 'Waffle com Nutella',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Compota Morango',
+          description: 'Waffle com compota de morango',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Açúcar e Canela',
+          description: 'Waffle polvilhado com açúcar e canela',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        }
+      ]
+    },
+    {
+      label: 'Panquecas',
+      id: 'panquecas',
+      itens: [
+        {
+          label: 'Simples',
+          description: 'Panqueca simples, sem adicionais',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Nutella',
+          description: 'Panqueca com Nutella',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Compota Morango',
+          description: 'Panqueca com compota de morango',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Açúcar e Canela',
+          description: 'Panqueca polvilhada com açúcar e canela',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        }
+      ]
+    },
+    {
+      label: 'Cheesecake',
+      id: 'cheesecake',
+      itens: [
+        {
+          label: 'Brigadeiro',
+          description: 'Cheesecake de Brigadeiro',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Frutos Vermelhos',
+          description: 'Cheesecake de Frutos Vermelhos',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Caramelo e Biscoff',
+          description: 'Cheesecake de Caramelo Salgado e Bolacha Biscoff',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Maracujá e Filipinos',
+          description: 'Cheesecake de Maracujá e Filipinos',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Twix e Morangos',
+          description: 'Cheesecake de Twix e Morangos',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'KitKat e Cookies Cream',
+          description: 'Cheesecake de KitKat e Cookies Cream',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Raffaello e Ananás',
+          description: 'Cheesecake de Raffaello e Ananás',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Ferrero Rocher e Creme Biscoff',
+          description: 'Cheesecake de Ferrero Rocher e Creme Biscoff',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Lima e Amoras',
+          description: 'Cheesecake de Lima e Amoras',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Toblerone e Framboesas',
+          description: 'Cheesecake de Toblerone e Framboesas',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Maltesers e Doce de Leite',
+          description: 'Cheesecake de Maltesers e Doce de Leite',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Curd de Laranja',
+          description: 'Cheesecake de Curd de Laranja',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Kinder Bueno White e Morangos',
+          description:
+            'Cheesecake de Kinder Bueno White com Morangos e Caramelo',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 1,
+          porEncomenda: 0
+        },
+        {
+          label: 'Oreo e Doce de Morango',
+          description:
+            'Cheesecake de Oreo com Doce de Morango e Cookies & Cream',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 1,
+          porEncomenda: 0
+        },
+        {
+          label: 'Morangos e Baunilha',
+          description:
+            'Cheesecake de Morangos e Baunilha com Praliné Crocante de Chocolate',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 1,
+          porEncomenda: 0
+        },
+        {
+          label: 'Caramelo e Praliné de Chocolate',
+          description:
+            'Cheesecake de Caramelo Salgado e Praliné Crocante de Chocolate',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 1,
+          porEncomenda: 0
+        },
+        {
+          label: 'Snickers e Bolacha Waffle',
+          description: 'Cheesecake de Snickers com Bolacha Waffle',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 1,
+          porEncomenda: 0
+        },
+        {
+          label: 'Mars e Caramelo',
+          description: 'Cheesecake de Mars com Creme de Caramelo',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 1,
+          porEncomenda: 0
+        }
+      ]
+    },
+    {
+      label: 'Crepes',
+      id: 'crepes',
+      itens: [
+        {
+          label: 'Simples',
+          description: 'Crepe simples, sem adicionais',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Nutella',
+          description: 'Crepe com Nutella',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Açúcar e Canela',
+          description: 'Crepe polvilhado com açúcar e canela',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Compota',
+          description: 'Crepe com compota',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        }
+        //,
+        // {
+        //   label: 'Extra Bola de Gelado ',
+        //   description: 'Pode ser adicionado a qualquer crepe',
+        //   preco: 0,
+        //   urlImagem: IMG_BASE + 'default.jpg',
+        //   ativo: true,
+        //   novo: 0,
+        //   porEncomenda: 0
+        // }
+      ]
+    },
+    {
+      label: 'Sandes',
+      id: 'sandes',
+      itens: [
+        {
+          label: 'Sande de Queijo',
+          description: 'Sandes de Queijo',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Sande de Fiambre',
+          description: 'Sandes de Fiambre',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Sande Mista',
+          description: 'Sandes de Queijo e Fiambre',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Presunto',
+          description: 'Sandes de Presunto',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Bifana',
+          description: 'Sandes de Bifana',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Prego no Pão',
+          description: 'Prego no Pão',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Pão de Cachorro',
+          description:
+            'Pão de Cachorro, Salsicha, Queijo, Fiambre, Cebola Crocante, Batata Palha, Molho da Casa',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Hamburguer Sidónio',
+          description:
+            'Bolo do Caco, Queijo, Alface, Tomate, Bacon Grelhado, Ovo Frito, Molho de Casa',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Hamburguer Doce Sobre a Mesa',
+          description:
+            'Bolo do Caco, Cebola Roxa Caramelizada, Rúcula, Presunto, Mozarella Fresca, Molho de Casa',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Kebab de Frango',
+          description:
+            'Pão Pita, Alface, Tomate, Cenoura, Milho, Frango, Batata Palha, Cebola Crocante, Molho Samurai',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Torrada de Pão Saloio',
+          description: 'Torrada de Pão Saloio',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        }
+      ]
     }
   ]
 }
