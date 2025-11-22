@@ -8,56 +8,115 @@ const data = {
       id: 'bebidas',
       itens: [
         {
-          label: 'Coca-Cola',
-          description: 'Refrigerante gelado',
-          preco: 2.5,
-          urlImagem:
-            'https://cdn-media.choiceqr.com/prod-eat-eatery-119/menu/thumbnail_a-O-i.png',
-          ativo: true
+          label: 'Sumo Natural',
+          description: '',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         },
         {
-          label: 'Sumo de Laranja',
-          description: 'Suco natural fresco',
-          preco: 3.0,
-          urlImagem:
-            'https://cdn-media.choiceqr.com/prod-eat-eatery-119/menu/thumbnail_LkisSec-VTLRGXG-ZtLDcFt_b-G-R.jpeg',
-          ativo: true
+          label: 'Granizado',
+          description: '',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         },
         {
-          label: 'Água Mineral',
-          description: 'Água pura e refrescante',
-          preco: 1.5,
-          urlImagem:
-            'https://cdn-media.choiceqr.com/prod-eat-eatery-119/menu/thumbnail_I-K-H.png',
-          ativo: true
+          label: 'Sangria',
+          description: '',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Caipirinha',
+          description: '',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         }
       ]
     },
     {
-      label: 'Sobremesas',
-      id: 'sobremesas',
+      label: 'Tostas',
+      id: 'tostas',
       itens: [
         {
-          label: 'Pudim',
-          description: 'Delicioso pudim caseiro',
-          preco: 4.0,
-          urlImagem: IMG_BASE + 'pudim.jpg',
-          ativo: true
+          label: 'Mista',
+          description: '',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         },
         {
-          label: 'Mousse de Chocolate',
-          description: 'Delicioso sabor de chocolate',
-          preco: 4.5,
-          urlImagem: IMG_BASE + 'mousse.jpg',
-          ativo: true
+          label: 'Frango',
+          description:
+            'Frango, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Molho Pitta.',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         },
         {
-          label: 'Mousse de Baunilha',
-          description: 'Delicioso sabor de baunilha',
-          preco: 4.5,
-          urlImagem:
-            'https://cdn-media.choiceqr.com/prod-eat-eatery-119/menu/thumbnail_JkUbzWR-nEhMdew-CyRMFkX_C-U-K.jpeg',
-          ativo: true
+          label: 'Atum',
+          description:
+            'Atum, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Molho Pitta.',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Camarão',
+          description:
+            'Camarão, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Molho Pitta.',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Pasta de Frango',
+          description:
+            'Pasta de Frango, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Molho Pitta.',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Pasta de Atum',
+          description:
+            'Pasta de Atum, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Molho Pitta.',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
+        },
+        {
+          label: 'Gulosa',
+          description:
+            'Pão Saloio, Queijo, Alface, Tomate, Bacon Grelhado, Ovo Frito, Molho de Casa.',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         }
       ]
     },
@@ -66,54 +125,70 @@ const data = {
       id: 'saladas',
       itens: [
         {
-          label: 'Salada Caesar',
+          label: 'Frango',
           description:
-            'Juicy pork and beef kotlets (patties) served with buttery buckwheat, creamy mushroom sauce, and a side of fresh cucumber and cherry tomatoes.A hearty, homestyle dish — beloved since childhood.',
-          preco: 3.5,
-          urlImagem:
-            'https://cdn-media.choiceqr.com/prod-eat-eatery-119/menu/thumbnail_V-E-F.png',
-          ativo: true
+            'Frango, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta.',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         },
         {
-          label: 'Salada Grega',
-          description: 'Com queijo feta',
-          preco: 3.0,
-          urlImagem: IMG_BASE + 'suco-laranja.jpg',
-          ativo: true
+          label: 'Atum',
+          description:
+            'Atum, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta.',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         },
         {
-          label: 'Salada de Frutas',
-          description: 'Fresca e saudável',
-          preco: 1.5,
-          urlImagem: IMG_BASE + 'agua.jpg',
-          ativo: true
+          label: 'Camarão',
+          description:
+            'Camarão, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta.',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         }
       ]
     },
     {
-      label: 'Sopas',
-      id: 'sopas',
+      label: 'Wraps',
+      id: 'wraps',
       itens: [
         {
-          label: 'Sopa de Legumes',
-          description: '',
-          preco: 3.5,
-          urlImagem: IMG_BASE + 'agua.jpg',
-          ativo: true
+          label: 'Frango',
+          description:
+            'Frango, Tortilha, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         },
         {
-          label: 'Sopa Grega',
-          description: 'Com queijo feta',
-          preco: 3.0,
-          urlImagem: IMG_BASE + 'suco-laranja.jpg',
-          ativo: true
+          label: 'Atum',
+          description:
+            'Atum, Tortilha, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         },
         {
-          label: 'Sopa de Agrião',
-          description: 'da horta para a mesa',
-          preco: 1.5,
-          urlImagem: IMG_BASE + 'agua.jpg',
-          ativo: true
+          label: 'Camarão',
+          description:
+            'Camarão, Tortilha, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta',
+          preco: 0,
+          urlImagem: IMG_BASE + 'default.jpg',
+          ativo: true,
+          novo: 0,
+          porEncomenda: 0
         }
       ]
     }

@@ -101,6 +101,7 @@
         link.getAttribute('href') === `#${currentSection.id}`
       )
     )
+    updateActive()
   }
 
   menu.addEventListener('scroll', updateActiveViaScroll)
@@ -124,6 +125,4 @@
       })
     })
   })
-
-  updateActive()
 })()
