@@ -48,11 +48,6 @@
 
     if (sectionHeight < visible) {
       last.style.minHeight = `${visible + navbarHeight}px`
-      // last.style.setProperty(
-      //   'padding-bottom',
-      //   `${missingSpace + 10}px`,
-      //   'important'
-      // )
     } else {
       last.style.minHeight = ''
     }
@@ -62,7 +57,6 @@
 
   // Atualiza active ao fazer scroll
   let nextSection = null
-  let isScrollingByClick = -20
 
   const updateActive = () => {
     if (!nextSection) {
@@ -77,11 +71,6 @@
   }
 
   const updateActiveViaScroll = () => {
-    // if (isScrollingByClick > 0) {
-    //   isScrollingByClick = isScrollingByClick - 1
-    //   return
-    // }
-    // isScrollingByClick = -20
     const scrollTop = menu.scrollTop + navbarHeight
     let currentSection = sections[0]
 
@@ -89,14 +78,6 @@
       const section = sections[i]
       const sectionTop = section.offsetTop
       const sectionBottom = sectionTop + section.offsetHeight
-
-      // if (
-      //   scrollTop + navbarHeight >= sectionTop &&
-      //   scrollTop + navbarHeight < sectionBottom
-      // ) {
-      //   //if (menu.scrollTop + menu.clientHeight >= menu.scrollHeight - 1) {
-      //   currentSection = sections[sections.length - 1]
-      // }
 
       if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
         currentSection = section
@@ -126,10 +107,9 @@
       if (!target) return
 
       const top = target.offsetTop - navbarHeight + 5
-      // isScrollingByClick = 20
+
       // Atualiza active imediatamente
       nextSection = target
-      //  updateActive()
 
       // Scroll suave nativo sem bloquear o scrollspy
       menu.scrollTo({

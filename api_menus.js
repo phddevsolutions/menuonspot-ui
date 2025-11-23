@@ -11,7 +11,7 @@ const data = {
           label: 'Sumo Natural',
           description: '',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -20,7 +20,7 @@ const data = {
           label: 'Granizado',
           description: '',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -29,7 +29,7 @@ const data = {
           label: 'Sangria',
           description: '',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -38,7 +38,7 @@ const data = {
           label: 'Caipirinha',
           description: '',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -53,7 +53,7 @@ const data = {
           label: 'Mista',
           description: '',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -63,7 +63,7 @@ const data = {
           description:
             'Frango, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Molho Pitta',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -73,7 +73,7 @@ const data = {
           description:
             'Atum, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Molho Pitta',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -83,7 +83,7 @@ const data = {
           description:
             'Camarão, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Molho Pitta',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -93,7 +93,7 @@ const data = {
           description:
             'Pasta de Frango, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Molho Pitta',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -103,7 +103,7 @@ const data = {
           description:
             'Pasta de Atum, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Molho Pitta',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -113,7 +113,7 @@ const data = {
           description:
             'Pão Saloio, Queijo, Alface, Tomate, Bacon Grelhado, Ovo Frito, Molho de Casa',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -129,7 +129,7 @@ const data = {
           description:
             'Frango, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -139,7 +139,7 @@ const data = {
           description:
             'Atum, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -149,7 +149,7 @@ const data = {
           description:
             'Camarão, Alface, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -165,7 +165,7 @@ const data = {
           description:
             'Frango, Tortilha, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -175,7 +175,7 @@ const data = {
           description:
             'Atum, Tortilha, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -185,7 +185,7 @@ const data = {
           description:
             'Camarão, Tortilha, Rúcula, Tomate Cherry, Cenoura, Mozzarella Fresca, Croutons, Molho Pitta',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -200,7 +200,7 @@ const data = {
           label: 'Panacota Frutos Vermelhos',
           description: '',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -209,7 +209,7 @@ const data = {
           label: 'Mousse Oreo',
           description: '',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -218,7 +218,7 @@ const data = {
           label: 'Pudim de Ovos',
           description: '',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -227,7 +227,7 @@ const data = {
           label: 'Pêra Bebada',
           description: '',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -236,7 +236,7 @@ const data = {
           label: 'Bolo de Bolacha',
           description: '',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -246,7 +246,7 @@ const data = {
           description:
             'Caramelo Salgado com Morangos e crocante de Bolacha e Chocolate',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -255,7 +255,7 @@ const data = {
           label: 'Mousse de Lima',
           description: 'Lima com Biscoito de Champagne',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -264,7 +264,7 @@ const data = {
           label: 'Mousse de Ananás',
           description: ' Ananás com cobertura de Ananás caramelisado e Suspiro',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -279,7 +279,7 @@ const data = {
           label: 'Simples',
           description: 'Waffle simples, sem adicionais',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -288,7 +288,7 @@ const data = {
           label: 'Nutella',
           description: 'Waffle com Nutella',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -297,7 +297,7 @@ const data = {
           label: 'Compota Morango',
           description: 'Waffle com compota de morango',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -306,7 +306,7 @@ const data = {
           label: 'Açúcar e Canela',
           description: 'Waffle polvilhado com açúcar e canela',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -321,7 +321,7 @@ const data = {
           label: 'Simples',
           description: 'Panqueca simples, sem adicionais',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -330,7 +330,7 @@ const data = {
           label: 'Nutella',
           description: 'Panqueca com Nutella',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -339,7 +339,7 @@ const data = {
           label: 'Compota Morango',
           description: 'Panqueca com compota de morango',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -348,7 +348,7 @@ const data = {
           label: 'Açúcar e Canela',
           description: 'Panqueca polvilhada com açúcar e canela',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -363,7 +363,7 @@ const data = {
           label: 'Brigadeiro',
           description: 'Cheesecake de Brigadeiro',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -372,7 +372,7 @@ const data = {
           label: 'Frutos Vermelhos',
           description: 'Cheesecake de Frutos Vermelhos',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -381,7 +381,7 @@ const data = {
           label: 'Caramelo e Biscoff',
           description: 'Cheesecake de Caramelo Salgado e Bolacha Biscoff',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -390,7 +390,7 @@ const data = {
           label: 'Maracujá e Filipinos',
           description: 'Cheesecake de Maracujá e Filipinos',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -399,7 +399,7 @@ const data = {
           label: 'Twix e Morangos',
           description: 'Cheesecake de Twix e Morangos',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -408,7 +408,7 @@ const data = {
           label: 'KitKat e Cookies Cream',
           description: 'Cheesecake de KitKat e Cookies Cream',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -417,7 +417,7 @@ const data = {
           label: 'Raffaello e Ananás',
           description: 'Cheesecake de Raffaello e Ananás',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -426,7 +426,7 @@ const data = {
           label: 'Ferrero Rocher e Creme Biscoff',
           description: 'Cheesecake de Ferrero Rocher e Creme Biscoff',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -435,7 +435,7 @@ const data = {
           label: 'Lima e Amoras',
           description: 'Cheesecake de Lima e Amoras',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -444,7 +444,7 @@ const data = {
           label: 'Toblerone e Framboesas',
           description: 'Cheesecake de Toblerone e Framboesas',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -453,7 +453,7 @@ const data = {
           label: 'Maltesers e Doce de Leite',
           description: 'Cheesecake de Maltesers e Doce de Leite',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -462,7 +462,7 @@ const data = {
           label: 'Curd de Laranja',
           description: 'Cheesecake de Curd de Laranja',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -472,7 +472,7 @@ const data = {
           description:
             'Cheesecake de Kinder Bueno White com Morangos e Caramelo',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 1,
           porEncomenda: 0
@@ -482,7 +482,7 @@ const data = {
           description:
             'Cheesecake de Oreo com Doce de Morango e Cookies & Cream',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 1,
           porEncomenda: 0
@@ -492,7 +492,7 @@ const data = {
           description:
             'Cheesecake de Morangos e Baunilha com Praliné Crocante de Chocolate',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 1,
           porEncomenda: 0
@@ -502,7 +502,7 @@ const data = {
           description:
             'Cheesecake de Caramelo Salgado e Praliné Crocante de Chocolate',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 1,
           porEncomenda: 0
@@ -511,7 +511,7 @@ const data = {
           label: 'Snickers e Bolacha Waffle',
           description: 'Cheesecake de Snickers com Bolacha Waffle',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 1,
           porEncomenda: 0
@@ -520,7 +520,7 @@ const data = {
           label: 'Mars e Caramelo',
           description: 'Cheesecake de Mars com Creme de Caramelo',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 1,
           porEncomenda: 0
@@ -535,7 +535,7 @@ const data = {
           label: 'Simples',
           description: 'Crepe simples, sem adicionais',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -544,7 +544,7 @@ const data = {
           label: 'Nutella',
           description: 'Crepe com Nutella',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -553,7 +553,7 @@ const data = {
           label: 'Açúcar e Canela',
           description: 'Crepe polvilhado com açúcar e canela',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -562,7 +562,7 @@ const data = {
           label: 'Compota',
           description: 'Crepe com compota',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -572,7 +572,7 @@ const data = {
         //   label: 'Extra Bola de Gelado ',
         //   description: 'Pode ser adicionado a qualquer crepe',
         //   preco: 0,
-        //   urlImagem: IMG_BASE + 'default.jpg',
+        //   urlImagem: IMG_BASE + 'default.png',
         //   ativo: true,
         //   novo: 0,
         //   porEncomenda: 0
@@ -587,7 +587,7 @@ const data = {
           label: 'Sande de Queijo',
           description: 'Sandes de Queijo',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -596,7 +596,7 @@ const data = {
           label: 'Sande de Fiambre',
           description: 'Sandes de Fiambre',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -605,7 +605,7 @@ const data = {
           label: 'Sande Mista',
           description: 'Sandes de Queijo e Fiambre',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -614,7 +614,7 @@ const data = {
           label: 'Presunto',
           description: 'Sandes de Presunto',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -623,7 +623,7 @@ const data = {
           label: 'Bifana',
           description: 'Sandes de Bifana',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -632,7 +632,7 @@ const data = {
           label: 'Prego no Pão',
           description: 'Prego no Pão',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -642,7 +642,7 @@ const data = {
           description:
             'Pão de Cachorro, Salsicha, Queijo, Fiambre, Cebola Crocante, Batata Palha, Molho da Casa',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -652,7 +652,7 @@ const data = {
           description:
             'Bolo do Caco, Queijo, Alface, Tomate, Bacon Grelhado, Ovo Frito, Molho de Casa',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -662,7 +662,7 @@ const data = {
           description:
             'Bolo do Caco, Cebola Roxa Caramelizada, Rúcula, Presunto, Mozarella Fresca, Molho de Casa',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -672,7 +672,7 @@ const data = {
           description:
             'Pão Pita, Alface, Tomate, Cenoura, Milho, Frango, Batata Palha, Cebola Crocante, Molho Samurai',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
@@ -681,7 +681,7 @@ const data = {
           label: 'Torrada de Pão Saloio',
           description: 'Torrada de Pão Saloio',
           preco: 0,
-          urlImagem: IMG_BASE + 'default.jpg',
+          urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
           porEncomenda: 0
