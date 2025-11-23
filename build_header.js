@@ -13,13 +13,10 @@ function buildHeader () {
   shadowRight.className = 'shadow-right'
 
   const navbar = document.createElement('div')
-  navbar.className = 'navbar height75'
+  navbar.className = 'navbar height48'
 
   wrapper.appendChild(navbar)
   headerContainer.appendChild(wrapper)
-
-  // const navbar = document.createElement('div')
-  // navbar.className = 'navbar height75'
 
   data.menus
     .sort((a, b) => a.label.localeCompare(b.label)) // sort by label
@@ -39,6 +36,4 @@ function buildHeader () {
   headerContainer.appendChild(wrapper)
 
   if (typeof initScrollSpy === 'function') initScrollSpy()
-
-  
 }
