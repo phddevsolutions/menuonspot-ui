@@ -22,7 +22,7 @@ async function buildMenuSections (containerId) {
 
       const title = document.createElement('div')
       title.className =
-        'row text-center text-section align-items-center justify-content-center mb-4'
+        'row text-center text-section align-items-center justify-content-center mb-4 title-section'
       title.textContent = menu.label
       section.appendChild(title)
 
@@ -31,7 +31,7 @@ async function buildMenuSections (containerId) {
 
       menu.itens
         .filter(item => item.ativo)
-        .sort((a, b) => a.label.localeCompare(b.label))   // sort by label
+        .sort((a, b) => a.label.localeCompare(b.label)) // sort by label
         .forEach(item => {
           const wrapperDiv = document.createElement('div')
           wrapperDiv.innerHTML = templateHTML.trim()
@@ -63,9 +63,6 @@ async function buildMenuSections (containerId) {
 
   container.appendChild(wrapper)
 
-  // =========================
-  // FUNÇÃO MAIS/MENOS
-  // =========================
   document.querySelectorAll('.item-description').forEach(desc => {
     const maxLength = 100 // ou qualquer limite de caracteres
     const fullText = desc.textContent

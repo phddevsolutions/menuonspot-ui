@@ -13,7 +13,7 @@ html, body {
 
 
 .height48{
-  height:75px;
+  height:48px;
 }
 
 /* === LAYOUT PRINCIPAL (3 colunas) === */
@@ -39,7 +39,7 @@ html, body {
 }
 
 #menu-placeholder section:first-child {
-  padding-top: 75px !important;
+  padding-top: 48px !important;
 }
 
 /* Cada seção do menu */
