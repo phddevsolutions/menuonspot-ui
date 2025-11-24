@@ -19,7 +19,16 @@
 }
 
 .navbar a.active {
-  color: #ff6600;
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: #FFF4E6;
+    border-radius: 5px;
+
+    font-weight: 600;
+    font-size: 13px;
+    color: #FF9900;
+
+    box-shadow: 0 0 4px rgba(255, 153, 48, 0.45);
 }
 
 .navbar a.active::after {
@@ -34,7 +43,24 @@
   transition: all 0.3s ease;
 }
 
+.menu-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #FFF4E6; /* cor de fundo suave (bege/creme) */
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFA500; /* fallback para browsers sem gradiente */
 
+    /* Texto com gradiente */
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(90deg, #FF9900, #FFB84D);
+
+    /* Sombra suave */
+    box-shadow: 0 0 4px rgba(0,0,0,0.05);
+}
 
 
 @media (max-width: 767px) {

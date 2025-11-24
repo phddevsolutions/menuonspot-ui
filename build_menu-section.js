@@ -22,7 +22,7 @@ async function buildMenuSections (containerId) {
 
       const title = document.createElement('div')
       title.className =
-        'row text-center text-section align-items-center justify-content-center mb-4 title-section'
+        'row text-center text-section align-items-center justify-content-center mb-2 title-section'
       title.textContent = menu.label
       section.appendChild(title)
 

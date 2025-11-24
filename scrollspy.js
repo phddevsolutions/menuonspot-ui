@@ -85,14 +85,25 @@
       }
     }
 
+    function scrollActiveTabIntoView () {
+      const activeTab = document.querySelector('.navbar .active')
+      if (activeTab) {
+        activeTab.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest'
+        })
+      }
+    }
+
     navLinks.forEach(link => {
       const setActiveClass =
         link.getAttribute('href') === `#${currentSection.id}`
       link.classList.toggle('active', setActiveClass)
       if (setActiveClass) nextSection = currentSection
     })
-
-    updateActive()
+    scrollActiveTabIntoView()
+    //updateActive()
   }
 
   menu.addEventListener('scroll', updateActiveViaScroll)
@@ -114,7 +125,9 @@
       // Scroll suave nativo sem bloquear o scrollspy
       menu.scrollTo({
         top,
-        behavior: 'smooth'
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest'
       })
     })
   })

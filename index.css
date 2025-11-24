@@ -38,9 +38,9 @@ html, body {
   padding: 0 1rem;
 }
 
-#menu-placeholder section:first-child {
+/* #menu-placeholder section:first-child {
   padding-top: 48px !important;
-}
+} */
 
 /* Cada seção do menu */
 #menu-placeholder section {
