@@ -73,3 +73,17 @@
   object-fit: cover; /* cobre o container sem deformar */
 
 }
+
+.spin-y {
+  animation: rotateYLoop 10s linear infinite;
+  transform-style: preserve-3d; 
+}
+
+@keyframes rotateYLoop {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}

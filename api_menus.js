@@ -8,8 +8,8 @@ const data = {
       id: 'bebidas',
       itens: [
         {
-          label: 'Sumo Natural',
-          description: '',
+          label: 'Sumo Laranja Natural',
+          description: 'Laranja e Gelo',
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,

@@ -44,6 +44,7 @@ async function buildMenuSections (containerId) {
             if (!this.dataset.fallbackUsed) {
               this.dataset.fallbackUsed = true
               this.src = DEFAULT_IMG
+              this.classList.add('spin-y')
             }
           }
 
