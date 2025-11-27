@@ -22,7 +22,7 @@ async function buildMenuSections (containerId) {
 
       const title = document.createElement('div')
       title.className =
-        'row text-center text-section align-items-center justify-content-center mb-2 title-section'
+        'row text-center text-section align-items-start justify-content-center mb-2 title-section'
       title.textContent = menu.label
       section.appendChild(title)
 
@@ -46,6 +46,10 @@ async function buildMenuSections (containerId) {
               this.src = DEFAULT_IMG
               this.classList.add('spin-y')
             }
+          }
+
+          if (imgEl.src.split('/').pop() === DEFAULT_IMG.split('/').pop()) {
+            imgEl.classList.add('spin-y')
           }
 
           itemDiv.querySelector('.item-title').textContent = item.label

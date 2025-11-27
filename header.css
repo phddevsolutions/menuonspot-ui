@@ -43,6 +43,13 @@
   transition: all 0.3s ease;
 }
 
+.navbar a:before {
+    content: "\f006";
+    font: normal normal normal 14px/1 FontAwesome;
+    color:#FF9900;
+    padding-right: 7px;
+}
+
 .menu-tag {
     display: inline-block;
     padding: 6px 14px;

@@ -18,7 +18,7 @@ const data = {
         },
         {
           label: 'Granizado',
-          description: '',
+          description: 'Gelo Triturado com Sabor a Escolher',
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,
@@ -27,7 +27,7 @@ const data = {
         },
         {
           label: 'Sangria',
-          description: '',
+          description: 'Vinho Tinto, Fruta, Gelo e Refrigerante',
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,
@@ -36,7 +36,7 @@ const data = {
         },
         {
           label: 'Caipirinha',
-          description: '',
+          description: 'Cachaça, Limão, Açúcar e Gelo',
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,
@@ -51,7 +51,7 @@ const data = {
       itens: [
         {
           label: 'Mista',
-          description: '',
+          description: 'Queijo e Fiambre',
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,
@@ -585,7 +585,7 @@ const data = {
       itens: [
         {
           label: 'Sande de Queijo',
-          description: 'Sandes de Queijo',
+          description: 'Queijo',
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,
@@ -594,7 +594,7 @@ const data = {
         },
         {
           label: 'Sande de Fiambre',
-          description: 'Sandes de Fiambre',
+          description: 'Fiambre',
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,
@@ -603,7 +603,7 @@ const data = {
         },
         {
           label: 'Sande Mista',
-          description: 'Sandes de Queijo e Fiambre',
+          description: 'Queijo e Fiambre',
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,
@@ -611,8 +611,8 @@ const data = {
           porEncomenda: 0
         },
         {
-          label: 'Presunto',
-          description: 'Sandes de Presunto',
+          label: 'Sande de Presunto',
+          description: 'Presunto',
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,
@@ -621,7 +621,7 @@ const data = {
         },
         {
           label: 'Bifana',
-          description: 'Sandes de Bifana',
+          description: 'Bifanas',
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,
@@ -630,7 +630,7 @@ const data = {
         },
         {
           label: 'Prego no Pão',
-          description: 'Prego no Pão',
+          description: 'Bife',
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,

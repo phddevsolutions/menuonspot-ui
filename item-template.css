@@ -53,7 +53,6 @@
     hyphens: auto;
     white-space: normal;
     line-height: 20px;
-    text-transform: capitalize;
 }
 
 .item-price {
@@ -72,6 +71,18 @@
   height: 120px;     /* ocupa toda a altura da coluna */
   object-fit: cover; /* cobre o container sem deformar */
 
+}
+
+.status-badge{
+    display: inline-block;
+    background-color: #FF9900;
+    color: #fff;
+    padding: 4px 6px;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
 .spin-y {
