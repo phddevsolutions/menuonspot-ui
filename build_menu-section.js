@@ -59,6 +59,13 @@ async function buildMenuSections (containerId) {
             '.item-price'
           ).textContent = `${item.preco.toFixed(2)}€`
 
+          if (item.novo) {
+            itemDiv.querySelector('.show-new').style.display = 'inline-block'
+          }
+          if (item.porEncomenda) {
+            itemDiv.querySelector('.show-order').style.display = 'inline-block'
+          }
+
           itemsRow.appendChild(itemDiv)
         })
 
@@ -74,7 +81,6 @@ async function buildMenuSections (containerId) {
 
     if (fullText.length > maxLength) {
       const visibleText = fullText.slice(0, maxLength)
-      const hiddenText = fullText.slice(maxLength)
 
       desc.textContent = visibleText
 

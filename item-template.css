@@ -75,6 +75,7 @@
 
 .status-badge{
     display: inline-block;
+     display: none;
     background-color: #FF9900;
     color: #fff;
     padding: 4px 6px;
@@ -83,6 +84,10 @@
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.3px;
+}
+
+.show-new{
+    background-color: #71DE82
 }
 
 .spin-y {

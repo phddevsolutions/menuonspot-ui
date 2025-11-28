@@ -13,7 +13,7 @@ const data = {
           preco: 0,
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,
-          novo: 0,
+          novo: 1,
           porEncomenda: 0
         },
         {
@@ -32,7 +32,7 @@ const data = {
           urlImagem: IMG_BASE + 'default.png',
           ativo: true,
           novo: 0,
-          porEncomenda: 0
+          porEncomenda: 1
         },
         {
           label: 'Caipirinha',
