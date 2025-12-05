@@ -18,17 +18,34 @@ function buildHeader () {
   wrapper.appendChild(navbar)
   headerContainer.appendChild(wrapper)
 
-  data.menus
-    .sort((a, b) => a.label.localeCompare(b.label)) // sort by label
-    .forEach((menu, index) => {
-      const a = document.createElement('a')
-      a.href = `#${menu.id}`
-      a.textContent = menu.label
+  // data.menus
+  //   .sort((a, b) => a.label.localeCompare(b.label)) // sort by label
+  //   .forEach((menu, index) => {
+  //     const a = document.createElement('a')
+  //     a.href = `#${menu.id}`
+  //     a.textContent = menu.label
 
-      if (index === 0) a.classList.add('active') // primeiro link ativo
+  //     if (index === 0) a.classList.add('active') // primeiro link ativo
 
-      navbar.appendChild(a)
+  //     navbar.appendChild(a)
+  //   })
+  fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+      // Ordena menus por label e cria links
+      data.menus
+        .sort((a, b) => a.label.localeCompare(b.label))
+        .forEach((menu, index) => {
+          const a = document.createElement('a')
+          a.href = `#${menu.id}`
+          a.textContent = menu.label
+
+          if (index === 0) a.classList.add('active') // primeiro link ativo
+
+          navbar.appendChild(a)
+        })
     })
+    .catch(err => console.error('Erro ao carregar o JSON:', err))
 
   wrapper.appendChild(shadowLeft)
   wrapper.appendChild(navbar)

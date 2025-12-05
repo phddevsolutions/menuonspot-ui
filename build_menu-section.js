@@ -2,6 +2,7 @@ async function buildMenuSections (containerId) {
   const container = document.getElementById(containerId)
   if (!container) return
 
+  const DEFAULT_IMG = './images/default.png'
   let templateHTML = ''
   try {
     templateHTML = await fetch('./item-template.html').then(r => r.text())
@@ -13,66 +14,72 @@ async function buildMenuSections (containerId) {
   const wrapper = document.createElement('div')
   wrapper.className = 'container-fluid'
 
-  data.menus
-    .sort((a, b) => a.label.localeCompare(b.label)) // sort by label
-    .forEach(menu => {
-      const section = document.createElement('section')
-      section.id = menu.id
-      section.className = 'py-4'
+  fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+      data.menus
+        .sort((a, b) => a.label.localeCompare(b.label))
+        .forEach(menu => {
+          const section = document.createElement('section')
+          section.id = menu.id
+          section.className = 'py-4'
 
-      const title = document.createElement('div')
-      title.className =
-        'row text-center text-section align-items-start justify-content-center mb-2 title-section'
-      title.textContent = menu.label
-      section.appendChild(title)
+          const title = document.createElement('div')
+          title.className =
+            'row text-center text-section align-items-start justify-content-center mb-2 title-section'
+          title.textContent = menu.label
+          section.appendChild(title)
 
-      const itemsRow = document.createElement('div')
-      itemsRow.className = 'container-fluid justify-content-center p-0'
+          const itemsRow = document.createElement('div')
+          itemsRow.className = 'container-fluid justify-content-center p-0'
 
-      menu.itens
-        .filter(item => item.ativo)
-        .sort((a, b) => a.label.localeCompare(b.label)) // sort by label
-        .forEach(item => {
-          const wrapperDiv = document.createElement('div')
-          wrapperDiv.innerHTML = templateHTML.trim()
-          const itemDiv = wrapperDiv.firstElementChild
+          menu.itens
+            .filter(item => item.ativo)
+            .sort((a, b) => a.label.localeCompare(b.label)) // sort by label
+            .forEach(item => {
+              const wrapperDiv = document.createElement('div')
+              wrapperDiv.innerHTML = templateHTML.trim()
+              const itemDiv = wrapperDiv.firstElementChild
 
-          const imgEl = itemDiv.querySelector('.item-img')
-          imgEl.src = item.urlImagem
-          imgEl.alt = item.label
-          imgEl.onerror = function () {
-            if (!this.dataset.fallbackUsed) {
-              this.dataset.fallbackUsed = true
-              this.src = DEFAULT_IMG
-              this.classList.add('spin-y')
-            }
-          }
+              const imgEl = itemDiv.querySelector('.item-img')
+              imgEl.src = item.urlImagem
+              imgEl.alt = item.label
+              imgEl.onerror = function () {
+                if (!this.dataset.fallbackUsed) {
+                  this.dataset.fallbackUsed = true
+                  this.src = DEFAULT_IMG
+                  this.classList.add('spin-y')
+                }
+              }
 
-          if (imgEl.src.split('/').pop() === DEFAULT_IMG.split('/').pop()) {
-            imgEl.classList.add('spin-y')
-          }
+              if (imgEl.src.split('/').pop() === DEFAULT_IMG.split('/').pop()) {
+                imgEl.classList.add('spin-y')
+              }
 
-          itemDiv.querySelector('.item-title').textContent = item.label
-          const descEl = itemDiv.querySelector('.item-description')
-          descEl.textContent = item.description
-          itemDiv.querySelector(
-            '.item-price'
-          ).textContent = `${item.preco.toFixed(2)}€`
+              itemDiv.querySelector('.item-title').textContent = item.label
+              const descEl = itemDiv.querySelector('.item-description')
+              descEl.textContent = item.description
+              itemDiv.querySelector(
+                '.item-price'
+              ).textContent = `${item.preco.toFixed(2)}€`
 
-          if (item.novo) {
-            itemDiv.querySelector('.show-new').style.display = 'inline-block'
-          }
-          if (item.porEncomenda) {
-            itemDiv.querySelector('.show-order').style.display = 'inline-block'
-          }
+              if (item.novo) {
+                itemDiv.querySelector('.show-new').style.display =
+                  'inline-block'
+              }
+              if (item.porEncomenda) {
+                itemDiv.querySelector('.show-order').style.display =
+                  'inline-block'
+              }
 
-          itemsRow.appendChild(itemDiv)
+              itemsRow.appendChild(itemDiv)
+            })
+
+          section.appendChild(itemsRow)
+          wrapper.appendChild(section)
         })
-
-      section.appendChild(itemsRow)
-      wrapper.appendChild(section)
     })
-
+    .catch(err => console.error('Erro ao carregar o JSON:', err))
   container.appendChild(wrapper)
 
   document.querySelectorAll('.item-description').forEach(desc => {
