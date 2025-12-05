@@ -29,6 +29,8 @@ function buildHeader () {
 
   //     navbar.appendChild(a)
   //   })
+  
+  //fetch("https://raw.githubusercontent.com/TEU_UTILIZADOR/NOME_REPO/main/data.json")
   fetch('data.json')
     .then(response => response.json())
     .then(data => {

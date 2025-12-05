@@ -14,6 +14,7 @@ async function buildMenuSections (containerId) {
   const wrapper = document.createElement('div')
   wrapper.className = 'container-fluid'
 
+  //fetch("https://raw.githubusercontent.com/TEU_UTILIZADOR/NOME_REPO/main/data.json")
   fetch('data.json')
     .then(response => response.json())
     .then(data => {
