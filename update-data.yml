@@ -1,0 +1,41 @@
+name: Update data.json via admin OAuth
+
+on:
+  workflow_dispatch:
+    inputs:
+      content:
+        description: 'Novo conteúdo JSON para data.json'
+        required: true
+        default: '{}'
+      code:
+        description: 'OAuth code da conta admin (apenas referência)'
+        required: false
+
+jobs:
+  update-data-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Fazer checkout do repositório
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Configurar git com token da conta admin
+      - name: Configurar git com token admin
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # 3️⃣ Atualizar o ficheiro data.json com o conteúdo enviado
+      - name: Atualizar data.json
+        run: |
+          echo "${{ github.event.inputs.content }}" > data.json
+
+      # 4️⃣ Commit e push usando o token da conta admin
+      - name: Commit and Push
+        env:
+          TOKEN_ADMIN: ${{ secrets.TOKEN_ADMIN }}
+        run: |
+          git add data.json
+          git commit -m "Update data.json via admin workflow"
+          git push https://x-access-token:$TOKEN_ADMIN@github.com/${{ github.repository }}.git HEAD:main

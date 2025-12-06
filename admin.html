@@ -20,3 +20,27 @@
   <script src="admin.js"></script>
 </body>
 </html>
+
+
+document.getElementById('saveBtn').onclick = async () => {
+  const newContent = document.getElementById('editor').value
+
+  const workflowUrl = `https://api.github.com/repos/phddevsolutions/menuonspot-ui/actions/workflows/update-data.yml/dispatches`
+
+  await fetch(workflowUrl, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer <TOKEN_PARA_DISPATCH>' , // token da conta pessoal com permissão workflow_dispatch
+      'Accept': 'application/vnd.github+json'
+    },
+    body: JSON.stringify({
+      ref: 'main', // branch a atualizar
+      inputs: {
+        content: newContent,
+        code: "<CODE_DA_CONTA_ADMIN>"
+      }
+    })
+  })
+
+  alert('Guardado com sucesso via GitHub Actions!')
+}
