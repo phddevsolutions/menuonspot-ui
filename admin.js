@@ -1,62 +1,24 @@
 // 🔧 CONFIGURAÇÃO
 const OWNER = 'phddevsolutions'
 const REPO = 'menuonspot-ui'
-const FILE_PATH = 'data.json'
 const BRANCH = 'main'
 const WORKFLOW_FILE = 'update-data.yml'
-const CLIENT_ID = 'Ov23lieOlxeI1P0NX5ha' // OAuth da conta admin
-const TOKEN_PROXY = 'https://github-oauth-proxy.vercel.app/api/token' // proxy para trocar code → token
 
 // Elementos do DOM
-const loginBtn = document.getElementById('loginBtn')
 const loadBtn = document.getElementById('loadBtn')
 const saveBtn = document.getElementById('saveBtn')
 const editor = document.getElementById('editor')
 
-let accessToken = null
 let jsonContent = '{}'
 
-// 🔹 Login via GitHub OAuth
-loginBtn.onclick = () => {
-  const url = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=repo`
-  window.location.href = url
-}
-
-// 🔹 Trocar code recebido por token
-const params = new URLSearchParams(window.location.search)
-const code = params.get('code')
-
-if (code) {
-  fetch(TOKEN_PROXY, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ code, client_id: CLIENT_ID })
-  })
-    .then(r => r.json())
-    .then(data => {
-      accessToken = data.access_token
-      loginBtn.style.display = 'none'
-      loadBtn.style.display = 'inline-block'
-      history.replaceState({}, document.title, window.location.pathname)
-    })
-    .catch(err => {
-      console.error(err)
-      alert('Erro ao obter token do GitHub')
-    })
-}
-
-// 🔹 Carregar data.json direto do GitHub via token da conta admin
+// 🔹 Carregar data.json direto do GitHub (público ou via token OAuth se necessário)
 loadBtn.onclick = async () => {
-  if (!accessToken) return alert('Faça login primeiro!')
-
   try {
     const res = await fetch(
-      `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/data.json`
     )
-    const data = await res.json()
-
-    const content = atob(data.content)
+    if (!res.ok) throw new Error('Erro ao carregar data.json')
+    const content = await res.text()
     jsonContent = content
     editor.value = content
 
@@ -71,8 +33,6 @@ loadBtn.onclick = async () => {
 
 // 🔹 Guardar alterações via workflow_dispatch
 saveBtn.onclick = async () => {
-  if (!accessToken) return alert('Faça login primeiro!')
-
   const newContent = editor.value
 
   try {
@@ -81,8 +41,8 @@ saveBtn.onclick = async () => {
     await fetch(workflowUrl, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${accessToken}`,
         Accept: 'application/vnd.github+json'
+        // Não é necessário token aqui, o workflow usará o secret TOKEN_ADMIN
       },
       body: JSON.stringify({
         ref: BRANCH,
