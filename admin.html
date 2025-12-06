@@ -5,42 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Menu</title>
 </head>
-<!-- https://phddevsolutions.github.io/menuonspot-ui/admin.html -->
 <body>
-  <h2>Admin – Editar Menu 2</h2>
+  <h2>Admin – Editar Menu</h2>
 
-  <button id="loginBtn">Login com GitHub</button>
-  <button id="loadBtn" style="display:none">Carregar data.json</button>
-
+  <button id="loadBtn">Carregar data.json</button>
+  <br><br>
   <textarea id="editor" style="width:100%;height:300px;display:none"></textarea>
   <br>
-
-  <button id="saveBtn" style="display:none">Guardar Alterações 2</button>
+  <button id="saveBtn" style="display:none">Guardar Alterações</button>
 
   <script src="admin.js"></script>
 </body>
 </html>
-
-
-document.getElementById('saveBtn').onclick = async () => {
-  const newContent = document.getElementById('editor').value
-
-  const workflowUrl = `https://api.github.com/repos/phddevsolutions/menuonspot-ui/actions/workflows/update-data.yml/dispatches`
-
-  await fetch(workflowUrl, {
-    method: 'POST',
-    headers: {
-      'Authorization': 'Bearer <TOKEN_PARA_DISPATCH>' , // token da conta pessoal com permissão workflow_dispatch
-      'Accept': 'application/vnd.github+json'
-    },
-    body: JSON.stringify({
-      ref: 'main', // branch a atualizar
-      inputs: {
-        content: newContent,
-        code: "<CODE_DA_CONTA_ADMIN>"
-      }
-    })
-  })
-
-  alert('Guardado com sucesso via GitHub Actions!')
-}

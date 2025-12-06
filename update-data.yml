@@ -7,9 +7,6 @@ on:
         description: 'Novo conteúdo JSON para data.json'
         required: true
         default: '{}'
-      code:
-        description: 'OAuth code da conta admin (apenas referência)'
-        required: false
 
 jobs:
   update-data-json:
@@ -21,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
 
       # 2️⃣ Configurar git com token da conta admin
-      - name: Configurar git com token admin
+      - name: Configurar git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -31,11 +28,12 @@ jobs:
         run: |
           echo "${{ github.event.inputs.content }}" > data.json
 
-      # 4️⃣ Commit e push usando o token da conta admin
+      # 4️⃣ Commit e push usando secret TOKEN_ADMIN
       - name: Commit and Push
         env:
           TOKEN_ADMIN: ${{ secrets.TOKEN_ADMIN }}
         run: |
+          git remote set-url origin https://x-access-token:${TOKEN_ADMIN}@github.com/${{ github.repository }}.git
           git add data.json
           git commit -m "Update data.json via admin workflow"
-          git push https://x-access-token:$TOKEN_ADMIN@github.com/${{ github.repository }}.git HEAD:main
+          git push origin main
