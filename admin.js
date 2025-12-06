@@ -4,8 +4,7 @@ const REPO = 'menuonspot-ui'
 const BRANCH = 'main'
 const FILE_PATH = 'data.json'
 const WORKFLOW_FILE = 'update-data.yml'
-const TOKEN_PROXY =
-  'https://vercel-github-proxy-rg6bw6gn0-pedromoraiscostas-projects.vercel.app/api/token'
+const TOKEN_PROXY = 'https://vercel-git-proxy.vercel.app/api/token'
 const CLIENT_ID = 'Ov23lieOlxeI1P0NX5ha'
 
 const loginBtn = document.getElementById('loginBtn')
