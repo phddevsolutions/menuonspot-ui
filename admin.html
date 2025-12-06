@@ -3,17 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Menu</title>
+  <title>Admin Menu com OAuth</title>
 </head>
 <body>
   <h2>Admin – Editar Menu</h2>
 
-  <button id="loadBtn">Carregar data.json</button>
+  <!-- Botão de login -->
+  <button id="loginBtn">Login com GitHub</button>
+
+  <!-- Botão para carregar data.json -->
+  <button id="loadBtn" style="display:none">Carregar data.json</button>
   <br><br>
+
+  <!-- Editor de texto -->
   <textarea id="editor" style="width:100%;height:300px;display:none"></textarea>
   <br>
+
+  <!-- Botão para guardar alterações -->
   <button id="saveBtn" style="display:none">Guardar Alterações</button>
 
+  <!-- Script principal -->
   <script src="admin.js"></script>
 </body>
 </html>
