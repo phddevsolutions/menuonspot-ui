@@ -52,7 +52,7 @@ loadBtn.onclick = async () => {
       }
     )
     const data = await res.json()
-    const content = atob(data.content)
+    const content = atob(data.content.replace(/\n/g, ''))
     editor.value = content
     editor.style.display = 'block'
     saveBtn.style.display = 'inline-block'
