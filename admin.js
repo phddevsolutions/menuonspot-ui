@@ -56,7 +56,6 @@ loadBtn.onclick = async () => {
     editor.value = content
     editor.style.display = 'block'
     saveBtn.style.display = 'inline-block'
-    alert('data.json carregado com sucesso!')
   } catch (err) {
     console.error(err)
     alert('Erro ao carregar data.json')
@@ -80,7 +79,7 @@ saveBtn.onclick = async () => {
         inputs: { content: newContent }
       })
     })
-    alert('Alterações enviadas com sucesso! O workflow fará o commit.')
+    alert('Alterações enviadas com sucesso')
   } catch (err) {
     console.error(err)
     alert('Erro ao enviar alterações para o workflow.')
