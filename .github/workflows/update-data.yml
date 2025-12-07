@@ -17,9 +17,7 @@ jobs:
 
       - name: Atualizar data.json
         run: |
-          cat << 'EOF' > data.json
-${{ github.event.inputs.content }}
-EOF
+                printf "%s" '${{ github.event.inputs.content }}' > data.json
 
       - name: Commit e push das alterações
         run: |
