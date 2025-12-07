@@ -65,8 +65,10 @@ loadBtn.onclick = async () => {
 // 🔹 Guardar alterações via workflow_dispatch
 saveBtn.onclick = async () => {
   try {
-    // Pega o conteúdo do editor e transforma em string JSON válida
-    const newContent = JSON.stringify(JSON.parse(editor.value))
+    // Pega o conteúdo do editor, faz parse e re-stringifica para garantir JSON válido
+    const rawContent = editor.value
+    const jsonObj = JSON.parse(rawContent) // valida JSON
+    const newContent = JSON.stringify(jsonObj) // transforma em string segura para o GitHub
 
     const workflowUrl = `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`
 
@@ -85,6 +87,7 @@ saveBtn.onclick = async () => {
 
     if (!response.ok) {
       const text = await response.text()
+      console.error('GitHub API response:', text)
       throw new Error(`GitHub API error: ${response.status} - ${text}`)
     }
 
