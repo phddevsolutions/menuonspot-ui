@@ -64,24 +64,32 @@ loadBtn.onclick = async () => {
 
 // 🔹 Guardar alterações via workflow_dispatch
 saveBtn.onclick = async () => {
-  const newContent = editor.value
+  const newContent = editor.value // deve ser JSON como string
 
   try {
     const workflowUrl = `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`
-    await fetch(workflowUrl, {
+    const response = await fetch(workflowUrl, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${accessToken}`,
         Accept: 'application/vnd.github+json'
       },
       body: JSON.stringify({
-        ref: BRANCH,
-        inputs: { content: newContent }
+        ref: BRANCH, // ex: "main"
+        inputs: { content: newContent } // já é string
       })
     })
+
+    if (!response.ok) {
+      const text = await response.text()
+      throw new Error(`GitHub API error: ${response.status} ${text}`)
+    }
+
     alert('Alterações enviadas com sucesso')
   } catch (err) {
     console.error(err)
-    alert('Erro ao enviar alterações para o workflow.')
+    alert(
+      'Erro ao enviar alterações para o workflow. Veja console para detalhes.'
+    )
   }
 }
