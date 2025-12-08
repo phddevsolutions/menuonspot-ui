@@ -1,0 +1,56 @@
+body { 
+    font-family: Arial;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    overflow-x: hidden; 
+}
+
+.container {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.row { 
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Inputs and form elements */
+select, input, button, textarea {
+    margin: 5px 0;
+    width: 100%;
+}
+
+textarea { 
+    height: 200px; 
+}
+
+/* Main editor box */
+#menuEditor {
+    padding: 15px;               /* better for smartphone spacing */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* OPTION 2 → Center inner content on smartphone */
+#menuEditor > * {
+    max-width: 500px;            /* ideal mobile-friendly width */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Checkbox styling */
+.checkbox-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

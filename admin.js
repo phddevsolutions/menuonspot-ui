@@ -1,4 +1,6 @@
+// =====================================================
 // 🔧 CONFIGURAÇÃO
+// =====================================================
 const OWNER = 'phddevsolutions'
 const REPO = 'menuonspot-ui'
 const BRANCH = 'main'
@@ -12,9 +14,16 @@ const loadBtn = document.getElementById('loadBtn')
 const saveBtn = document.getElementById('saveBtn')
 const editor = document.getElementById('editor')
 
-let accessToken = null
+const menuEditor = document.getElementById('menuEditor')
+const menuComplete = document.getElementById('menuComplete')
+const jsonOutput = document.getElementById('jsonOutput')
 
+let accessToken = null
+let menus = [] // ← dados manipulados no editor visual
+
+// =====================================================
 // 🔹 Login GitHub
+// =====================================================
 loginBtn.onclick = () => {
   const url = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=repo`
   window.location.href = url
@@ -23,6 +32,7 @@ loginBtn.onclick = () => {
 // 🔹 Troca code → token via proxy
 const params = new URLSearchParams(window.location.search)
 const code = params.get('code')
+
 if (code) {
   fetch(TOKEN_PROXY, {
     method: 'POST',
@@ -42,33 +52,48 @@ if (code) {
     })
 }
 
+// =====================================================
 // 🔹 Carregar data.json
+// =====================================================
 loadBtn.onclick = async () => {
   try {
     const res = await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`,
-      {
-        headers: { Authorization: `Bearer ${accessToken}` }
-      }
+      { headers: { Authorization: `Bearer ${accessToken}` } }
     )
+
     const data = await res.json()
-    const content = atob(data.content.replace(/\n/g, ''))
+    const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, '')), c =>
+      c.charCodeAt(0)
+    )
+    const content = new TextDecoder('utf-8').decode(bytes)
+
+    // Preenche textarea raw
     editor.value = content
     editor.style.display = 'block'
     saveBtn.style.display = 'inline-block'
+
+    // Preenche editor visual
+    const parsed = JSON.parse(content)
+    menus = parsed.menus
+    menuEditor.style.display = 'block'
+    menuComplete.style.display = 'block'
+    refreshDropdown()
   } catch (err) {
     console.error(err)
     alert('Erro ao carregar data.json')
   }
 }
 
+// =====================================================
 // 🔹 Guardar alterações via workflow_dispatch
+// =====================================================
 saveBtn.onclick = async () => {
   try {
-    // Pega o conteúdo do editor, faz parse e re-stringifica para garantir JSON válido
+    // O conteúdo final é sempre o editor.raw
     const rawContent = editor.value
     const jsonObj = JSON.parse(rawContent) // valida JSON
-    const newContent = JSON.stringify(jsonObj) // transforma em string segura para o GitHub
+    const newContent = JSON.stringify(jsonObj) // string segura
 
     const workflowUrl = `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`
 
@@ -80,7 +105,7 @@ saveBtn.onclick = async () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        ref: BRANCH, // ex: "main"
+        ref: BRANCH,
         inputs: { content: newContent }
       })
     })
@@ -94,8 +119,252 @@ saveBtn.onclick = async () => {
     alert('Alterações enviadas com sucesso!')
   } catch (err) {
     console.error(err)
-    alert(
-      'Erro ao enviar alterações para o workflow. Veja console para detalhes.'
-    )
+    alert('Erro ao enviar alterações para o workflow.')
   }
+}
+
+// =====================================================
+// 🟦 EDITOR VISUAL – Consistência de dados
+// =====================================================
+
+// Preenche dropdown de categorias
+function refreshDropdown () {
+  const select = document.getElementById('categorySelect')
+  select.innerHTML = ''
+
+  menus.forEach((m, index) => {
+    const opt = document.createElement('option')
+    opt.value = index
+    opt.textContent = m.label
+    select.appendChild(opt)
+  })
+
+  refreshItems()
+  updateJson()
+}
+
+// Mostra itens da categoria selecionada
+function refreshItems () {
+  const idx = parseInt(document.getElementById('categorySelect').value, 10)
+  const ul = document.getElementById('itemsList')
+  const itemSelect = document.getElementById('itemSelect')
+
+  ul.innerHTML = ''
+  itemSelect.innerHTML = ''
+
+  const itens = menus[idx]?.itens || []
+
+  itens.forEach((item, index) => {
+    // Lista visual
+    const li = document.createElement('li')
+    li.textContent = `${item.label} – ${item.description} ${
+      item.price ? ' (€' + item.price + ')' : ''
+    }`
+    // opcional: clicar no li preenche o form
+    li.addEventListener('click', () => {
+      itemSelect.value = index
+      fillItemForm()
+    })
+    ul.appendChild(li)
+
+    // Dropdown para selecionar item
+    const opt = document.createElement('option')
+    opt.value = index
+    opt.textContent = item.label
+    itemSelect.appendChild(opt)
+  })
+
+  // Se houver items, selecciona o primeiro e preenche o form
+  if (itens.length > 0) {
+    itemSelect.value = 0
+    fillItemForm()
+  } else {
+    // limpa form se não houver items
+    clearItemForm()
+  }
+
+  updateJson()
+}
+
+// Adicionar categoria
+function addCategory () {
+  const name = document.getElementById('categoryName').value.trim()
+  if (!name) return alert('Introduza um nome!')
+
+  menus.push({
+    label: name,
+    id: name.toLowerCase().replace(/\s+/g, '_'),
+    itens: []
+  })
+
+  refreshDropdown()
+}
+
+// Editar categoria
+function editCategory () {
+  const idx = document.getElementById('categorySelect').value
+  const name = document.getElementById('categoryName').value.trim()
+  if (!name) return alert('Introduza um novo nome!')
+
+  menus[idx].label = name
+  menus[idx].id = name.toLowerCase().replace(/\s+/g, '_')
+
+  refreshDropdown()
+}
+
+// Remover categoria
+function removeCategory () {
+  const idx = document.getElementById('categorySelect').value
+  if (!confirm('Tem a certeza?')) return
+  menus.splice(idx, 1)
+  refreshDropdown()
+}
+
+// Atualiza JSON visual + textarea bruto
+function updateJson () {
+  const finalJson = JSON.stringify({ menus }, null, 2)
+  jsonOutput.value = finalJson
+  editor.value = finalJson // mantém editor raw sempre sincronizado
+}
+
+//Ao mudar categoria
+document.getElementById('categorySelect').addEventListener('change', () => {
+  refreshItems()
+  updateJson()
+})
+
+// ===============================
+// CRUD DE ITENS
+// ===============================
+
+// Atualiza lista visual e combo de seleção
+function refreshItems () {
+  const idx = document.getElementById('categorySelect').value
+  const ul = document.getElementById('itemsList')
+  const itemSelect = document.getElementById('itemSelect')
+
+  ul.innerHTML = ''
+  itemSelect.innerHTML = ''
+
+  const itens = menus[idx]?.itens || []
+
+  itens.forEach((item, index) => {
+    // Lista visual
+    const li = document.createElement('li')
+    li.textContent = `${item.label} ${
+      item.price ? ' - ' + item.price + ' €' : ''
+    }`
+    ul.appendChild(li)
+
+    // Dropdown
+    const opt = document.createElement('option')
+    opt.value = index
+    opt.textContent = item.label
+    itemSelect.appendChild(opt)
+  })
+
+  if (itens.length > 0) {
+    itemSelect.value = 0 // seleciona automaticamente o 1º item
+    fillItemForm() // <-- preenche os inputs!
+  } else {
+    clearItemForm() // caso não existam items
+  }
+
+  updateJson()
+}
+
+function createMenuItem ({ name, desc, price, encomenda, isNew, isActive }) {
+  return {
+    label: name,
+    description: desc,
+    price,
+    ativo: isActive,
+    novo: Number(isNew),
+    porEncomenda: Number(encomenda)
+  }
+}
+
+// ➕ Adicionar item
+function addItem () {
+  const idx = document.getElementById('categorySelect').value
+  const name = document.getElementById('itemName').value.trim()
+  const desc = document.getElementById('itemDesc').value.trim()
+  const price = document.getElementById('itemPrice').value.trim()
+  const isOrder = document.getElementById('itemOrder').checked
+  const isNew = document.getElementById('itemNew').checked
+  const isActive = document.getElementById('isActive').checked
+
+  if (!name) return alert('Insira o nome do item.')
+
+  menus[idx].itens.push(
+    createMenuItem({ name, desc, price, isActive, isNew, isOrder })
+  )
+
+  refreshItems()
+  clearItemFields()
+}
+
+// ✏ Editar item existente
+function editItem () {
+  const cIdx = document.getElementById('categorySelect').value
+  const iIdx = document.getElementById('itemSelect').value
+
+  const name = document.getElementById('itemName').value.trim()
+  const desc = document.getElementById('itemDesc').value.trim()
+  const price = document.getElementById('itemPrice').value.trim()
+  const isOrder = document.getElementById('itemOrder').checked
+  const isNew = document.getElementById('itemNew').checked
+  const isActive = document.getElementById('isActive').checked
+
+  menus[cIdx].itens[iIdx] = createMenuItem({
+    name,
+    desc,
+    price,
+    isActive,
+    isNew,
+    isOrder
+  })
+
+  refreshItems()
+}
+
+// ❌ Remover item
+function removeItem () {
+  const cIdx = document.getElementById('categorySelect').value
+  const iIdx = document.getElementById('itemSelect').value
+
+  if (!confirm('Tem certeza que quer remover este item?')) return
+
+  menus[cIdx].itens.splice(iIdx, 1)
+  refreshItems()
+  clearItemFields()
+}
+
+document.getElementById('itemSelect').addEventListener('change', fillItemForm)
+
+function fillItemForm () {
+  const cIdx = parseInt(document.getElementById('categorySelect').value, 10)
+  const iIdx = parseInt(document.getElementById('itemSelect').value, 10)
+  const item = menus[cIdx]?.itens?.[iIdx]
+
+  if (!item) {
+    clearItemForm()
+    return
+  }
+
+  document.getElementById('itemName').value = item.label || ''
+  document.getElementById('itemDesc').value = item.description || ''
+  document.getElementById('itemPrice').value = item.price || ''
+  document.getElementById('itemOrder').checked = item.porEncomenda
+  document.getElementById('itemNew').checked = item.novo
+  document.getElementById('isActive').checked = item.ativo
+}
+
+function clearItemForm () {
+  document.getElementById('itemName').value = ''
+  document.getElementById('itemDesc').value = ''
+  document.getElementById('itemPrice').value = ''
+  document.getElementById('itemOrder').checked = false
+  document.getElementById('itemNew').checked = false
+  document.getElementById('isActive').checked = false
 }

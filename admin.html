@@ -3,26 +3,140 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Menu com OAuth + Editor Visual</title>
+ <link rel="stylesheet" href="admin.css">
+  <style>
+   
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Admin – Editar Menu</h2>
+    </div>
+  </div>
+   <div class="row">
+    <div class="col-md-12">
+       <button id="loginBtn">Login com GitHub</button>
+    </div>
+  </div>
+   <div class="row">
+    <div class="col-md-12">
+       <button id="loadBtn" style="display:none">Carregar data.json</button>
+    </div>
+  </div>
+
+  
+ <div class="row">
+  <div id="menuEditor" style="display:none">
+
+    <h3>Categorias</h3>
+
+    <!-- Dropdown -->
+    <label>Selecionar categoria:</label>
+    <select id="categorySelect"></select>
+
+    <div class="row">
+      <label>Novo nome da categoria:</label>
+      <input type="text" id="categoryName" placeholder="Ex: Bebidas">
+    </div>
+
+    <div class="row">
+      <button onclick="addCategory()">Adicionar Categoria</button>
+      <button onclick="editCategory()">Gravar Categoria</button>
+      <button onclick="removeCategory()">Remover Categoria</button>
+    </div>
+
+    <h3>Itens da Categoria Selecionada</h3>
+    <ul id="itemsList"></ul>
+    <h3>Gerir Itens</h3>
+
+    <label>Selecionar item para editar:</label>
+    <select id="itemSelect"></select>
+
+    <label>Nome do item:</label>
+    <input type="text" id="itemName">
+
+    <label>Descrição:</label>
+    <input type="text" id="itemDesc">
+
+    <label>Preço:</label>
+    <input type="text" id="itemPrice">
+
+  <div class="checkbox-container">
+      <div class="checkbox-group">
+        <label for="isActive">Activo</label>
+        <input type="checkbox" id="isActive">
+      </div>
+
+      <div class="checkbox-group">
+        <label for="itemOrder">Encomendar</label>
+        <input type="checkbox" id="itemOrder">
+      </div>
+
+      <div class="checkbox-group">
+        <label for="itemNew">Novo</label>
+        <input type="checkbox" id="itemNew">
+      </div>
+  </div>
+
+  <div class="row">
+    <button onclick="addItem()">Adicionar Item</button>
+    <button onclick="editItem()">Gravar Item</button>
+    <button onclick="removeItem()">Remover Item</button>
+  </div>
+
+    <h3>JSON Atual Gerado</h3>
+    <textarea id="jsonOutput" readonly></textarea>
+  </div>
+ </div>
+  
+
+  <div id="menuComplete" class="row" style="display:none">    
+    <h3>Editor RAW (JSON Completo)</h3>
+    <textarea id="editor" style="display:none"></textarea>
+  </div>
+
+   <div class="row">   
+    <!-- Botão para enviar alterações -->
+    <button id="saveBtn" style="display:none">Guardar Alterações</button>
+  </div>
+</div>
+  <!-- Script principal -->
+  <script src="admin.js"></script>
+
+</body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Menu com OAuth</title>
 </head>
 <body>
   <h2>Admin – Editar Menu 2</h2>
 
-  <!-- Botão de login -->
+  
   <button id="loginBtn">Login com GitHub</button>
 
-  <!-- Botão para carregar data.json -->
+  
   <button id="loadBtn" style="display:none">Carregar data.json</button>
   <br><br>
 
-  <!-- Editor de texto -->
+  
   <textarea id="editor" style="width:100%;height:300px;display:none"></textarea>
   <br>
 
-  <!-- Botão para guardar alterações -->
+  
   <button id="saveBtn" style="display:none">Guardar Alterações</button>
 
-  <!-- Script principal -->
+  
   <script src="admin.js"></script>
 </body>
-</html>
+</html> -->
