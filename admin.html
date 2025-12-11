@@ -34,18 +34,34 @@
     <h3>Categorias</h3>
 
     <!-- Dropdown -->
-    <label>Selecionar categoria:</label>
-    <select id="categorySelect"></select>
+    
 
     <div class="row">
-      <label>Novo nome da categoria:</label>
+      <label>Criar categoria</label>
+       </div>
+      <div class="row"> 
       <input type="text" id="categoryName" placeholder="Ex: Bebidas">
+      <button onclick="addCategory()">Adicionar</button>
     </div>
 
     <div class="row">
-      <button onclick="addCategory()">Adicionar Categoria</button>
-      <button onclick="editCategory()">Gravar Categoria</button>
-      <button onclick="removeCategory()">Remover Categoria</button>
+      <label>Editar categoria</label>
+    </div>
+    <div class="row">
+      <select id="categoryNameEdit"></select>
+      <input type="text" id="categoryNameEditText" placeholder="novo nome">
+    </div>
+     <div class="row">
+      
+      <button onclick="editCategory()">Gravar</button>
+    </div>
+
+    <div class="row">
+      <label>Remover categoria</label>
+    </div>
+    <div class="row">
+      <select id="categorySelect"></select>
+      <button onclick="removeCategory()">Remover</button>
     </div>
 
     <h3>Itens da Categoria Selecionada</h3>

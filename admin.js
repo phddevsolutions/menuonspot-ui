@@ -77,7 +77,7 @@ async function carregarDataJson () {
     menus = parsed.menus
     menuEditor.style.display = 'block'
     menuComplete.style.display = 'block'
-    refreshDropdown()
+    refreshDropdownCategories()
   } catch (err) {
     console.error(err)
     alert('Erro ao carregar data.json')
@@ -127,15 +127,19 @@ saveBtn.onclick = async () => {
 // =====================================================
 
 // Preenche dropdown de categorias
-function refreshDropdown () {
+function refreshDropdownCategories () {
   const select = document.getElementById('categorySelect')
   select.innerHTML = ''
+
+  const selectEdit = document.getElementById('categoryNameEdit')
+  selectEdit.innerHTML = ''
 
   menus.forEach((m, index) => {
     const opt = document.createElement('option')
     opt.value = index
     opt.textContent = m.label
     select.appendChild(opt)
+    selectEdit.appendChild(opt.cloneNode(true))
   })
 
   refreshItems()
@@ -196,19 +200,19 @@ function addCategory () {
     itens: []
   })
 
-  refreshDropdown()
+  refreshDropdownCategories()
 }
 
 // Editar categoria
 function editCategory () {
-  const idx = document.getElementById('categorySelect').value
-  const name = document.getElementById('categoryName').value.trim()
+  const idx = document.getElementById('categoryNameEdit').value
+  const name = document.getElementById('categoryNameEditText').value.trim()
   if (!name) return alert('Introduza um novo nome!')
 
   menus[idx].label = name
-  menus[idx].id = name.toLowerCase().replace(/\s+/g, '_')
+  menus[idx].id = name.replace(/\s+/g, '_')
 
-  refreshDropdown()
+  refreshDropdownCategories()
 }
 
 // Remover categoria
@@ -216,7 +220,7 @@ function removeCategory () {
   const idx = document.getElementById('categorySelect').value
   if (!confirm('Tem a certeza?')) return
   menus.splice(idx, 1)
-  refreshDropdown()
+  refreshDropdownCategories()
 }
 
 // Atualiza JSON visual + textarea bruto
