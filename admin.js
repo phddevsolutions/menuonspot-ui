@@ -10,7 +10,6 @@ const TOKEN_PROXY = 'https://vercel-git-proxy.vercel.app/api/token'
 const CLIENT_ID = 'Ov23lieOlxeI1P0NX5ha'
 
 const loginBtn = document.getElementById('loginBtn')
-const loadBtn = document.getElementById('loadBtn')
 const saveBtn = document.getElementById('saveBtn')
 const editor = document.getElementById('editor')
 
@@ -43,8 +42,8 @@ if (code) {
     .then(data => {
       accessToken = data.access_token
       loginBtn.style.display = 'none'
-      loadBtn.style.display = 'inline-block'
       history.replaceState({}, document.title, window.location.pathname)
+      carregarDataJson()
     })
     .catch(err => {
       console.error(err)
@@ -55,7 +54,7 @@ if (code) {
 // =====================================================
 // 🔹 Carregar data.json
 // =====================================================
-loadBtn.onclick = async () => {
+async function carregarDataJson () {
   try {
     const res = await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`,
