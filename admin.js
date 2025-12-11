@@ -206,13 +206,15 @@ function addCategory () {
 // Editar categoria
 function editCategory () {
   const idx = document.getElementById('categoryNameEdit').value
-  const name = document.getElementById('categoryNameEditText').value.trim()
+  const nameInput = document.getElementById('categoryNameEditText')
+  const name = nameInput.value.trim()
   if (!name) return alert('Introduza um novo nome!')
 
   menus[idx].label = name
   menus[idx].id = name.replace(/\s+/g, '_')
 
   refreshDropdownCategories()
+  nameInput.value = ''
 }
 
 // Remover categoria
