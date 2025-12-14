@@ -412,7 +412,7 @@ function clearItemForm () {
 function showSave () {
   showToast('Não esquecer de: Enviar Alterações', 'info')
   const sendDataContainer = document.getElementById('sendDataContainer')
-  sendDataContainer.style.display = 'inline-block'
+  sendDataContainer.style.display = 'block'
 }
 
 function EnableSpinner (button) {
