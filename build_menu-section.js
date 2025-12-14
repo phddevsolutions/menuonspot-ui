@@ -60,9 +60,12 @@ async function buildMenuSections (containerId) {
               itemDiv.querySelector('.item-title').textContent = item.label
               const descEl = itemDiv.querySelector('.item-description')
               descEl.textContent = item.description
-              itemDiv.querySelector(
-                '.item-price'
-              ).textContent = `${item.preco.toFixed(2)}€`
+              const rawPrice = String(item.preco).replace(',', '.')
+              const price = parseFloat(rawPrice)
+
+              itemDiv.querySelector('.item-price').textContent = isNaN(price)
+                ? '0.00€'
+                : `${price.toFixed(2).replace('.', ',')}€`
 
               if (item.novo) {
                 itemDiv.querySelector('.show-new').style.display =

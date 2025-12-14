@@ -208,9 +208,9 @@ function addCategory () {
       itens: []
     })
 
-    menus.sort((a, b) =>
-      a.label.localeCompare(b.label, undefined, { sensitivity: 'base' })
-    )
+    // menus.sort((a, b) =>
+    //   a.label.localeCompare(b.label, undefined, { sensitivity: 'base' })
+    // )
     refreshDropdownCategories()
   }
 
@@ -320,56 +320,55 @@ function refreshItems () {
   updateJson()
 }
 
-function createMenuItem ({ name, desc, price, encomenda, isNew, isActive }) {
+function createMenuItem ({ name, desc, price, byOrder, novo, active }) {
   return {
     label: name,
     description: desc,
     price,
-    ativo: isActive,
-    novo: Number(isNew),
-    porEncomenda: Number(encomenda)
+    ativo: active,
+    novo: Number(novo),
+    porEncomenda: Number(byOrder)
   }
 }
 
 // ➕ Adicionar item
 function addItem () {
-  const idx = document.getElementById('categorySelect').value
+  const idx = document.getElementById('categorySelectToEdit').value
   const name = document.getElementById('itemName').value.trim()
   const desc = document.getElementById('itemDesc').value.trim()
   const price = document.getElementById('itemPrice').value.trim()
-  const isOrder = document.getElementById('itemOrder').checked
-  const isNew = document.getElementById('itemNew').checked
-  const isActive = document.getElementById('isActive').checked
+  const byOrder = document.getElementById('itemOrder').checked
+  const novo = document.getElementById('itemNew').checked
+  const active = document.getElementById('isActive').checked
 
   if (!name) return alert('Insira o nome do item.')
 
   menus[idx].itens.push(
-    createMenuItem({ name, desc, price, isActive, isNew, isOrder })
+    createMenuItem({ name, desc, price, byOrder, novo, active })
   )
 
   refreshItems()
-  clearItemFields()
 }
 
 // ✏ Editar item existente
 function editItem () {
-  const cIdx = document.getElementById('categorySelect').value
+  const cIdx = document.getElementById('categorySelectToEdit').value
   const iIdx = document.getElementById('itemSelect').value
 
   const name = document.getElementById('itemName').value.trim()
   const desc = document.getElementById('itemDesc').value.trim()
   const price = document.getElementById('itemPrice').value.trim()
-  const isOrder = document.getElementById('itemOrder').checked
-  const isNew = document.getElementById('itemNew').checked
-  const isActive = document.getElementById('isActive').checked
+  const byOrder = document.getElementById('itemOrder').checked
+  const novo = document.getElementById('itemNew').checked
+  const active = document.getElementById('isActive').checked
 
   menus[cIdx].itens[iIdx] = createMenuItem({
     name,
     desc,
     price,
-    isActive,
-    isNew,
-    isOrder
+    byOrder,
+    novo,
+    active
   })
 
   refreshItems()
@@ -377,14 +376,13 @@ function editItem () {
 
 // ❌ Remover item
 function removeItem () {
-  const cIdx = document.getElementById('categorySelect').value
+  const cIdx = document.getElementById('categorySelectToEdit').value
   const iIdx = document.getElementById('itemSelect').value
 
   if (!confirm('Tem certeza que quer remover este item?')) return
 
   menus[cIdx].itens.splice(iIdx, 1)
   refreshItems()
-  clearItemFields()
 }
 
 document.getElementById('itemSelect').addEventListener('change', fillItemForm)
