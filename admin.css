@@ -53,15 +53,16 @@ textarea {
     font-size: 13px !important;
 }
 
-/* Main editor box */
-#menuEditor {
-    padding: 15px;               /* better for smartphone spacing */
-    border: 1px solid #ddd;
-    border-radius: 8px;
+.groupbox{
+  padding: 15px;               
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
+/* Main editor box */
+
 
 /* OPTION 2 → Center inner content on smartphone */
-#menuEditor > * {
+.groupbox > * {
     max-width: 500px;            /* ideal mobile-friendly width */
     width: 100%;
     margin-left: auto;

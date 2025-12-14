@@ -14,6 +14,7 @@ const saveBtn = document.getElementById('saveBtn')
 const editor = document.getElementById('editor')
 
 const menuEditor = document.getElementById('menuEditor')
+const menuItens = document.getElementById('menuItens')
 const menuComplete = document.getElementById('menuComplete')
 // const jsonOutput = document.getElementById('jsonOutput')
 
@@ -77,6 +78,7 @@ async function carregarDataJson () {
     const parsed = JSON.parse(content)
     menus = parsed.menus
     menuEditor.style.display = 'block'
+    menuItens.style.display = 'block'
     // menuComplete.style.display = 'block'
     refreshDropdownCategories()
   } catch (err) {
