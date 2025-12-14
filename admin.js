@@ -15,6 +15,7 @@ const editor = document.getElementById('editor')
 
 const menuEditor = document.getElementById('menuEditor')
 const menuItens = document.getElementById('menuItens')
+const navbuttons = document.getElementById('navbuttons')
 const menuComplete = document.getElementById('menuComplete')
 // const jsonOutput = document.getElementById('jsonOutput')
 
@@ -79,6 +80,7 @@ async function carregarDataJson () {
     menus = parsed.menus
     menuEditor.style.display = 'block'
     menuItens.style.display = 'block'
+    navbuttons.style.display = 'block'
     // menuComplete.style.display = 'block'
     refreshDropdownCategories()
   } catch (err) {
@@ -455,4 +457,19 @@ function showToast (message, type = 'success') {
 
   const toast = new bootstrap.Toast(toastEl, { delay: 2000 })
   toast.show()
+}
+
+function showPanel (panelId) {
+  document.getElementById('menuEditor').style.display = 'none'
+  document.getElementById('menuItens').style.display = 'none'
+
+  switch (panelId) {
+    case '1':
+      document.getElementById('menuEditor').style.display = 'block'
+      break
+
+    case '2':
+      document.getElementById('menuItens').style.display = 'block'
+      break
+  }
 }
