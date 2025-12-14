@@ -85,9 +85,6 @@ async function carregarDataJson () {
   }
 }
 
-// =====================================================
-// 🔹 Guardar alterações via workflow_dispatch
-// =====================================================
 saveBtn.onclick = async () => {
   try {
     EnableSpinner(saveBtn)
@@ -125,11 +122,6 @@ saveBtn.onclick = async () => {
   DisableSpinner(saveBtn)
 }
 
-// =====================================================
-// 🟦 EDITOR VISUAL – Consistência de dados
-// =====================================================
-
-// Preenche dropdown de categorias
 function refreshDropdownCategories () {
   const select = document.getElementById('categorySelect')
   select.innerHTML = ''
@@ -153,7 +145,6 @@ function refreshDropdownCategories () {
   updateJson()
 }
 
-// Mostra itens da categoria selecionada
 function refreshItems () {
   const idx = parseInt(document.getElementById('categorySelect').value, 10)
   const ul = document.getElementById('itemsList')
@@ -170,33 +161,29 @@ function refreshItems () {
     li.textContent = `${item.label} – ${item.description} ${
       item.preco ? ' (€' + item.preco + ')' : ''
     }`
-    // opcional: clicar no li preenche o form
+
     li.addEventListener('click', () => {
       itemSelect.value = index
       fillItemForm()
     })
     ul.appendChild(li)
 
-    // Dropdown para selecionar item
     const opt = document.createElement('option')
     opt.value = index
     opt.textContent = item.label
     itemSelect.appendChild(opt)
   })
 
-  // Se houver items, selecciona o primeiro e preenche o form
   if (itens.length > 0) {
     itemSelect.value = 0
     fillItemForm()
   } else {
-    // limpa form se não houver items
     clearItemForm()
   }
 
   updateJson()
 }
 
-// Adicionar categoria
 function addCategory () {
   const nameInput = document.getElementById('categoryName')
   const name = nameInput.value.trim()
@@ -211,9 +198,9 @@ function addCategory () {
       itens: []
     })
 
-    // menus.sort((a, b) =>
-    //   a.label.localeCompare(b.label, undefined, { sensitivity: 'base' })
-    // )
+    menus.sort((a, b) =>
+      a.label.localeCompare(b.label, undefined, { sensitivity: 'base' })
+    )
     refreshDropdownCategories()
     showSave()
   }
@@ -221,7 +208,6 @@ function addCategory () {
   nameInput.value = ''
 }
 
-// Editar categoria
 function editCategory () {
   const idx = document.getElementById('categoryNameEdit').value
   const nameInput = document.getElementById('categoryNameEditText')
@@ -236,7 +222,6 @@ function editCategory () {
   nameInput.value = ''
 }
 
-// Remover categoria
 function removeCategory () {
   const idx = document.getElementById('categorySelect').value
   if (
