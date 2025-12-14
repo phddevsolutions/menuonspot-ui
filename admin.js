@@ -70,7 +70,6 @@ async function carregarDataJson () {
     // Preenche textarea raw
     editor.value = content
     editor.style.display = 'block'
-    saveBtn.style.display = 'inline-block'
 
     // Preenche editor visual
     const parsed = JSON.parse(content)
@@ -212,6 +211,7 @@ function addCategory () {
     //   a.label.localeCompare(b.label, undefined, { sensitivity: 'base' })
     // )
     refreshDropdownCategories()
+    showSave()
   }
 
   nameInput.value = ''
@@ -228,6 +228,7 @@ function editCategory () {
   menus[idx].id = name.replace(/\s+/g, '_')
 
   refreshDropdownCategories()
+  showSave()
   nameInput.value = ''
 }
 
@@ -240,6 +241,7 @@ function removeCategory () {
     return
   menus.splice(idx, 1)
   refreshDropdownCategories()
+  showSave()
 }
 
 // Atualiza JSON visual + textarea bruto
@@ -349,6 +351,7 @@ function addItem () {
   )
 
   refreshItems()
+  showSave()
 }
 
 // ✏ Editar item existente
@@ -373,9 +376,9 @@ function editItem () {
   })
 
   refreshItems()
+  showSave()
 }
 
-// ❌ Remover item
 function removeItem () {
   const cIdx = document.getElementById('categorySelectToEdit').value
   const iIdx = document.getElementById('itemSelect').value
@@ -384,6 +387,7 @@ function removeItem () {
 
   menus[cIdx].itens.splice(iIdx, 1)
   refreshItems()
+  showSave()
 }
 
 document.getElementById('itemSelect').addEventListener('change', fillItemForm)
@@ -413,4 +417,8 @@ function clearItemForm () {
   document.getElementById('itemOrder').checked = false
   document.getElementById('itemNew').checked = false
   document.getElementById('isActive').checked = false
+}
+
+function showSave () {
+  saveBtn.style.display = 'inline-block'
 }
