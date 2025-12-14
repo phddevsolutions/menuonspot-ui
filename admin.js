@@ -165,7 +165,7 @@ function refreshItems () {
     // Lista visual
     const li = document.createElement('li')
     li.textContent = `${item.label} – ${item.description} ${
-      item.price ? ' (€' + item.price + ')' : ''
+      item.preco ? ' (€' + item.preco + ')' : ''
     }`
     // opcional: clicar no li preenche o form
     li.addEventListener('click', () => {
@@ -299,7 +299,7 @@ function refreshItems () {
     // Lista visual
     const li = document.createElement('li')
     li.textContent = `${item.label} ${
-      item.price ? ' - ' + item.price + ' €' : ''
+      item.preco ? ' - ' + item.preco + ' €' : ''
     }`
     ul.appendChild(li)
 
@@ -325,7 +325,7 @@ function createMenuItem ({ name, desc, price, byOrder, novo, active }) {
     label: name,
     description: desc,
     urlImagem: './images/default.png',
-    preco:price,
+    preco: price,
     ativo: active,
     novo: Number(novo),
     porEncomenda: Number(byOrder)
@@ -400,7 +400,7 @@ function fillItemForm () {
 
   document.getElementById('itemName').value = item.label || ''
   document.getElementById('itemDesc').value = item.description || ''
-  document.getElementById('itemPrice').value = item.price || ''
+  document.getElementById('itemPrice').value = item.preco || ''
   document.getElementById('itemOrder').checked = item.porEncomenda
   document.getElementById('itemNew').checked = item.novo
   document.getElementById('isActive').checked = item.ativo

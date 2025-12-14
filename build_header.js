@@ -31,7 +31,10 @@ function buildHeader () {
   //   })
   
   //fetch("https://raw.githubusercontent.com/TEU_UTILIZADOR/NOME_REPO/main/data.json")
-  fetch('data.json')
+  // fetch('data.json')
+  fetch(`data.json?ts=${Date.now()}`, {
+    cache: 'no-store'
+  })
     .then(response => response.json())
     .then(data => {
       // Ordena menus por label e cria links
