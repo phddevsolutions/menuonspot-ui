@@ -325,7 +325,7 @@ function createMenuItem ({ name, desc, price, byOrder, novo, active }) {
     label: name,
     description: desc,
     urlImagem: './images/default.png',
-    price,
+    preco:price,
     ativo: active,
     novo: Number(novo),
     porEncomenda: Number(byOrder)
