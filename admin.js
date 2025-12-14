@@ -33,6 +33,7 @@ const params = new URLSearchParams(window.location.search)
 const code = params.get('code')
 
 if (code) {
+  loginBtn.classList.add('btn-loading')
   fetch(TOKEN_PROXY, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -41,11 +42,12 @@ if (code) {
     .then(r => r.json())
     .then(data => {
       accessToken = data.access_token
-      loginBtn.style.display = 'none'
       history.replaceState({}, document.title, window.location.pathname)
       carregarDataJson()
+      loginBtn.style.display = 'none'
     })
     .catch(err => {
+      loginBtn.classList.remove('btn-loading')
       console.error(err)
       alert('Erro ao obter token do GitHub')
     })

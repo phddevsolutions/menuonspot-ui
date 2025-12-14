@@ -79,3 +79,23 @@ textarea {
     align-items: center;
     gap: 5px;
 }
+
+/* hide spinner by default */
+.btn-spinner {
+  display: none;
+}
+
+/* loading state */
+.btn-loading {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.btn-loading .btn-text {
+  display: none;
+}
+
+.btn-loading .btn-spinner {
+  display: inline-block;
+}
+
