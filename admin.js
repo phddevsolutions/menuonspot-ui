@@ -33,7 +33,7 @@ const params = new URLSearchParams(window.location.search)
 const code = params.get('code')
 
 if (code) {
-  loginBtn.classList.add('btn-loading')
+  EnableSpinner(loginBtn)
   fetch(TOKEN_PROXY, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -47,7 +47,7 @@ if (code) {
       loginBtn.style.display = 'none'
     })
     .catch(err => {
-      loginBtn.classList.remove('btn-loading')
+      DisableSpinner(loginBtn)
       console.error(err)
       alert('Erro ao obter token do GitHub')
     })
@@ -90,6 +90,7 @@ async function carregarDataJson () {
 // =====================================================
 saveBtn.onclick = async () => {
   try {
+    EnableSpinner(saveBtn)
     // O conteúdo final é sempre o editor.raw
     const rawContent = editor.value
     const jsonObj = JSON.parse(rawContent) // valida JSON
@@ -119,8 +120,9 @@ saveBtn.onclick = async () => {
     alert('Alterações enviadas com sucesso!')
   } catch (err) {
     console.error(err)
-    alert('Erro ao enviar alterações para o workflow.')
+    alert('Erro ao enviar alterações!')
   }
+  DisableSpinner(saveBtn)
 }
 
 // =====================================================
@@ -423,4 +425,16 @@ function clearItemForm () {
 
 function showSave () {
   saveBtn.style.display = 'inline-block'
+}
+
+function EnableSpinner (button) {
+  if (!button) return
+  button.classList.add('btn-loading')
+  button.disabled = true
+}
+
+function DisableSpinner (button) {
+  if (!button) return
+  button.classList.remove('btn-loading')
+  button.disabled = false
 }
