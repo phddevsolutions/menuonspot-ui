@@ -49,7 +49,7 @@ if (code) {
     .catch(err => {
       DisableSpinner(loginBtn)
       console.error(err)
-      alert('Erro ao obter token do GitHub')
+      showToast('Erro ao obter token!', 'danger')
     })
 }
 
@@ -81,7 +81,7 @@ async function carregarDataJson () {
     refreshDropdownCategories()
   } catch (err) {
     console.error(err)
-    alert('Erro ao carregar data.json')
+    showToast('Erro ao carregar dados!', 'danger')
   }
 }
 
@@ -117,10 +117,10 @@ saveBtn.onclick = async () => {
       throw new Error(`GitHub API error: ${response.status} - ${text}`)
     }
 
-    alert('Alterações enviadas com sucesso!')
+    showToast('Alterações enviadas com sucesso!', 'success')
   } catch (err) {
     console.error(err)
-    alert('Erro ao enviar alterações!')
+    showToast('Erro ao enviar alterações', 'danger')
   }
   DisableSpinner(saveBtn)
 }
@@ -200,7 +200,7 @@ function refreshItems () {
 function addCategory () {
   const nameInput = document.getElementById('categoryName')
   const name = nameInput.value.trim()
-  if (!name) return alert('Nova categoria vazia!')
+  if (!name) return showToast('Nova categoria vazia!', 'warning')
 
   const exists = menus.some(m => m.label.toLowerCase() === name.toLowerCase())
 
@@ -226,7 +226,7 @@ function editCategory () {
   const idx = document.getElementById('categoryNameEdit').value
   const nameInput = document.getElementById('categoryNameEditText')
   const name = nameInput.value.trim()
-  if (!name) return alert('Nome da categoria é vazio!')
+  if (!name) return showToast('Nome da categoria vazia!', 'warning')
 
   menus[idx].label = name
   menus[idx].id = name.replace(/\s+/g, '_')
@@ -348,7 +348,8 @@ function addItem () {
   const novo = document.getElementById('itemNew').checked
   const active = document.getElementById('isActive').checked
 
-  if (!name) return alert('Insira o nome do item.')
+  if (!name) return showToast('Campo Nome vazio!', 'warning')
+  if (!price) return showToast('Campo Preco vazio!', 'warning')
 
   menus[idx].itens.push(
     createMenuItem({ name, desc, price, byOrder, novo, active })
@@ -424,7 +425,9 @@ function clearItemForm () {
 }
 
 function showSave () {
-  saveBtn.style.display = 'inline-block'
+  showToast('Não esquecer de: Enviar Alterações', 'info')
+  const sendDataContainer = document.getElementById('sendDataContainer')
+  sendDataContainer.style.display = 'inline-block'
 }
 
 function EnableSpinner (button) {
@@ -437,4 +440,32 @@ function DisableSpinner (button) {
   if (!button) return
   button.classList.remove('btn-loading')
   button.disabled = false
+}
+
+function showToast (message, type = 'success') {
+  const toastEl = document.getElementById('appToast')
+  const toastMsg = document.getElementById('toastMessage')
+
+  toastEl.className = `toast align-items-center text-bg-${type} border-0`
+  toastMsg.textContent = message
+  let delay
+  switch (type) {
+    case 'success':
+      delay = 2000
+      break
+    case 'danger':
+      delay = 10000
+      break
+    case 'warning':
+      delay = 3000
+      break
+    case 'info':
+      delay = 4000
+      break
+    default:
+      delay = 3000
+  }
+
+  const toast = new bootstrap.Toast(toastEl, { delay: 2000 })
+  toast.show()
 }
