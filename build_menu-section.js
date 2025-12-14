@@ -15,7 +15,7 @@ async function buildMenuSections (containerId) {
   wrapper.className = 'container-fluid'
 
   //fetch("https://raw.githubusercontent.com/TEU_UTILIZADOR/NOME_REPO/main/data.json")
-  fetch('data.json')
+  // fetch('data.json')
   fetch(`data.json?ts=${Date.now()}`, {
     cache: 'no-store'
   })
