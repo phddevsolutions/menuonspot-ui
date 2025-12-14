@@ -4,7 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menuonspot Admin</title>
- <link rel="stylesheet" href="admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  
   <style>
    
   </style>
@@ -18,7 +23,7 @@
   </div>
    <div class="row">
     <div class="col-md-12">
-       <button id="loginBtn">Login com GitHub</button>
+       <button class="btn btn-success w-100 mb-2 btn-sm" id="loginBtn">Login com GitHub</button>
     </div>
   </div>
    <!-- <div class="row">
@@ -40,70 +45,107 @@
       <label>Criar categoria</label>
        </div>
       <div class="row"> 
-      <input type="text" id="categoryName" placeholder="Ex: Bebidas">
-      <button onclick="addCategory()">Adicionar</button>
+      <input type="text" id="categoryName" placeholder="Ex: Bebidas" >
+      <button class="btn btn-success w-100 mb-2 btn-sm" onclick="addCategory()">Adicionar</button>
     </div>
 
     <div class="row">
-      <label>Editar categoria</label>
+      <label>Alterar categoria</label>
     </div>
     <div class="row">
-      <select id="categoryNameEdit"></select>
-      <input type="text" id="categoryNameEditText" placeholder="novo nome">
+      <select id="categoryNameEdit"  class="form-select form-select-sm w-auto shadow-sm"></select>
+      <input type="text" id="categoryNameEditText" placeholder="Novo nome">
     </div>
      <div class="row">
       
-      <button onclick="editCategory()">Gravar</button>
+      <button class="btn btn-primary w-100 mb-2 btn-sm" onclick="editCategory()">Gravar</button>
     </div>
 
     <div class="row">
       <label>Remover categoria</label>
     </div>
     <div class="row">
-      <select id="categorySelect"></select>
-      <button onclick="removeCategory()">Remover</button>
+      <select id="categorySelect" class="form-select form-select-sm w-auto shadow-sm"></select>
+      <button class="btn btn-outline-danger w-100 mb-2 btn-sm" onclick="removeCategory()">Remover</button>
+    </div>
+    <div class="row">
+      <h5>Itens da Categoria Selecionada</h5>
+    </div>
+    <div class="row">
+      <ul id="itemsList"></ul>
+      <div class="border-top border-secondary mb-3"></div>
+    </div>
+    <div class="row">
+      <h3>Gerir Itens</h3>
+    </div>
+    <div class="row">
+      <select id="categorySelectToEdit" class="form-select form-select-sm w-auto shadow-sm"></select>
+    </div>
+    <div class="row">
+      
+      <select id="itemSelect" class="form-select form-select-sm w-auto shadow-sm"></select>
+    </div>
+    <div class="row">
+      <div class="container text-start setwidth100">
+        <div class="row mb-2 align-items-center">
+      <div class="col-3 col-form-label fonttext">Nome</div>
+      <div class="col-9">
+        <input type="text" class="form-control fonttext" id="itemName">
+      </div>
     </div>
 
-    <h3>Itens da Categoria Selecionada</h3>
-    <ul id="itemsList"></ul>
-    <h3>Gerir Itens</h3>
-
-    <label>Selecionar item para editar:</label>
-    <select id="itemSelect"></select>
-
-    <label>Nome do item:</label>
-    <input type="text" id="itemName">
-
-    <label>Descrição:</label>
-    <input type="text" id="itemDesc">
-
-    <label>Preço:</label>
-    <input type="text" id="itemPrice">
-
-  <div class="checkbox-container">
-      <div class="checkbox-group">
-        <label for="isActive">Activo</label>
-        <input type="checkbox" id="isActive">
+    <div class="row mb-2 align-items-center">
+      <div class="col-3 col-form-label fonttext">Descrição</div>
+      <div class="col-9">
+        <!-- <input type="text" class="form-control itemdesc" id="itemDesc"> -->
+         <textarea id="itemDesc" class="form-control"></textarea>
       </div>
+    </div>
 
-      <div class="checkbox-group">
-        <label for="itemOrder">Encomendar</label>
-        <input type="checkbox" id="itemOrder">
+    <div class="row mb-2 align-items-center">
+      <div class="col-3 col-form-label fonttext">Preço</div>
+      <div class="col-9">
+        <input type="number" class="form-control fonttext" id="itemPrice" placeholder="€ 0.00">
       </div>
+    </div>
+         <div class="row mb-2 fonttext">
+            <div class="col-12">
+             <div class="checkbox-container">
+              <div class="checkbox-group">
+                <div for="isActive">Activo</div>
+                <input type="checkbox" id="isActive">
+              </div>
 
-      <div class="checkbox-group">
-        <label for="itemNew">Novo</label>
-        <input type="checkbox" id="itemNew">
+              <div class="checkbox-group">
+                <div for="itemOrder">Encomendar</div>
+                <input type="checkbox" id="itemOrder">
+              </div>
+
+              <div class="checkbox-group">
+                <div for="itemNew">Novo</div>
+                <input type="checkbox" id="itemNew">
+              </div>
+          </div>
+          </div>
+        </div>
       </div>
-  </div>
+    </div>
+   
+<div class="border-top border-secondary"></div>
+  
 
   <div class="row">
-    <button onclick="addItem()">Adicionar Item</button>
-    <button onclick="editItem()">Gravar Item</button>
-    <button onclick="removeItem()">Remover Item</button>
+    <button type="button" class="btn btn-primary w-100 mb-2" onclick="editItem()">Alterar</button>
+    <button type="button" class="btn btn-success w-100 mb-2 btn-sm" onclick="addItem()">Adicionar</button>
+    <button type="button" class="btn btn-outline-danger w-100 mb-2 btn-sm" onclick="removeItem()">Remover</button>
   </div>
-
-    <h3>JSON Atual Gerado</h3>
+  
+  <div class="row"> 
+    <div class="border-top border-secondary mt-3 mb-3"></div>  
+    <button id="saveBtn" class="btn btn-info w-100 mb-2" style="display:none">Guardar Alterações</button>
+  </div>
+  
+  <h3>JSON Atual Gerado</h3>
     <textarea id="jsonOutput" readonly></textarea>
   </div>
  </div>
@@ -114,10 +156,7 @@
     <textarea id="editor" style="display:none"></textarea>
   </div>
 
-   <div class="row">   
-    <!-- Botão para enviar alterações -->
-    <button id="saveBtn" style="display:none">Guardar Alterações</button>
-  </div>
+  
 </div>
   <!-- Script principal -->
   <script src="admin.js"></script>

@@ -134,12 +134,16 @@ function refreshDropdownCategories () {
   const selectEdit = document.getElementById('categoryNameEdit')
   selectEdit.innerHTML = ''
 
+  const selectToEdit = document.getElementById('categorySelectToEdit')
+  selectToEdit.innerHTML = ''
+
   menus.forEach((m, index) => {
     const opt = document.createElement('option')
     opt.value = index
     opt.textContent = m.label
     select.appendChild(opt)
     selectEdit.appendChild(opt.cloneNode(true))
+    selectToEdit.appendChild(opt.cloneNode(true))
   })
 
   refreshItems()
@@ -191,16 +195,26 @@ function refreshItems () {
 
 // Adicionar categoria
 function addCategory () {
-  const name = document.getElementById('categoryName').value.trim()
-  if (!name) return alert('Introduza um nome!')
+  const nameInput = document.getElementById('categoryName')
+  const name = nameInput.value.trim()
+  if (!name) return alert('Nova categoria vazia!')
 
-  menus.push({
-    label: name,
-    id: name.toLowerCase().replace(/\s+/g, '_'),
-    itens: []
-  })
+  const exists = menus.some(m => m.label.toLowerCase() === name.toLowerCase())
 
-  refreshDropdownCategories()
+  if (!exists) {
+    menus.push({
+      label: name,
+      id: name.toLowerCase().replace(/\s+/g, '_'),
+      itens: []
+    })
+
+    menus.sort((a, b) =>
+      a.label.localeCompare(b.label, undefined, { sensitivity: 'base' })
+    )
+    refreshDropdownCategories()
+  }
+
+  nameInput.value = ''
 }
 
 // Editar categoria
@@ -208,7 +222,7 @@ function editCategory () {
   const idx = document.getElementById('categoryNameEdit').value
   const nameInput = document.getElementById('categoryNameEditText')
   const name = nameInput.value.trim()
-  if (!name) return alert('Introduza um novo nome!')
+  if (!name) return alert('Nome da categoria é vazio!')
 
   menus[idx].label = name
   menus[idx].id = name.replace(/\s+/g, '_')
@@ -220,7 +234,10 @@ function editCategory () {
 // Remover categoria
 function removeCategory () {
   const idx = document.getElementById('categorySelect').value
-  if (!confirm('Tem a certeza?')) return
+  if (
+    !confirm('A categoria e todos os items serão eliminados, Tem a certeza ?')
+  )
+    return
   menus.splice(idx, 1)
   refreshDropdownCategories()
 }
@@ -233,10 +250,35 @@ function updateJson () {
 }
 
 //Ao mudar categoria
-document.getElementById('categorySelect').addEventListener('change', () => {
+categorySelect.addEventListener('change', () =>
+  onCategoryChange(categorySelect)
+)
+
+categoryNameEdit.addEventListener('change', () =>
+  onCategoryChange(categoryNameEdit)
+)
+
+categorySelectToEdit.addEventListener('change', () =>
+  onCategoryChange(categorySelectToEdit)
+)
+
+function onCategoryChange (sourceSelect) {
+  const value = sourceSelect.value
+
+  if (sourceSelect === categorySelect) {
+    categoryNameEdit.value = value
+    categorySelectToEdit.value = value
+  } else if (sourceSelect === categoryNameEdit) {
+    categorySelect.value = value
+    categorySelectToEdit.value = value
+  } else {
+    categorySelect.value = value
+    categoryNameEdit.value = value
+  }
+
   refreshItems()
   updateJson()
-})
+}
 
 // ===============================
 // CRUD DE ITENS
