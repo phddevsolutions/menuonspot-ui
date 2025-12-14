@@ -15,7 +15,7 @@ const editor = document.getElementById('editor')
 
 const menuEditor = document.getElementById('menuEditor')
 const menuComplete = document.getElementById('menuComplete')
-const jsonOutput = document.getElementById('jsonOutput')
+// const jsonOutput = document.getElementById('jsonOutput')
 
 let accessToken = null
 let menus = [] // ← dados manipulados no editor visual
@@ -77,7 +77,7 @@ async function carregarDataJson () {
     const parsed = JSON.parse(content)
     menus = parsed.menus
     menuEditor.style.display = 'block'
-    menuComplete.style.display = 'block'
+    // menuComplete.style.display = 'block'
     refreshDropdownCategories()
   } catch (err) {
     console.error(err)
@@ -251,7 +251,7 @@ function removeCategory () {
 // Atualiza JSON visual + textarea bruto
 function updateJson () {
   const finalJson = JSON.stringify({ menus }, null, 2)
-  jsonOutput.value = finalJson
+  // jsonOutput.value = finalJson
   editor.value = finalJson // mantém editor raw sempre sincronizado
 }
 
