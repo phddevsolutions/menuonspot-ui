@@ -51,9 +51,9 @@
             <div class="row">
                 <label>Criar categoria</label>
             </div>
-            <div class="row"> 
+            <div class="row justify-content-center"> 
               <input type="text" id="categoryName" placeholder="Ex: Bebidas" >
-              <button class="btn btn-success w-100 mb-2 btn-sm" onclick="addCategory()">Adicionar</button>
+              <button class="btn btn-success w-50 mb-2 btn-sm" onclick="addCategory()">Adicionar</button>
             </div>
 
             <div class="row">
@@ -63,17 +63,17 @@
               <select id="categoryNameEdit"  class="form-select form-select-sm w-100 shadow-sm"></select>
               <input type="text" id="categoryNameEditText" placeholder="Novo nome">
             </div>
-            <div class="row">
-              <button class="btn btn-primary w-100 mb-2 btn-sm" onclick="editCategory()">Gravar</button>
+            <div class="row justify-content-center">
+              <button class="btn btn-primary w-50 mb-2 btn-sm" onclick="editCategory()">Gravar</button>
             </div>
 
             <div class="row">
               <label>Remover categoria</label>
             </div>
 
-            <div class="row">
+            <div class="row justify-content-center">
               <select id="categorySelect" class="form-select form-select-sm w-100 shadow-sm"></select>
-              <button class="btn btn-outline-danger w-100 mb-2 btn-sm" onclick="removeCategory()">Remover</button>
+              <button class="btn btn-outline-danger w-50 mb-2 btn-sm" onclick="removeCategory()">Remover</button>
             </div>
 
             <div class="row">
@@ -98,6 +98,9 @@
                 <div class="row">      
                   <select id="itemSelect" class="form-select form-select-sm w-100 shadow-sm"></select>
                 </div>
+                
+                <div class="border-top border-secondary mt-3 mb-3"></div>
+
                 <div class="row">
                   <div class="container text-start setwidth100">
                     <div class="row mb-2 align-items-center">
@@ -146,10 +149,14 @@
           
                 <div class="border-top border-secondary"></div>
 
-                <div class="row">
-                  <button type="button" class="btn btn-primary w-100 mb-2" onclick="editItem()">Alterar</button>
-                  <button type="button" class="btn btn-success w-100 mb-2 btn-sm" onclick="addItem()">Adicionar</button>
-                  <button type="button" class="btn btn-outline-danger w-100 mb-2 btn-sm" onclick="removeItem()">Remover</button>
+                <div class="row justify-content-center">
+                  <button type="button" class="btn btn-primary w-50" onclick="editItem()">Alterar</button>
+                  </div>
+                <div class="row justify-content-center">
+                  <button type="button" class="btn btn-success w-50 btn-sm" onclick="addItem()">Adicionar</button>
+                </div>
+                <div class="row justify-content-center">
+                  <button type="button" class="btn btn-outline-danger w-50 mb-5 btn-sm" onclick="removeItem()">Remover</button>
                 </div>
           
                 <div class="row" id="sendDataContainer" style="display:none"> 
