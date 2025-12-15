@@ -17,6 +17,7 @@ const menuEditor = document.getElementById('menuEditor')
 const menuItens = document.getElementById('menuItens')
 const navbuttons = document.getElementById('navbuttons')
 const menuComplete = document.getElementById('menuComplete')
+const mainTab = document.getElementById('pills-home')
 // const jsonOutput = document.getElementById('jsonOutput')
 
 let accessToken = null
@@ -78,8 +79,10 @@ async function carregarDataJson () {
     // Preenche editor visual
     const parsed = JSON.parse(content)
     menus = parsed.menus
-    menuEditor.style.display = 'block'
-    menuItens.style.display = 'block'
+    // menuEditor.style.display = 'block'
+    // menuItens.style.display = 'block'
+    mainTab.classList.add('show', 'active')
+
     navbuttons.style.display = 'block'
     // menuComplete.style.display = 'block'
     refreshDropdownCategories()
@@ -457,19 +460,4 @@ function showToast (message, type = 'success') {
 
   const toast = new bootstrap.Toast(toastEl, { delay: 2000 })
   toast.show()
-}
-
-function showPanel (panelId) {
-  document.getElementById('menuEditor').style.display = 'none'
-  document.getElementById('menuItens').style.display = 'none'
-
-  switch (panelId) {
-    case '1':
-      document.getElementById('menuEditor').style.display = 'block'
-      break
-
-    case '2':
-      document.getElementById('menuItens').style.display = 'block'
-      break
-  }
 }

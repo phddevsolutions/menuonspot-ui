@@ -101,3 +101,45 @@ textarea {
   display: inline-block;
 }
 
+.btnAdminCategory {
+    display: inline-block;
+    background-color: mintcream;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.btnAdminCategory.active {
+    display: inline-block;
+    background-color: #FFF4E6;
+    border-radius: 5px;
+
+    font-weight: 600;
+    font-size: 13px;
+    color: #FF9900;
+
+    box-shadow: 0 0 4px rgba(255, 153, 48, 0.45) !important;
+}
+
+.btnAdminCategory.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; /* linha laranja abaixo do link */
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #ff6600;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.btnAdminCategory:before {
+    font: normal normal normal 14px/1 FontAwesome;
+    color:#FF9900;
+    padding-right: 7px;
+}
+
+.btnColor{
+  background-color: #FFF4e6
+}
+
+

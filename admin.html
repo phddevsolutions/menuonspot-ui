@@ -22,17 +22,7 @@
         <h2>Menuonspot Admin</h2>
       </div>
     </div>
-    <div id="navbuttons" style="display: none;" class="row text-center mb-4">
-      <div class="col-md-12">
-        <button class="btn btn-primary me-2" onclick="showPanel('1')">
-          Itens
-        </button>
-        <button class="btn btn-outline-primary" onclick="showPanel('2')">
-          Categorias
-        </button>
-      </div>
-    </div>
-
+   
     <div class="row">
       <div class="col-md-12">
         <button type="button" class="btn btn-success w-100 mb-2 btn-sm" id="loginBtn">
@@ -42,125 +32,142 @@
       </div>
     </div>
 
-  
-    <div class="row">  
-      <div id="menuEditor" class="groupbox" style="display:none">
+    <ul id="navbuttons" style="display: none;" class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class=" active btnAdminCategory" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Categorias</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="btnAdminCategory" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Produtos</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+      
+      <div class="tab-pane fade active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+        <div class="row">  
+          <div id="menuEditor" class="groupbox">
 
-        <h3>Gerir Categorias</h3>
+            <h3>Gerir Categorias</h3>
 
-        <div class="row">
-            <label>Criar categoria</label>
+            <div class="row">
+                <label>Criar categoria</label>
+            </div>
+            <div class="row"> 
+              <input type="text" id="categoryName" placeholder="Ex: Bebidas" >
+              <button class="btn btn-success w-100 mb-2 btn-sm" onclick="addCategory()">Adicionar</button>
+            </div>
+
+            <div class="row">
+              <label>Alterar categoria</label>
+            </div>
+            <div class="row">
+              <select id="categoryNameEdit"  class="form-select form-select-sm w-100 shadow-sm"></select>
+              <input type="text" id="categoryNameEditText" placeholder="Novo nome">
+            </div>
+            <div class="row">
+              <button class="btn btn-primary w-100 mb-2 btn-sm" onclick="editCategory()">Gravar</button>
+            </div>
+
+            <div class="row">
+              <label>Remover categoria</label>
+            </div>
+
+            <div class="row">
+              <select id="categorySelect" class="form-select form-select-sm w-100 shadow-sm"></select>
+              <button class="btn btn-outline-danger w-100 mb-2 btn-sm" onclick="removeCategory()">Remover</button>
+            </div>
+
+            <div class="row">
+              <h5>Itens da Categoria Selecionada</h5>
+            </div>
+
+            <div class="row">
+              <ul id="itemsList"></ul>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
         <div class="row"> 
-          <input type="text" id="categoryName" placeholder="Ex: Bebidas" >
-          <button class="btn btn-success w-100 mb-2 btn-sm" onclick="addCategory()">Adicionar</button>
-        </div>
+              <div id="menuItens" class="groupbox">
+                <div class="row">
+                  <h3>Gerir Produtos</h3>
+                </div>
+                <div class="row">
+                  <select id="categorySelectToEdit" class="form-select form-select-sm w-100 shadow-sm"></select>
+                </div>
+                <div class="row">      
+                  <select id="itemSelect" class="form-select form-select-sm w-100 shadow-sm"></select>
+                </div>
+                <div class="row">
+                  <div class="container text-start setwidth100">
+                    <div class="row mb-2 align-items-center">
+                      <div class="col-3 col-form-label fonttext">Nome</div>
+                    <div class="col-9">
+                      <input type="text" class="form-control fonttext" id="itemName">
+                    </div>
+                  </div>
 
-        <div class="row">
-          <label>Alterar categoria</label>
-        </div>
-        <div class="row">
-          <select id="categoryNameEdit"  class="form-select form-select-sm w-100 shadow-sm"></select>
-          <input type="text" id="categoryNameEditText" placeholder="Novo nome">
-        </div>
-        <div class="row">
-          <button class="btn btn-primary w-100 mb-2 btn-sm" onclick="editCategory()">Gravar</button>
-        </div>
+                  <div class="row mb-2 align-items-center">
+                    <div class="col-3 col-form-label fonttext">Descrição</div>
+                    <div class="col-9">
+                      <!-- <input type="text" class="form-control itemdesc" id="itemDesc"> -->
+                      <textarea id="itemDesc" class="form-control"></textarea>
+                    </div>
+                  </div>
 
-        <div class="row">
-          <label>Remover categoria</label>
-        </div>
+                  <div class="row mb-2 align-items-center">
+                    <div class="col-3 col-form-label fonttext">Preço</div>
+                    <div class="col-9">
+                      <input type="number" class="form-control fonttext" id="itemPrice" placeholder="€ 0.00">
+                    </div>
+                  </div>
+                  <div class="row mb-2 fonttext">
+                    <div class="col-12">
+                      <div class="checkbox-container">
+                        <div class="checkbox-group">
+                          <div for="isActive">Activo</div>
+                            <input type="checkbox" id="isActive">
+                          </div>
 
-        <div class="row">
-          <select id="categorySelect" class="form-select form-select-sm w-100 shadow-sm"></select>
-          <button class="btn btn-outline-danger w-100 mb-2 btn-sm" onclick="removeCategory()">Remover</button>
-        </div>
+                          <div class="checkbox-group">
+                            <div for="itemOrder">Encomendar</div>
+                            <input type="checkbox" id="itemOrder">
+                          </div>
 
-        <div class="row">
-          <h5>Itens da Categoria Selecionada</h5>
-        </div>
+                          <div class="checkbox-group">
+                            <div for="itemNew">Novo</div>
+                            <input type="checkbox" id="itemNew">
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="border-top border-secondary"></div>
 
-        <div class="row">
-          <ul id="itemsList"></ul>
+                <div class="row">
+                  <button type="button" class="btn btn-primary w-100 mb-2" onclick="editItem()">Alterar</button>
+                  <button type="button" class="btn btn-success w-100 mb-2 btn-sm" onclick="addItem()">Adicionar</button>
+                  <button type="button" class="btn btn-outline-danger w-100 mb-2 btn-sm" onclick="removeItem()">Remover</button>
+                </div>
+          
+                <div class="row" id="sendDataContainer" style="display:none"> 
+                  <div class="border-top border-secondary mt-3 mb-3"></div>
+                  <div class="mb-1 fonttext">Carregar em Enviar Alterações para ficar disponível para os clientes.</div>  
+                  <button id="saveBtn" type="button" class="btn btn-success w-100 mb-2 btn-lg" >
+                      <span class="btn-text">🔔 Enviar Alterações</span>
+                      <span class="spinner-border spinner-border-sm btn-spinner" role="status" aria-hidden="true"></span>
+                    </button>
+                </div>
+              </div>
         </div>
       </div>
+
     </div>
 
-    <div class="row"> 
-      <div id="menuItens" class="groupbox" style="display:none">
-        <div class="row">
-          <h3>Gerir Itens</h3>
-        </div>
-        <div class="row">
-          <select id="categorySelectToEdit" class="form-select form-select-sm w-100 shadow-sm"></select>
-        </div>
-        <div class="row">      
-          <select id="itemSelect" class="form-select form-select-sm w-100 shadow-sm"></select>
-        </div>
-        <div class="row">
-          <div class="container text-start setwidth100">
-            <div class="row mb-2 align-items-center">
-              <div class="col-3 col-form-label fonttext">Nome</div>
-            <div class="col-9">
-              <input type="text" class="form-control fonttext" id="itemName">
-            </div>
-          </div>
-
-          <div class="row mb-2 align-items-center">
-            <div class="col-3 col-form-label fonttext">Descrição</div>
-            <div class="col-9">
-              <!-- <input type="text" class="form-control itemdesc" id="itemDesc"> -->
-              <textarea id="itemDesc" class="form-control"></textarea>
-            </div>
-          </div>
-
-          <div class="row mb-2 align-items-center">
-            <div class="col-3 col-form-label fonttext">Preço</div>
-            <div class="col-9">
-              <input type="number" class="form-control fonttext" id="itemPrice" placeholder="€ 0.00">
-            </div>
-          </div>
-          <div class="row mb-2 fonttext">
-            <div class="col-12">
-              <div class="checkbox-container">
-                <div class="checkbox-group">
-                  <div for="isActive">Activo</div>
-                    <input type="checkbox" id="isActive">
-                  </div>
-
-                  <div class="checkbox-group">
-                    <div for="itemOrder">Encomendar</div>
-                    <input type="checkbox" id="itemOrder">
-                  </div>
-
-                  <div class="checkbox-group">
-                    <div for="itemNew">Novo</div>
-                    <input type="checkbox" id="itemNew">
-                  </div>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
    
-        <div class="border-top border-secondary"></div>
-
-        <div class="row">
-          <button type="button" class="btn btn-primary w-100 mb-2" onclick="editItem()">Alterar</button>
-          <button type="button" class="btn btn-success w-100 mb-2 btn-sm" onclick="addItem()">Adicionar</button>
-          <button type="button" class="btn btn-outline-danger w-100 mb-2 btn-sm" onclick="removeItem()">Remover</button>
-        </div>
-  
-        <div class="row" id="sendDataContainer" style="display:none"> 
-          <div class="border-top border-secondary mt-3 mb-3"></div>
-          <div class="mb-1 fonttext">Carregar em Enviar Alterações para ficar disponível para os clientes.</div>  
-          <button id="saveBtn" type="button" class="btn btn-success w-100 mb-2 btn-lg" >
-              <span class="btn-text">🔔 Enviar Alterações</span>
-              <span class="spinner-border spinner-border-sm btn-spinner" role="status" aria-hidden="true"></span>
-            </button>
-        </div>
-      </div>
-    </div>
+   
         <!-- <h3>JSON Atual Gerado</h3>
           <textarea id="jsonOutput" readonly></textarea> -->
 
