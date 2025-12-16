@@ -330,9 +330,8 @@ function createMenuItem ({ name, desc, price, byOrder, novo, active }) {
   }
 }
 
-// ➕ Adicionar item
-function addItem () {
-  const idx = document.getElementById('categorySelectToEdit').value
+function processItem () {
+  const cIdx = document.getElementById('categorySelectToEdit').value
   const name = document.getElementById('itemName').value.trim()
   const desc = document.getElementById('itemDesc').value.trim()
   const price = document.getElementById('itemPrice').value.trim()
@@ -340,28 +339,33 @@ function addItem () {
   const novo = document.getElementById('itemNew').checked
   const active = document.getElementById('isActive').checked
 
-  if (!name) return showToast('Campo Nome vazio!', 'warning')
-  if (!price) return showToast('Campo Preco vazio!', 'warning')
+  if (!name) return showToast('Nome vazio', 'danger')
+  if (!price) return showToast('Preco vazio', 'danger')
 
-  menus[idx].itens.push(
-    createMenuItem({ name, desc, price, byOrder, novo, active })
-  )
+  const itens = menus[cIdx]?.itens
 
+  const labelExists =
+    Array.isArray(itens) &&
+    itens.some(item => item.label.toLowerCase() === name.toLowerCase())
+
+  if (labelExists) {
+    editItem(cIdx, name, desc, price, byOrder, novo, active)
+  } else {
+    addItem(cIdx, name, desc, price, byOrder, novo, active)
+  }
   refreshItems()
   showSave()
 }
+// ➕ Adicionar item
+function addItem (cIdx, name, desc, price, byOrder, novo, active) {
+  menus[cIdx].itens.push(
+    createMenuItem({ name, desc, price, byOrder, novo, active })
+  )
+}
 
 // ✏ Editar item existente
-function editItem () {
-  const cIdx = document.getElementById('categorySelectToEdit').value
+function editItem (cIdx, name, desc, price, byOrder, novo, active) {
   const iIdx = document.getElementById('itemSelect').value
-
-  const name = document.getElementById('itemName').value.trim()
-  const desc = document.getElementById('itemDesc').value.trim()
-  const price = document.getElementById('itemPrice').value.trim()
-  const byOrder = document.getElementById('itemOrder').checked
-  const novo = document.getElementById('itemNew').checked
-  const active = document.getElementById('isActive').checked
 
   menus[cIdx].itens[iIdx] = createMenuItem({
     name,
@@ -371,9 +375,6 @@ function editItem () {
     novo,
     active
   })
-
-  refreshItems()
-  showSave()
 }
 
 function removeItem () {
