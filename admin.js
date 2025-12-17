@@ -462,3 +462,12 @@ function showToast (message, type = 'success') {
   const toast = new bootstrap.Toast(toastEl, { delay: 2000 })
   toast.show()
 }
+
+document.getElementById('imageUpload').addEventListener('change', e => {
+  const file = e.target.files[0]
+  if (!file) return
+
+  const img = document.getElementById('preview')
+  img.src = URL.createObjectURL(file)
+  img.classList.remove('d-none')
+})
