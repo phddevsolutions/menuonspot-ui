@@ -100,9 +100,8 @@ saveBtn.onclick = async () => {
     const jsonObj = JSON.parse(rawContent) // valida JSON
     const newContent = JSON.stringify(jsonObj) // string segura
 
-    if (newContent.length > 9000) {
-      showToast('Menu muito grande para ser guardado!', 'danger')
-      throw new Error('JSON too large for workflow_dispatch input')
+    if (newContent.length == 0) {
+      throw new Error('Menu vazio contactar o suporte!')
     }
 
     const workflowUrl = `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`
@@ -128,8 +127,7 @@ saveBtn.onclick = async () => {
 
     showToast('Alterações enviadas com sucesso!', 'success')
   } catch (err) {
-    console.error(err)
-    showToast('Erro ao enviar alterações', 'danger')
+    showToast(err, 'danger')
   }
   DisableSpinner(saveBtn)
 }
