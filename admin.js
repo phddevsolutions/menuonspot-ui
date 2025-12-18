@@ -248,7 +248,7 @@ function removeCategory () {
 // Atualiza JSON visual + textarea bruto
 function updateJson () {
   const finalJson = JSON.stringify({ menus }, null, 2)
-  jsonOutput.value = finalJson
+  // jsonOutput.value = finalJson
   editor.value = finalJson // mantém editor raw sempre sincronizado
 }
 
