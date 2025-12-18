@@ -416,6 +416,7 @@ function fillItemForm () {
   document.getElementById('itemOrder').checked = item.porEncomenda
   document.getElementById('itemNew').checked = item.novo
   document.getElementById('isActive').checked = item.ativo
+  document.getElementById('preview').src = item.urlImagem || ''
 }
 
 function clearItemForm () {
@@ -425,6 +426,7 @@ function clearItemForm () {
   document.getElementById('itemOrder').checked = false
   document.getElementById('itemNew').checked = false
   document.getElementById('isActive').checked = false
+  document.getElementById('preview').src = ''
 }
 
 function showSave () {
@@ -479,5 +481,4 @@ document.getElementById('imageUpload').addEventListener('change', e => {
 
   const img = document.getElementById('preview')
   img.src = URL.createObjectURL(file)
-  img.classList.remove('d-none')
 })
