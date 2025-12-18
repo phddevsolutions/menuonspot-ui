@@ -18,7 +18,7 @@ const menuItens = document.getElementById('menuItens')
 const navbuttons = document.getElementById('navbuttons')
 const menuComplete = document.getElementById('menuComplete')
 const mainTab = document.getElementById('pills-home')
-// const jsonOutput = document.getElementById('jsonOutput')
+const jsonOutput = document.getElementById('jsonOutput')
 
 let accessToken = null
 let menus = [] // ← dados manipulados no editor visual
@@ -99,6 +99,11 @@ saveBtn.onclick = async () => {
     const rawContent = editor.value
     const jsonObj = JSON.parse(rawContent) // valida JSON
     const newContent = JSON.stringify(jsonObj) // string segura
+
+    if (newContent.length > 9000) {
+      showToast('Menu muito grande para ser guardado!', 'danger')
+      throw new Error('JSON too large for workflow_dispatch input')
+    }
 
     const workflowUrl = `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`
 
@@ -243,7 +248,7 @@ function removeCategory () {
 // Atualiza JSON visual + textarea bruto
 function updateJson () {
   const finalJson = JSON.stringify({ menus }, null, 2)
-  // jsonOutput.value = finalJson
+  jsonOutput.value = finalJson
   editor.value = finalJson // mantém editor raw sempre sincronizado
 }
 
@@ -318,11 +323,14 @@ function refreshItems () {
   updateJson()
 }
 
-function createMenuItem ({ name, desc, price, byOrder, novo, active }) {
+function createMenuItem ({ name, desc, price, byOrder, novo, active, image }) {
   return {
     label: name,
     description: desc,
-    urlImagem: './images/default.png',
+    urlImagem:
+      image.files.length > 0
+        ? './images/' + image.files[0].name
+        : './images/default.png',
     preco: price,
     ativo: active,
     novo: Number(novo),
@@ -338,6 +346,7 @@ function processItem () {
   const byOrder = document.getElementById('itemOrder').checked
   const novo = document.getElementById('itemNew').checked
   const active = document.getElementById('isActive').checked
+  const image = document.getElementById('imageUpload')
 
   if (!name) return showToast('Nome vazio', 'danger')
   if (!price) return showToast('Preco vazio', 'danger')
@@ -349,22 +358,22 @@ function processItem () {
     itens.some(item => item.label.toLowerCase() === name.toLowerCase())
 
   if (labelExists) {
-    editItem(cIdx, name, desc, price, byOrder, novo, active)
+    editItem(cIdx, name, desc, price, byOrder, novo, active, image)
   } else {
-    addItem(cIdx, name, desc, price, byOrder, novo, active)
+    addItem(cIdx, name, desc, price, byOrder, novo, active, image)
   }
   refreshItems()
   showSave()
 }
 // ➕ Adicionar item
-function addItem (cIdx, name, desc, price, byOrder, novo, active) {
+function addItem (cIdx, name, desc, price, byOrder, novo, active, image) {
   menus[cIdx].itens.push(
-    createMenuItem({ name, desc, price, byOrder, novo, active })
+    createMenuItem({ name, desc, price, byOrder, novo, active, image })
   )
 }
 
 // ✏ Editar item existente
-function editItem (cIdx, name, desc, price, byOrder, novo, active) {
+function editItem (cIdx, name, desc, price, byOrder, novo, active, image) {
   const iIdx = document.getElementById('itemSelect').value
 
   menus[cIdx].itens[iIdx] = createMenuItem({
@@ -373,7 +382,8 @@ function editItem (cIdx, name, desc, price, byOrder, novo, active) {
     price,
     byOrder,
     novo,
-    active
+    active,
+    image
   })
 }
 
