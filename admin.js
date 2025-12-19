@@ -333,7 +333,7 @@ function createMenuItem ({
   return {
     label: name,
     description: desc,
-    urlImagem: urlImagem || '/images/default.png',
+    urlImagem: '.' + urlImagem || './images/default.png',
     preco: price,
     ativo: active,
     novo: Number(novo),
