@@ -19,6 +19,7 @@ const navbuttons = document.getElementById('navbuttons')
 const menuComplete = document.getElementById('menuComplete')
 const mainTab = document.getElementById('pills-home')
 const jsonOutput = document.getElementById('jsonOutput')
+let loading = false
 
 let accessToken = null
 let menus = [] // ← dados manipulados no editor visual
@@ -85,7 +86,9 @@ async function carregarDataJson () {
 
     navbuttons.style.display = 'block'
     // menuComplete.style.display = 'block'
+    loading = true
     refreshDropdownCategories()
+    loading = false
   } catch (err) {
     console.error(err)
     showToast('Erro ao carregar dados!', 'danger')
@@ -152,45 +155,6 @@ function refreshDropdownCategories () {
   })
 
   refreshItems()
-  updateJson()
-}
-
-function refreshItems () {
-  const idx = parseInt(document.getElementById('categorySelect').value, 10)
-  const ul = document.getElementById('itemsList')
-  const itemSelect = document.getElementById('itemSelect')
-
-  ul.innerHTML = ''
-  itemSelect.innerHTML = ''
-
-  const itens = menus[idx]?.itens || []
-
-  itens.forEach((item, index) => {
-    // Lista visual
-    const li = document.createElement('li')
-    li.textContent = `${item.label} – ${item.description} ${
-      item.preco ? ' (€' + item.preco + ')' : ''
-    }`
-
-    li.addEventListener('click', () => {
-      itemSelect.value = index
-      fillItemForm()
-    })
-    ul.appendChild(li)
-
-    const opt = document.createElement('option')
-    opt.value = index
-    opt.textContent = item.label
-    itemSelect.appendChild(opt)
-  })
-
-  if (itens.length > 0) {
-    itemSelect.value = 0
-    fillItemForm()
-  } else {
-    clearItemForm()
-  }
-
   updateJson()
 }
 
@@ -276,8 +240,9 @@ function onCategoryChange (sourceSelect) {
     categorySelect.value = value
     categoryNameEdit.value = value
   }
-
+  loading = true
   refreshItems()
+  loading = false
   updateJson()
 }
 
@@ -290,6 +255,7 @@ function refreshItems () {
   const idx = document.getElementById('categorySelect').value
   const ul = document.getElementById('itemsList')
   const itemSelect = document.getElementById('itemSelect')
+  let currentItemIndex = itemSelect.value ?? null
 
   ul.innerHTML = ''
   itemSelect.innerHTML = ''
@@ -312,14 +278,59 @@ function refreshItems () {
   })
 
   if (itens.length > 0) {
-    itemSelect.value = 0 // seleciona automaticamente o 1º item
-    fillItemForm() // <-- preenche os inputs!
+    if (currentItemIndex !== null && itens[currentItemIndex]) {
+      itemSelect.value = currentItemIndex
+    }
+    if (loading) {
+      itemSelect.value = 0
+    }
+    fillItemForm()
   } else {
     clearItemForm() // caso não existam items
   }
 
   updateJson()
 }
+// function refreshItems () {
+//   const idx = parseInt(document.getElementById('categorySelect').value, 10)
+//   const ul = document.getElementById('itemsList')
+//   const itemSelect = document.getElementById('itemSelect')
+
+//   ul.innerHTML = ''
+//   itemSelect.innerHTML = ''
+
+//   const itens = menus[idx]?.itens || []
+
+//   itens.forEach((item, index) => {
+//     // Lista visual
+//     const li = document.createElement('li')
+//     li.textContent = `${item.label} – ${item.description} ${
+//       item.preco ? ' (€' + item.preco + ')' : ''
+//     }`
+
+//     li.addEventListener('click', () => {
+//       itemSelect.value = index
+//       fillItemForm()
+//     })
+//     ul.appendChild(li)
+
+//     const opt = document.createElement('option')
+//     opt.value = index
+//     opt.textContent = item.label
+//     itemSelect.appendChild(opt)
+//   })
+
+//   if (itens.length > 0) {
+//     if (loading) {
+//       itemSelect.value = 0
+//     }
+//     fillItemForm()
+//   } else {
+//     clearItemForm()
+//   }
+
+//   updateJson()
+// }
 
 function createMenuItem ({
   name,
