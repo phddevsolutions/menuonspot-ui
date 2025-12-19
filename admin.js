@@ -321,14 +321,19 @@ function refreshItems () {
   updateJson()
 }
 
-function createMenuItem ({ name, desc, price, byOrder, novo, active, image }) {
+function createMenuItem ({
+  name,
+  desc,
+  price,
+  byOrder,
+  novo,
+  active,
+  urlImagem
+}) {
   return {
     label: name,
     description: desc,
-    urlImagem:
-      image.files.length > 0
-        ? './images/' + image.files[0].name
-        : './images/default.png',
+    urlImagem: urlImagem || '/images/default.png',
     preco: price,
     ativo: active,
     novo: Number(novo),
@@ -336,7 +341,7 @@ function createMenuItem ({ name, desc, price, byOrder, novo, active, image }) {
   }
 }
 
-function processItem () {
+async function processItem () {
   const cIdx = document.getElementById('categorySelectToEdit').value
   const name = document.getElementById('itemName').value.trim()
   const desc = document.getElementById('itemDesc').value.trim()
@@ -344,10 +349,26 @@ function processItem () {
   const byOrder = document.getElementById('itemOrder').checked
   const novo = document.getElementById('itemNew').checked
   const active = document.getElementById('isActive').checked
-  const image = document.getElementById('imageUpload')
 
   if (!name) return showToast('Nome vazio', 'danger')
   if (!price) return showToast('Preco vazio', 'danger')
+
+  let urlImagem = '/images/default.png'
+
+  if (selectedImageFile) {
+    urlImagem = await uploadImageToRepo(selectedImageFile)
+    selectedImageFile = null
+  }
+
+  const newItem = createMenuItem({
+    name,
+    desc,
+    price,
+    byOrder,
+    novo,
+    active,
+    urlImagem
+  })
 
   const itens = menus[cIdx]?.itens
 
@@ -356,13 +377,16 @@ function processItem () {
     itens.some(item => item.label.toLowerCase() === name.toLowerCase())
 
   if (labelExists) {
-    editItem(cIdx, name, desc, price, byOrder, novo, active, image)
+    const iIdx = document.getElementById('itemSelect').value
+    menus[cIdx].itens[iIdx] = newItem
   } else {
-    addItem(cIdx, name, desc, price, byOrder, novo, active, image)
+    menus[cIdx].itens.push(newItem)
   }
+
   refreshItems()
   showSave()
 }
+
 // ➕ Adicionar item
 function addItem (cIdx, name, desc, price, byOrder, novo, active, image) {
   menus[cIdx].itens.push(
@@ -473,10 +497,65 @@ function showToast (message, type = 'success') {
   toast.show()
 }
 
+let selectedImageFile = null
 document.getElementById('imageUpload').addEventListener('change', e => {
   const file = e.target.files[0]
   if (!file) return
 
-  const img = document.getElementById('preview')
-  img.src = URL.createObjectURL(file)
+  if (!file.type.startsWith('image/')) {
+    showToast('Invalid image type', 'danger')
+    e.target.value = ''
+    return
+  }
+  if (file.size > 2_000_000) {
+    // optional limit
+    showToast('Image too large (max 2MB)', 'danger')
+    e.target.value = ''
+    return
+  }
+
+  selectedImageFile = file
+  document.getElementById('preview').src = URL.createObjectURL(file)
 })
+
+function fileToBase64 (file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result.split(',')[1])
+    reader.onerror = reject
+    reader.readAsDataURL(file)
+  })
+}
+
+async function uploadImageToRepo (file) {
+  const imageName = `${crypto.randomUUID()}-${file.name
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9.-]/g, '')}`
+  const path = `images/docesobreamesa/${imageName}`
+  const content = await fileToBase64(file)
+
+  const response = await fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,
+    {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        Accept: 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `Upload image ${file.name}`,
+        content,
+        branch: BRANCH
+      })
+    }
+  )
+
+  if (!response.ok) {
+    const text = await response.text()
+    throw new Error(`Image upload failed: ${text}`)
+  }
+
+  return `/${path}` // relative path to store in JSON
+}
