@@ -1,0 +1,76 @@
+name: Upload Image
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_name:
+        description: "Final image filename (UUID-based)"
+        required: true
+      image_base64:
+        description: "Base64-encoded image (no data:image prefix)"
+        required: true
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 🔒 Security & sanity checks
+      - name: Validate filename
+        run: |
+          NAME="${{ inputs.image_name }}"
+
+          # Block path traversal
+          if [[ "$NAME" == *"/"* || "$NAME" == *"\\"* || "$NAME" == *".."* ]]; then
+            echo "Invalid filename"
+            exit 1
+          fi
+
+          # Allow only safe extensions
+          case "$NAME" in
+            *.png|*.jpg|*.jpeg|*.webp) ;;
+            *)
+              echo "Unsupported file extension"
+              exit 1
+              ;;
+          esac
+
+      # 🚫 Prevent overwriting existing files
+      - name: Prevent overwrite
+        run: |
+          FILE="images/docesobreamesa/${{ inputs.image_name }}"
+
+          if [ -f "$FILE" ]; then
+            echo "Image already exists: $FILE"
+            exit 1
+          fi
+
+      # 💾 Save image
+      - name: Save image file
+        run: |
+          mkdir -p images/docesobreamesa
+          echo "${{ inputs.image_base64 }}" | base64 -d > images/docesobreamesa/${{ inputs.image_name }}
+
+      # 📏 Size check (max 2MB)
+      - name: Validate file size
+        run: |
+          FILE="images/docesobreamesa/${{ inputs.image_name }}"
+          SIZE=$(wc -c < "$FILE")
+
+          if [ "$SIZE" -gt 2000000 ]; then
+            echo "Image too large ($SIZE bytes)"
+            exit 1
+          fi
+
+      # 🧾 Commit & push
+      - name: Commit image
+        run: |
+          git config user.name "image-bot"
+          git config user.email "image-bot@github.com"
+
+          git add images/docesobreamesa/${{ inputs.image_name }}
+          git commit -m "Upload image ${{ inputs.image_name }}"
+          git push
