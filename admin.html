@@ -82,12 +82,16 @@
                   </div>
 
                   <div class="row mb-2 justify-content-center">
-                    <img id="preview" title="" class="img-thumbnail img-size" >
-
-                    <input type="file"  id="imageUpload" accept="image/*" hidden>
-                    <button class="btn btn-primary mt-3" onclick="document.getElementById('imageUpload').click()">
-                      Upload Image
-                    </button>
+                    <div class="col-7">
+                      <input type="file"  id="imageUpload" accept="image/*" hidden>
+                      <button type="button" class="btn btn-primary mt-3" onclick="document.getElementById('imageUpload').click()">
+                        Upload Image
+                      </button>
+                    </div>
+                    <div class="col-5">
+                      <img id="preview" title="" class="img-thumbnail img-size" >
+                    </div>
+                    
                   </div>
 
                   <div class="row mb-2 fonttext">

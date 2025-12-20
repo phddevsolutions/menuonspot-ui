@@ -129,10 +129,12 @@ saveBtn.onclick = async () => {
     }
 
     showToast('Alterações enviadas com sucesso!', 'success')
+    DisableSpinner(saveBtn)
+    hideSave()
   } catch (err) {
     showToast(err, 'danger')
+    DisableSpinner(saveBtn)
   }
-  DisableSpinner(saveBtn)
 }
 
 function refreshDropdownCategories () {
@@ -466,6 +468,10 @@ function showSave () {
   showToast('Não esquecer de: Enviar Alterações', 'info')
   const sendDataContainer = document.getElementById('sendDataContainer')
   sendDataContainer.style.display = 'block'
+}
+function hideSave () {
+  const sendDataContainer = document.getElementById('sendDataContainer')
+  sendDataContainer.style.display = 'none'
 }
 
 function EnableSpinner (button) {
