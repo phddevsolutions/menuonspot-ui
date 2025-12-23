@@ -20,7 +20,7 @@ const menuComplete = document.getElementById('menuComplete')
 const mainTab = document.getElementById('pills-home')
 const jsonOutput = document.getElementById('jsonOutput')
 let loading = false
-
+const urldefaultpath = './images/default.png'
 let accessToken = null
 let menus = [] // ← dados manipulados no editor visual
 
@@ -346,7 +346,7 @@ function createMenuItem ({
   return {
     label: name,
     description: desc,
-    urlImagem: '.' + urlImagem || './images/default.png',
+    urlImagem: '.' + urlImagem || urldefaultpath,
     preco: price,
     ativo: active,
     novo: Number(novo),
@@ -366,7 +366,7 @@ async function processItem () {
   if (!name) return showToast('Nome vazio', 'danger')
   if (!price) return showToast('Preco vazio', 'danger')
 
-  let urlImagem = '/images/default.png'
+  let urlImagem = urldefaultpath
 
   if (selectedImageFile) {
     urlImagem = await uploadImageToRepo(selectedImageFile)
@@ -454,10 +454,10 @@ function fillItemForm () {
   document.getElementById('isActive').checked = item.ativo
 
   const preview = document.getElementById('preview')
-  const urlImagem = item.urlImagem || '/images/default.png'
+  const urlImagem = item.urlImagem || urldefaultpath
 
   // Set default image immediately
-  preview.src = '/images/default.png'
+  preview.src = urldefaultpath
 
   // Try to load the actual image
   loadImageWithRetry(urlImagem, 5, 1000)
@@ -622,9 +622,9 @@ function RemoveImage () {
     preview.title = ''
 
     const iIdx = document.getElementById('itemSelect').value
-    menus[cIdx].itens[iIdx].urlImagem = './images/default.png'
+    menus[cIdx].itens[iIdx].urlImagem = urldefaultpath
 
-    document.getElementById('preview').src = './images/default.png'
+    document.getElementById('preview').src = urldefaultpath
     selectedImageFile = null
     fileInput.value = ''
   }
