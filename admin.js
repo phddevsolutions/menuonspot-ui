@@ -576,3 +576,28 @@ async function uploadImageToRepo (file) {
 
   return `/${path}` // relative path to store in JSON
 }
+
+function RemoveImage () {
+  const cIdx = document.getElementById('categorySelectToEdit').value
+  const itens = menus[cIdx]?.itens
+  const name = document.getElementById('itemName').value.trim()
+
+  const labelExists =
+    Array.isArray(itens) &&
+    itens.some(item => item.label.toLowerCase() === name.toLowerCase())
+
+  if (labelExists) {
+    const input = document.getElementById('imageUpload')
+    input.value = ''
+    const preview = document.getElementById('preview')
+     preview.src = ''
+    preview.title = ''
+
+    const iIdx = document.getElementById('itemSelect').value
+    menus[cIdx].itens[iIdx].urlImagem = './images/default.png'
+
+    document.getElementById('preview').src = './images/default.png'
+    selectedImageFile = null
+    fileInput.value = ''
+  } 
+}

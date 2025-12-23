@@ -74,24 +74,27 @@
                     </div>
                   </div>
 
+                  
+
+                  <div class="row mb-2 justify-content-between">
+                    <div class="col-3 col-form-label fonttext d-flex flex-column justify-content-center">Imagem</div>
+                    <div class="col-5">
+                      <img id="preview" title="" class="img-thumbnail img-size" onclick="document.getElementById('imageUpload').click()" >
+                    </div>
+                    <div class="col-4 d-flex flex-column justify-content-center">
+                      <input type="file"  id="imageUpload" accept="image/*" hidden>
+                      <button type="button" class="btn btn-outline-danger" onclick="RemoveImage()">
+                        Remover
+                      </button>
+                    </div>
+                  
+                  </div>
+
                   <div class="row mb-2 align-items-center">
                     <div class="col-3 col-form-label fonttext">Preço</div>
                     <div class="col-9">
                       <input type="number" class="form-control fonttext" id="itemPrice" placeholder="€ 0.00">
                     </div>
-                  </div>
-
-                  <div class="row mb-2 justify-content-center">
-                    <div class="col-7">
-                      <input type="file"  id="imageUpload" accept="image/*" hidden>
-                      <button type="button" class="btn btn-primary mt-3" onclick="document.getElementById('imageUpload').click()">
-                        Upload Image
-                      </button>
-                    </div>
-                    <div class="col-5">
-                      <img id="preview" title="" class="img-thumbnail img-size" >
-                    </div>
-                    
                   </div>
 
                   <div class="row mb-2 fonttext">
@@ -120,7 +123,7 @@
                 <div class="border-top border-secondary mb-3"></div>
 
                 <div class="row justify-content-between">
-                  <button type="button" class="btn btn-outline-danger w-25 btn-sm" onclick="removeItem()">Remover</button>
+                  <button type="button" class="btn btn-outline-danger w-25 btn-sm" onclick="removeItem()">Apagar</button>
                   <button type="button" class="btn btn-primary w-25" onclick="processItem()">Gravar</button>
                 </div>
           
@@ -146,7 +149,7 @@
             </div>
             <div class="row justify-content-center"> 
               <input type="text" id="categoryName" >
-              <button class="btn btn-success w-50 mb-2 btn-sm" onclick="addCategory()">Adicionar</button>
+              <button class="btn btn-primary w-50 mb-2 btn-sm" onclick="addCategory()">Adicionar</button>
             </div>
 
             <div class="row">
