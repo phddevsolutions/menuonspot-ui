@@ -436,6 +436,7 @@ function removeItem () {
 document.getElementById('itemSelect').addEventListener('change', fillItemForm)
 
 function fillItemForm () {
+  selectedImageFile = null
   const cIdx = parseInt(document.getElementById('categorySelect').value, 10)
   const iIdx = parseInt(document.getElementById('itemSelect').value, 10)
   const item = menus[cIdx]?.itens?.[iIdx]
@@ -451,10 +452,37 @@ function fillItemForm () {
   document.getElementById('itemOrder').checked = item.porEncomenda
   document.getElementById('itemNew').checked = item.novo
   document.getElementById('isActive').checked = item.ativo
-  document.getElementById('preview').src = item.urlImagem || ''
+
+  const preview = document.getElementById('preview')
+  const urlImagem = item.urlImagem || '/images/default.png'
+
+  // Set default image immediately
+  preview.src = '/images/default.png'
+
+  // Try to load the actual image
+  loadImageWithRetry(urlImagem, 5, 1000)
+    .then(url => (preview.src = url))
+    .catch(() => {
+      // Keep default if the image never becomes available
+      console.warn('Image not available, using default.')
+    })
+}
+
+async function loadImageWithRetry (url, maxRetries = 5, delayMs = 1000) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const res = await fetch(url, { method: 'HEAD' })
+      if (res.ok) return url // image exists
+    } catch (e) {
+      // ignore fetch errors
+    }
+    await new Promise(r => setTimeout(r, delayMs))
+  }
+  throw new Error('Image not available')
 }
 
 function clearItemForm () {
+  selectedImageFile = null
   document.getElementById('itemName').value = ''
   document.getElementById('itemDesc').value = ''
   document.getElementById('itemPrice').value = ''
@@ -590,7 +618,7 @@ function RemoveImage () {
     const input = document.getElementById('imageUpload')
     input.value = ''
     const preview = document.getElementById('preview')
-     preview.src = ''
+    preview.src = ''
     preview.title = ''
 
     const iIdx = document.getElementById('itemSelect').value
@@ -599,5 +627,5 @@ function RemoveImage () {
     document.getElementById('preview').src = './images/default.png'
     selectedImageFile = null
     fileInput.value = ''
-  } 
+  }
 }
