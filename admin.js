@@ -658,6 +658,5 @@ function RemoveImage () {
 
     document.getElementById('preview').src = urldefaultpath
     selectedImageFile = null
-    fileInput.value = ''
   }
 }
