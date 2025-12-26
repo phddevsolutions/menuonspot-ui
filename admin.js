@@ -493,7 +493,7 @@ function fillItemForm () {
   spinner.style.display = 'block'
   preview.classList.add('img-loading')
 
-  loadImageWithRetry(urlImagem, 5, 2000)
+  loadImageWithRetry(urlImagem, 10, 5000)
     .then(url => {
       preview.src = url
     })
