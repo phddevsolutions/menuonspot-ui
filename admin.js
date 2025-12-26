@@ -32,6 +32,7 @@ let loading = false
 const urldefaultpath = './images/default.png'
 let accessToken = null
 let menus = [] // ← dados manipulados no editor visual
+let currentImageLoadToken = 0
 
 // =====================================================
 // 🔹 Login GitHub
@@ -490,16 +491,51 @@ function fillItemForm () {
   preview.src = ''
   spinner.style.setProperty('display', 'block', 'important')
 
-  loadImageWithRetry(urlImagem, 15, 5000)
+   const token = ++currentImageLoadToken
+  loadImageWithRetry(urlImagem, 15, 5000, token)
     .then(url => {
-      preview.src = url
+      if (token === currentImageLoadToken) {
+        preview.src = url
+      }
     })
     .catch(() => {
-      preview.src = urldefaultpath
+     if (token === currentImageLoadToken) {
+        preview.src = urldefaultpath
+      }
     })
     .finally(() => {
-      spinner.style.setProperty('display', 'none', 'important')
+      if (token === currentImageLoadToken) {
+        spinner.style.setProperty('display', 'none', 'important')
+      }
     })
+}
+
+
+function loadImageWithRetry (url, retries, delay) {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    let attempts = 0
+
+    const tryLoad = () => {
+      if (token !== currentImageLoadToken) {
+        reject('Cancelled')
+        return
+      }
+      img.src = `${url}?cb=${Date.now()}`
+    }
+
+    img.onload = () => resolve(img.src)
+    img.onerror = () => {
+      if (token !== currentImageLoadToken) {
+        reject('Cancelled')
+        return
+      }
+      if (++attempts >= retries) reject()
+      else setTimeout(tryLoad, delay)
+    }
+
+    tryLoad()
+  })
 }
 
 // async function loadImageWithRetry (url, maxRetries = 5, delayMs = 50000) {
@@ -514,24 +550,6 @@ function fillItemForm () {
 //   }
 //   throw new Error('Image not available')
 // }
-function loadImageWithRetry (url, retries, delay) {
-  return new Promise((resolve, reject) => {
-    const img = new Image()
-    let attempts = 0
-
-    const tryLoad = () => {
-      img.src = `${url}?cb=${Date.now()}`
-    }
-
-    img.onload = () => resolve(img.src)
-    img.onerror = () => {
-      if (++attempts >= retries) reject()
-      else setTimeout(tryLoad, delay)
-    }
-
-    tryLoad()
-  })
-}
 
 function clearItemForm () {
   selectedImageFile = null
