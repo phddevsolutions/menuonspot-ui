@@ -585,7 +585,7 @@ function clearItemForm () {
   document.getElementById('itemOrder').checked = false
   document.getElementById('itemNew').checked = false
   document.getElementById('isActive').checked = false
-  document.getElementById('preview').src = ''
+  document.getElementById('preview').src = urlImagem
 }
 
 async function showSave () {
