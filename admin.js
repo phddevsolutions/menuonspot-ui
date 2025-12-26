@@ -486,10 +486,8 @@ function fillItemForm () {
   const preview = document.getElementById('preview')
   const urlImagem = item.urlImagem || urldefaultpath
 
-  // Set default image immediately
-  // preview.src = urldefaultpath
 
-  // 🔄 show spinner
+  preview.src = ''
   spinner.style.setProperty('display', 'block', 'important')
 
   loadImageWithRetry(urlImagem, 15, 5000)
@@ -497,13 +495,10 @@ function fillItemForm () {
       preview.src = url
     })
     .catch(() => {
-      console.warn('Image not available, using default.')
-       preview.src = urldefaultpath
+      preview.src = urldefaultpath
     })
     .finally(() => {
-      // ✅ hide spinner
       spinner.style.setProperty('display', 'none', 'important')
-     
     })
 }
 
