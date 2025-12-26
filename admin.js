@@ -95,15 +95,16 @@ async function carregarDataJson () {
   }
 }
 
-saveBtn.onclick = async () => {
+async function saveContent () {
   try {
     EnableSpinner(saveBtn)
+
     // O conteúdo final é sempre o editor.raw
     const rawContent = editor.value
     const jsonObj = JSON.parse(rawContent) // valida JSON
     const newContent = JSON.stringify(jsonObj) // string segura
 
-    if (newContent.length == 0) {
+    if (newContent.length === 0) {
       throw new Error('Menu vazio contactar o suporte!')
     }
 
@@ -129,13 +130,15 @@ saveBtn.onclick = async () => {
     }
 
     showToast('Alterações enviadas com sucesso!', 'success')
-    DisableSpinner(saveBtn)
     hideSave()
   } catch (err) {
-    showToast(err, 'danger')
+    showToast(err.message ?? err, 'danger')
+  } finally {
     DisableSpinner(saveBtn)
   }
 }
+
+saveBtn.onclick = saveContent()
 
 function refreshDropdownCategories () {
   const select = document.getElementById('categorySelect')
@@ -160,7 +163,7 @@ function refreshDropdownCategories () {
   updateJson()
 }
 
-function addCategory () {
+async function addCategory () {
   const nameInput = document.getElementById('categoryName')
   const name = nameInput.value.trim()
   if (!name) return showToast('Nova categoria vazia!', 'warning')
@@ -178,13 +181,13 @@ function addCategory () {
       a.label.localeCompare(b.label, undefined, { sensitivity: 'base' })
     )
     refreshDropdownCategories()
-    showSave()
+    await showSave()
   }
 
   nameInput.value = ''
 }
 
-function editCategory () {
+async function editCategory () {
   const idx = document.getElementById('categoryNameEdit').value
   const nameInput = document.getElementById('categoryNameEditText')
   const name = nameInput.value.trim()
@@ -194,11 +197,11 @@ function editCategory () {
   menus[idx].id = name.replace(/\s+/g, '_')
 
   refreshDropdownCategories()
-  showSave()
+  await showSave()
   nameInput.value = ''
 }
 
-function removeCategory () {
+async function removeCategory () {
   const idx = document.getElementById('categorySelect').value
   if (
     !confirm('A categoria e todos os items serão eliminados, Tem a certeza ?')
@@ -206,7 +209,7 @@ function removeCategory () {
     return
   menus.splice(idx, 1)
   refreshDropdownCategories()
-  showSave()
+  await showSave()
 }
 
 // Atualiza JSON visual + textarea bruto
@@ -397,7 +400,7 @@ async function processItem () {
   }
 
   refreshItems()
-  showSave()
+  await showSave()
 }
 
 // ➕ Adicionar item
@@ -422,7 +425,7 @@ function editItem (cIdx, name, desc, price, byOrder, novo, active, image) {
   })
 }
 
-function removeItem () {
+async function removeItem () {
   const cIdx = document.getElementById('categorySelectToEdit').value
   const iIdx = document.getElementById('itemSelect').value
 
@@ -430,7 +433,7 @@ function removeItem () {
 
   menus[cIdx].itens.splice(iIdx, 1)
   refreshItems()
-  showSave()
+  await showSave()
 }
 
 document.getElementById('itemSelect').addEventListener('change', fillItemForm)
@@ -492,10 +495,11 @@ function clearItemForm () {
   document.getElementById('preview').src = ''
 }
 
-function showSave () {
-  showToast('Não esquecer de: Enviar Alterações', 'info')
-  const sendDataContainer = document.getElementById('sendDataContainer')
-  sendDataContainer.style.display = 'block'
+async function showSave () {
+  await saveContent()
+  //showToast('Não esquecer de: Enviar Alterações', 'info')
+  //const sendDataContainer = document.getElementById('sendDataContainer')
+  //sendDataContainer.style.display = 'block'
 }
 function hideSave () {
   const sendDataContainer = document.getElementById('sendDataContainer')
