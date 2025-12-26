@@ -487,11 +487,22 @@ function fillItemForm () {
   // Set default image immediately
   preview.src = urldefaultpath
 
-  loadImageWithRetry(urlImagem, 5, 2000)
-    .then(url => (preview.src = url))
+  // 🔄 show spinner
+  spinner.style.display = 'block'
+  preview.classList.add('img-loading')
+
+  loadImageWithRetry(imageUrl, 5, 2000)
+    .then(url => {
+      preview.src = url
+    })
     .catch(() => {
-      // Keep default if the image never becomes available
       console.warn('Image not available, using default.')
+      preview.src = urldefaultpath
+    })
+    .finally(() => {
+      // ✅ hide spinner
+      spinner.style.display = 'none'
+      preview.classList.remove('img-loading')
     })
 }
 
