@@ -487,7 +487,7 @@ function fillItemForm () {
   const urlImagem = item.urlImagem || urldefaultpath
 
   // Set default image immediately
-  preview.src = urldefaultpath
+  // preview.src = urldefaultpath
 
   // 🔄 show spinner
   spinner.style.setProperty('display', 'block', 'important')
@@ -498,7 +498,7 @@ function fillItemForm () {
     })
     .catch(() => {
       console.warn('Image not available, using default.')
-      // preview.src = urldefaultpath
+       preview.src = urldefaultpath
     })
     .finally(() => {
       // ✅ hide spinner
