@@ -490,7 +490,7 @@ function fillItemForm () {
   preview.src = urldefaultpath
 
   // 🔄 show spinner
-  spinner.style.display = 'block'
+  spinner.style.setProperty('display', 'block', 'important')
   preview.classList.add('img-loading')
 
   loadImageWithRetry(urlImagem, 10, 5000)
@@ -499,11 +499,11 @@ function fillItemForm () {
     })
     .catch(() => {
       console.warn('Image not available, using default.')
-      preview.src = urldefaultpath
+      // preview.src = urldefaultpath
     })
     .finally(() => {
       // ✅ hide spinner
-      spinner.style.display = 'none'
+      spinner.style.setProperty('display', 'none', 'important')
       preview.classList.remove('img-loading')
     })
 }
