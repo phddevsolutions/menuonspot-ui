@@ -78,6 +78,7 @@
 
                   <div class="row mb-2 justify-content-between">
                     <div class="col-3 col-form-label fonttext d-flex flex-column justify-content-center">Imagem</div>
+
                     <div class="col-5 position-relative">
                       <img id="preview"
                           class="img-thumbnail img-size"
@@ -85,20 +86,19 @@
 
                       <!-- Image spinner -->
                       <div id="imageSpinner"
-                        class="spinner-border text-secondary position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
-                        role="status"
-                        style="display:none; z-index:10;">
+                          class="spinner-border text-secondary position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+                          role="status"
+                          style="display:none; z-index:10;">
+                      </div> <!-- properly close spinner div -->
                     </div>
 
-                    </div>
                     <div class="col-4 d-flex flex-column justify-content-center">
-                      <input type="file"  id="imageUpload" accept="image/*" hidden>
+                      <input type="file" id="imageUpload" accept="image/*" hidden>
                       <button type="button" class="btn btn-outline-danger" onclick="RemoveImage()">
                         <span class="btn-text">Remover</span>
                         <span class="spinner-border spinner-border-sm btn-spinner" role="status" aria-hidden="true"></span>
                       </button>
                     </div>
-                  
                   </div>
 
                   <div class="row mb-2 align-items-center">
