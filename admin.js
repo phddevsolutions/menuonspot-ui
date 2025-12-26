@@ -104,10 +104,9 @@ async function carregarDataJson () {
 
 async function saveContent () {
   try {
-    // O conteúdo final é sempre o editor.raw
     const rawContent = editor.value
-    const jsonObj = JSON.parse(rawContent) // valida JSON
-    const newContent = JSON.stringify(jsonObj) // string segura
+    const jsonObj = JSON.parse(rawContent)
+    const newContent = JSON.stringify(jsonObj)
 
     if (newContent.length === 0) {
       throw new Error('Menu vazio contactar o suporte!')
@@ -130,14 +129,12 @@ async function saveContent () {
 
     if (!response.ok) {
       const text = await response.text()
-      console.error('GitHub API response:', text)
       throw new Error(`GitHub API error: ${response.status} - ${text}`)
     }
 
     showToast('Alterações enviadas com sucesso!', 'success')
   } catch (err) {
     showToast(err.message ?? err, 'danger')
-  } finally {
   }
 }
 
@@ -499,7 +496,7 @@ function fillItemForm () {
     })
 }
 
-async function loadImageWithRetry (url, maxRetries = 5, delayMs = 10000) {
+async function loadImageWithRetry (url, maxRetries = 5, delayMs = 50000) {
   for (let i = 0; i < maxRetries; i++) {
     try {
       const res = await fetch(url, { method: 'HEAD' })
