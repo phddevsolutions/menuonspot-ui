@@ -487,14 +487,14 @@ function fillItemForm () {
   // Set default image immediately
   preview.src = urldefaultpath
 
-  // Try to load the actual image
-//   loadImageWithRetry(urlImagem, 5, 1000)
-//     .then(url => (preview.src = url))
-//     .catch(() => {
-//       // Keep default if the image never becomes available
-//       console.warn('Image not available, using default.')
-//     })
-// }
+  
+  loadImageWithRetry(urlImagem, 5, 1000)
+    .then(url => (preview.src = url))
+    .catch(() => {
+      // Keep default if the image never becomes available
+      console.warn('Image not available, using default.')
+    })
+}
 
 // async function loadImageWithRetry (url, maxRetries = 5, delayMs = 50000) {
 //   for (let i = 0; i < maxRetries; i++) {
