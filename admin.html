@@ -62,7 +62,7 @@
                     <div class="row mb-2 align-items-center">
                       <div class="col-3 col-form-label fonttext">Nome</div>
                     <div class="col-9">
-                      <input type="text" class="form-control fonttext" id="itemName">
+                      <input type="text" class="form-control fonttext save-trigger" id="itemName">
                     </div>
                   </div>
 
@@ -70,7 +70,7 @@
                     <div class="col-3 col-form-label fonttext">Descrição</div>
                     <div class="col-9">
                       <!-- <input type="text" class="form-control itemdesc" id="itemDesc"> -->
-                      <textarea id="itemDesc" class="form-control"></textarea>
+                      <textarea id="itemDesc" class="form-control save-trigger"></textarea>
                     </div>
                   </div>
 
@@ -104,7 +104,7 @@
                   <div class="row mb-2 align-items-center">
                     <div class="col-3 col-form-label fonttext">Preço</div>
                     <div class="col-9">
-                      <input type="number" class="form-control fonttext" id="itemPrice" placeholder="€ 0.00">
+                      <input type="number" class="form-control fonttext save-trigger" id="itemPrice" placeholder="€ 0.00">
                     </div>
                   </div>
 
@@ -113,17 +113,17 @@
                       <div class="checkbox-container">
                         <div class="checkbox-group">
                           <div for="isActive">Activo</div>
-                            <input type="checkbox" id="isActive">
+                            <input type="checkbox" id="isActive" class="save-trigger">
                           </div>
 
                           <div class="checkbox-group">
                             <div for="itemOrder">Encomendar</div>
-                            <input type="checkbox" id="itemOrder">
+                            <input type="checkbox" id="itemOrder" class="save-trigger">
                           </div>
 
                           <div class="checkbox-group">
                             <div for="itemNew">Novo</div>
-                            <input type="checkbox" id="itemNew">
+                            <input type="checkbox" id="itemNew" class="save-trigger">
                           </div>
                       </div>
                       </div>
@@ -138,7 +138,7 @@
                     <span class="btn-text">Apagar</span>
                     <span class="spinner-border spinner-border-sm btn-spinner" role="status" aria-hidden="true"></span>
                   </button>
-                  <button type="button" class="btn btn-primary w-25" id="saveProductId" onclick="processItem()">
+                  <button type="button" disabled aria-disabled="true" class="btn btn-primary w-25" id="saveProductId" onclick="processItem()">
                     <span class="btn-text">Gravar</span>
                     <span class="spinner-border spinner-border-sm btn-spinner" role="status" aria-hidden="true"></span>
                   </button>

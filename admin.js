@@ -33,6 +33,7 @@ const urldefaultpath = './images/default.png'
 let accessToken = null
 let menus = [] // ← dados manipulados no editor visual
 let currentImageLoadToken = 0
+let temp_newProduct = false
 
 // =====================================================
 // 🔹 Login GitHub
@@ -261,6 +262,7 @@ function onCategoryChange (sourceSelect) {
     categorySelect.value = value
     categoryNameEdit.value = value
   }
+  setSaveButtonEnabled(false)
   loading = true
   refreshItems()
   loading = false
@@ -273,6 +275,7 @@ function onCategoryChange (sourceSelect) {
 
 // Atualiza lista visual e combo de seleção
 function refreshItems () {
+  setSaveButtonEnabled(false)
   const idx = document.getElementById('categorySelect').value
   const ul = document.getElementById('itemsList')
   const itemSelect = document.getElementById('itemSelect')
@@ -304,6 +307,10 @@ function refreshItems () {
     }
     if (loading) {
       itemSelect.value = 0
+    }
+    if (temp_newProduct) {
+      itemSelect.value = itens.length - 1
+      temp_newProduct = false
     }
     fillItemForm()
   } else {
@@ -420,6 +427,7 @@ async function processItem () {
     menus[cIdx].itens[iIdx] = newItem
   } else {
     menus[cIdx].itens.push(newItem)
+    temp_newProduct = true
   }
 
   refreshItems()
@@ -466,7 +474,20 @@ async function removeItem () {
 
 document.getElementById('itemSelect').addEventListener('change', fillItemForm)
 
+document.addEventListener('input', e => {
+  if (e.target.matches('.save-trigger')) {
+    setSaveButtonEnabled(true)
+  }
+})
+
+document.addEventListener('change', e => {
+  if (e.target.matches('.save-trigger')) {
+    setSaveButtonEnabled(true)
+  }
+})
+
 function fillItemForm () {
+  setSaveButtonEnabled(false)
   selectedImageFile = null
   const cIdx = parseInt(document.getElementById('categorySelect').value, 10)
   const iIdx = parseInt(document.getElementById('itemSelect').value, 10)
@@ -534,6 +555,13 @@ function loadImageWithRetry (url, retries, delay, token) {
 
     tryLoad()
   })
+}
+
+function setSaveButtonEnabled (enabled) {
+  saveProductBtn.disabled = !enabled
+  saveProductBtn.setAttribute('aria-disabled', String(!enabled))
+  saveProductBtn.classList.toggle('btn-primary', enabled)
+  saveProductBtn.classList.toggle('btn-secondary', !enabled)
 }
 
 // async function loadImageWithRetry (url, maxRetries = 5, delayMs = 50000) {
@@ -623,7 +651,7 @@ document.getElementById('imageUpload').addEventListener('change', e => {
     e.target.value = ''
     return
   }
-
+  setSaveButtonEnabled(true)
   selectedImageFile = file
   document.getElementById('preview').src = URL.createObjectURL(file)
 })
@@ -683,13 +711,13 @@ function RemoveImage () {
     const input = document.getElementById('imageUpload')
     input.value = ''
     const preview = document.getElementById('preview')
-    preview.src = ''
+    preview.src = urldefaultpath
     preview.title = ''
 
-    const iIdx = document.getElementById('itemSelect').value
-    menus[cIdx].itens[iIdx].urlImagem = urldefaultpath
+    // const iIdx = document.getElementById('itemSelect').value
+    // menus[cIdx].itens[iIdx].urlImagem = urldefaultpath
 
-    document.getElementById('preview').src = urldefaultpath
+    setSaveButtonEnabled(true)
     selectedImageFile = null
   }
 }
