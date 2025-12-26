@@ -138,8 +138,6 @@ async function saveContent () {
   }
 }
 
-saveBtn.onclick = saveContent()
-
 function refreshDropdownCategories () {
   const select = document.getElementById('categorySelect')
   select.innerHTML = ''
