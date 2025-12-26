@@ -496,17 +496,43 @@ function fillItemForm () {
     })
 }
 
-async function loadImageWithRetry (url, maxRetries = 5, delayMs = 50000) {
+// async function loadImageWithRetry (url, maxRetries = 5, delayMs = 50000) {
+//   for (let i = 0; i < maxRetries; i++) {
+//     try {
+//       const res = await fetch(url, { method: 'HEAD' })
+//       if (res.ok) return url // image exists
+//     } catch (e) {
+//       // ignore fetch errors
+//     }
+//     await new Promise(r => setTimeout(r, delayMs))
+//   }
+//   throw new Error('Image not available')
+// }
+async function loadImageWithRetry (
+  url,
+  { maxRetries = 5, delayMs = 3000, onLoadingChange = () => {} } = {}
+) {
+  onLoadingChange(true)
+
   for (let i = 0; i < maxRetries; i++) {
     try {
-      const res = await fetch(url, { method: 'HEAD' })
-      if (res.ok) return url // image exists
-    } catch (e) {
-      // ignore fetch errors
-    }
+      const cacheBuster = `cb=${Date.now()}`
+      const res = await fetch(`${url}?${cacheBuster}`, {
+        method: 'GET',
+        cache: 'no-store'
+      })
+
+      if (res.ok) {
+        onLoadingChange(false)
+        return `${url}?${cacheBuster}`
+      }
+    } catch (_) {}
+
     await new Promise(r => setTimeout(r, delayMs))
   }
-  throw new Error('Image not available')
+
+  onLoadingChange(false)
+  throw new Error('Image not available on GitHub')
 }
 
 function clearItemForm () {
@@ -525,10 +551,6 @@ async function showSave () {
   //showToast('Não esquecer de: Enviar Alterações', 'info')
   //const sendDataContainer = document.getElementById('sendDataContainer')
   //sendDataContainer.style.display = 'block'
-}
-function hideSave () {
-  const sendDataContainer = document.getElementById('sendDataContainer')
-  sendDataContainer.style.display = 'none'
 }
 
 function EnableSpinner (button) {
