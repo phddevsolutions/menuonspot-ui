@@ -123,8 +123,8 @@
                 <div class="border-top border-secondary mb-3"></div>
 
                 <div class="row justify-content-between">
-                  <button type="button" class="btn btn-outline-danger w-25 btn-sm" onclick="removeItem()">Apagar</button>
-                  <button type="button" class="btn btn-primary w-25" onclick="processItem()">Gravar</button>
+                  <button type="button" class="btn btn-outline-danger w-25 btn-sm" id="deleteProductId" onclick="removeItem()">Apagar</button>
+                  <button type="button" class="btn btn-primary w-25" id="saveProductId" onclick="processItem()">Gravar</button>
                 </div>
           
                 <div class="row" id="sendDataContainer" style="display:none"> 
@@ -149,7 +149,7 @@
             </div>
             <div class="row justify-content-center"> 
               <input type="text" id="categoryName" >
-              <button class="btn btn-primary w-50 mb-2 btn-sm" onclick="addCategory()">Adicionar</button>
+              <button class="btn btn-primary w-50 mb-2 btn-sm" id="addCategoryId" onclick="addCategory()">Adicionar</button>
             </div>
 
             <div class="row">
@@ -158,7 +158,7 @@
             <div class="row justify-content-center">
               <select id="categoryNameEdit"  class="form-select form-select-sm w-100 shadow-sm"></select>
               <input type="text" id="categoryNameEditText">
-              <button class="btn btn-primary w-50 mb-2 btn-sm" onclick="editCategory()">Gravar</button>
+              <button class="btn btn-primary w-50 mb-2 btn-sm" id="editCategoryId" onclick="editCategory()">Gravar</button>
             </div>
 
             <div class="row">
@@ -167,7 +167,7 @@
 
             <div class="row justify-content-center">
               <select id="categorySelect" class="form-select form-select-sm w-100 shadow-sm"></select>
-              <button class="btn btn-outline-danger w-50 mb-2 btn-sm" onclick="removeCategory()">Remover</button>
+              <button class="btn btn-outline-danger w-50 mb-2 btn-sm" id="removeCategoryId" onclick="removeCategory()">Remover</button>
             </div>
 
             <div class="row">

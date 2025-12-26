@@ -10,6 +10,13 @@ const TOKEN_PROXY = 'https://vercel-git-proxy.vercel.app/api/token'
 const CLIENT_ID = 'Ov23lieOlxeI1P0NX5ha'
 
 const loginBtn = document.getElementById('loginBtn')
+const addCategoryBtn = document.getElementById('addCategoryId')
+const editCategoryBtn = document.getElementById('editCategoryId')
+const removeCategoryBtn = document.getElementById('removeCategoryId')
+
+const saveProductBtn = document.getElementById('saveProductId')
+const deleteProductBtn = document.getElementById('deleteProductId')
+
 const saveBtn = document.getElementById('saveBtn')
 const editor = document.getElementById('editor')
 
@@ -97,8 +104,6 @@ async function carregarDataJson () {
 
 async function saveContent () {
   try {
-    EnableSpinner(saveBtn)
-
     // O conteúdo final é sempre o editor.raw
     const rawContent = editor.value
     const jsonObj = JSON.parse(rawContent) // valida JSON
@@ -130,11 +135,9 @@ async function saveContent () {
     }
 
     showToast('Alterações enviadas com sucesso!', 'success')
-    hideSave()
   } catch (err) {
     showToast(err.message ?? err, 'danger')
   } finally {
-    DisableSpinner(saveBtn)
   }
 }
 
@@ -162,9 +165,13 @@ function refreshDropdownCategories () {
 }
 
 async function addCategory () {
+  EnableSpinner(addCategoryBtn)
   const nameInput = document.getElementById('categoryName')
   const name = nameInput.value.trim()
-  if (!name) return showToast('Nova categoria vazia!', 'warning')
+  if (!name) {
+    DisableSpinner(addCategoryBtn)
+    return showToast('Nova categoria vazia!', 'warning')
+  }
 
   const exists = menus.some(m => m.label.toLowerCase() === name.toLowerCase())
 
@@ -183,13 +190,18 @@ async function addCategory () {
   }
 
   nameInput.value = ''
+  DisableSpinner(addCategoryBtn)
 }
 
 async function editCategory () {
+  EnableSpinner(editCategoryBtn)
   const idx = document.getElementById('categoryNameEdit').value
   const nameInput = document.getElementById('categoryNameEditText')
   const name = nameInput.value.trim()
-  if (!name) return showToast('Nome da categoria vazia!', 'warning')
+  if (!name) {
+    DisableSpinner(editCategoryBtn)
+    return showToast('Nome da categoria vazia!', 'warning')
+  }
 
   menus[idx].label = name
   menus[idx].id = name.replace(/\s+/g, '_')
@@ -197,17 +209,23 @@ async function editCategory () {
   refreshDropdownCategories()
   await showSave()
   nameInput.value = ''
+  DisableSpinner(editCategoryBtn)
 }
 
 async function removeCategory () {
+  EnableSpinner(removeCategoryBtn)
   const idx = document.getElementById('categorySelect').value
   if (
     !confirm('A categoria e todos os items serão eliminados, Tem a certeza ?')
-  )
+  ) {
+    DisableSpinner(removeCategoryBtn)
     return
+  }
+
   menus.splice(idx, 1)
   refreshDropdownCategories()
   await showSave()
+  DisableSpinner(removeCategoryBtn)
 }
 
 // Atualiza JSON visual + textarea bruto
@@ -356,6 +374,7 @@ function createMenuItem ({
 }
 
 async function processItem () {
+  EnableSpinner(saveProductBtn)
   const cIdx = document.getElementById('categorySelectToEdit').value
   const name = document.getElementById('itemName').value.trim()
   const desc = document.getElementById('itemDesc').value.trim()
@@ -364,8 +383,14 @@ async function processItem () {
   const novo = document.getElementById('itemNew').checked
   const active = document.getElementById('isActive').checked
 
-  if (!name) return showToast('Nome vazio', 'danger')
-  if (!price) return showToast('Preco vazio', 'danger')
+  if (!name) {
+    DisableSpinner(saveProductBtn)
+    return showToast('Nome vazio', 'danger')
+  }
+  if (!price) {
+    DisableSpinner(saveProductBtn)
+    return showToast('Preco vazio', 'danger')
+  }
 
   let urlImagem = urldefaultpath
 
@@ -399,6 +424,7 @@ async function processItem () {
 
   refreshItems()
   await showSave()
+  DisableSpinner(saveProductBtn)
 }
 
 // ➕ Adicionar item
@@ -424,14 +450,18 @@ function editItem (cIdx, name, desc, price, byOrder, novo, active, image) {
 }
 
 async function removeItem () {
+  EnableSpinner(deleteProductBtn)
   const cIdx = document.getElementById('categorySelectToEdit').value
   const iIdx = document.getElementById('itemSelect').value
 
-  if (!confirm('Tem certeza que quer remover este item?')) return
-
+  if (!confirm('Tem certeza que quer remover este item?')) {
+    DisableSpinner(deleteProductBtn)
+    return
+  }
   menus[cIdx].itens.splice(iIdx, 1)
   refreshItems()
   await showSave()
+  DisableSpinner(deleteProductBtn)
 }
 
 document.getElementById('itemSelect').addEventListener('change', fillItemForm)
