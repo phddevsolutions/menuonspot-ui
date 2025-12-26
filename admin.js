@@ -491,9 +491,8 @@ function fillItemForm () {
 
   // 🔄 show spinner
   spinner.style.setProperty('display', 'block', 'important')
-  preview.classList.add('img-loading')
 
-  loadImageWithRetry(urlImagem, 10, 5000)
+  loadImageWithRetry(urlImagem, 15, 5000)
     .then(url => {
       preview.src = url
     })
@@ -504,7 +503,7 @@ function fillItemForm () {
     .finally(() => {
       // ✅ hide spinner
       spinner.style.setProperty('display', 'none', 'important')
-      preview.classList.remove('img-loading')
+     
     })
 }
 
@@ -520,7 +519,7 @@ function fillItemForm () {
 //   }
 //   throw new Error('Image not available')
 // }
-function loadImageWithRetry (url, retries = 5, delay = 50000) {
+function loadImageWithRetry (url, retries, delay) {
   return new Promise((resolve, reject) => {
     const img = new Image()
     let attempts = 0
