@@ -488,7 +488,7 @@ function fillItemForm () {
   preview.src = urldefaultpath
 
   
-  loadImageWithRetry(urlImagem, 5, 1000)
+  loadImageWithRetry(urlImagem, 5, 2000)
     .then(url => (preview.src = url))
     .catch(() => {
       // Keep default if the image never becomes available
@@ -508,35 +508,23 @@ function fillItemForm () {
 //   }
 //   throw new Error('Image not available')
 // }
-async function loadImageWithRetry(
-  url,
-  {
-    maxRetries = 5,
-    delayMs = 3000,
-    onLoadingChange = () => {}
-  } = {}
-) {
-  onLoadingChange(true)
+function loadImageWithRetry(url, retries = 5, delay = 2000) {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    let attempts = 0
 
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      const cacheBuster = `cb=${Date.now()}`
-      const res = await fetch(`${url}?${cacheBuster}`, {
-        method: 'GET',
-        cache: 'no-store'
-      })
+    const tryLoad = () => {
+      img.src = `${url}?cb=${Date.now()}`
+    }
 
-      if (res.ok) {
-        onLoadingChange(false)
-        return `${url}?${cacheBuster}`
-      }
-    } catch (_) {}
+    img.onload = () => resolve(img.src)
+    img.onerror = () => {
+      if (++attempts >= retries) reject()
+      else setTimeout(tryLoad, delay)
+    }
 
-    await new Promise(r => setTimeout(r, delayMs))
-  }
-
-  onLoadingChange(false)
-  throw new Error('Image not available on GitHub')
+    tryLoad()
+  })
 }
 
 
