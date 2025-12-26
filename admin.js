@@ -365,7 +365,7 @@ function createMenuItem ({
   return {
     label: name,
     description: desc,
-    urlImagem: '.' + urlImagem || urldefaultpath,
+    urlImagem: urlImagem || urldefaultpath,
     preco: price,
     ativo: active,
     novo: Number(novo),
@@ -634,7 +634,7 @@ async function uploadImageToRepo (file) {
     throw new Error(`Image upload failed: ${text}`)
   }
 
-  return `/${path}` // relative path to store in JSON
+  return `./${path}` // relative path to store in JSON
 }
 
 function RemoveImage () {
