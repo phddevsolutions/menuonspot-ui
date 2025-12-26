@@ -20,6 +20,8 @@ const deleteProductBtn = document.getElementById('deleteProductId')
 const saveBtn = document.getElementById('saveBtn')
 const editor = document.getElementById('editor')
 
+const spinner = document.getElementById('imageSpinner')
+
 const menuEditor = document.getElementById('menuEditor')
 const menuItens = document.getElementById('menuItens')
 const navbuttons = document.getElementById('navbuttons')
@@ -501,7 +503,23 @@ function fillItemForm () {
     })
     .finally(() => {
       // ✅ hide spinner
+      // 🔄 show spinner
+  spinner.style.display = 'block'
+  preview.classList.add('img-loading')
+
+  loadImageWithRetry(imageUrl, 5, 2000)
+    .then(url => {
+      preview.src = url
+    })
+    .catch(() => {
+      console.warn('Image not available, using default.')
+      preview.src = urldefaultpath
+    })
+    .finally(() => {
+      // ✅ hide spinner
       spinner.style.display = 'none'
+      preview.classList.remove('img-loading')
+    }).style.display = 'none'
       preview.classList.remove('img-loading')
     })
 }
