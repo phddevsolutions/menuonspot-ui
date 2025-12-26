@@ -499,7 +499,7 @@ function fillItemForm () {
     })
 }
 
-async function loadImageWithRetry (url, maxRetries = 5, delayMs = 1000) {
+async function loadImageWithRetry (url, maxRetries = 5, delayMs = 3000) {
   for (let i = 0; i < maxRetries; i++) {
     try {
       const res = await fetch(url, { method: 'HEAD' })
