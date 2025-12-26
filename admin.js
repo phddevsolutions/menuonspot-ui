@@ -487,11 +487,10 @@ function fillItemForm () {
   const preview = document.getElementById('preview')
   const urlImagem = item.urlImagem || urldefaultpath
 
-
   preview.src = ''
   spinner.style.setProperty('display', 'block', 'important')
 
-   const token = ++currentImageLoadToken
+  const token = ++currentImageLoadToken
   loadImageWithRetry(urlImagem, 15, 5000, token)
     .then(url => {
       if (token === currentImageLoadToken) {
@@ -499,7 +498,7 @@ function fillItemForm () {
       }
     })
     .catch(() => {
-     if (token === currentImageLoadToken) {
+      if (token === currentImageLoadToken) {
         preview.src = urldefaultpath
       }
     })
@@ -510,8 +509,7 @@ function fillItemForm () {
     })
 }
 
-
-function loadImageWithRetry (url, retries, delay) {
+function loadImageWithRetry (url, retries, delay, token) {
   return new Promise((resolve, reject) => {
     const img = new Image()
     let attempts = 0
