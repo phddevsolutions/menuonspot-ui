@@ -508,9 +508,13 @@ function fillItemForm () {
 //   }
 //   throw new Error('Image not available')
 // }
-async function loadImageWithRetry (
+async function loadImageWithRetry(
   url,
-  { maxRetries = 5, delayMs = 3000, onLoadingChange = () => {} } = {}
+  {
+    maxRetries = 5,
+    delayMs = 3000,
+    onLoadingChange = () => {}
+  } = {}
 ) {
   onLoadingChange(true)
 
@@ -534,6 +538,7 @@ async function loadImageWithRetry (
   onLoadingChange(false)
   throw new Error('Image not available on GitHub')
 }
+
 
 function clearItemForm () {
   selectedImageFile = null
