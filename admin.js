@@ -487,7 +487,6 @@ function fillItemForm () {
   // Set default image immediately
   preview.src = urldefaultpath
 
-  
   loadImageWithRetry(urlImagem, 5, 2000)
     .then(url => (preview.src = url))
     .catch(() => {
@@ -508,7 +507,7 @@ function fillItemForm () {
 //   }
 //   throw new Error('Image not available')
 // }
-function loadImageWithRetry(url, retries = 5, delay = 2000) {
+function loadImageWithRetry (url, retries = 5, delay = 50000) {
   return new Promise((resolve, reject) => {
     const img = new Image()
     let attempts = 0
@@ -526,7 +525,6 @@ function loadImageWithRetry(url, retries = 5, delay = 2000) {
     tryLoad()
   })
 }
-
 
 function clearItemForm () {
   selectedImageFile = null
