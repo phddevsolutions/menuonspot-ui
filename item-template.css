@@ -70,7 +70,7 @@
 
 .item-img {
   height: 120px;     /* ocupa toda a altura da coluna */
-  object-fit: cover; /* cobre o container sem deformar */
+  object-fit: contain; 
 
 }
 
