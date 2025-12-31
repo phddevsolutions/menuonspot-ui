@@ -409,13 +409,28 @@ async function processItem () {
 
   if (labelExists) {
     const iIdx = document.getElementById('itemSelect').value
-    urlImagem = menus[cIdx].itens[iIdx].urlImagem || urldefaultpath
+    urlImagem = menus[cIdx].itens[iIdx].urlImagem 
   } else {
     urlImagem = urldefaultpath
   }
 
   if (selectedImageFile) {
     urlImagem = await uploadImageToRepo(selectedImageFile)
+    if (labelExists) {
+      const iIdx = document.getElementById('itemSelect').value
+      const oldImagePath = menus[cIdx].itens[iIdx].urlImagem
+      if (
+        oldImagePath &&
+        oldImagePath !== urldefaultpath &&
+        oldImagePath !== urlImagem
+      ) {
+        try {
+          await removeImageFromRepo(oldImagePath)
+        } catch (err) {
+          console.error('Erro ao remover imagem antiga:', err)
+        }
+      }
+    }
     selectedImageFile = null
   }
 
@@ -728,3 +743,54 @@ function RemoveImage () {
     selectedImageFile = null
   }
 }
+
+async function removeImageFromRepo(fileId) {
+  const path = fileId.replace(/^.\//, '') // removes leading "./" if present
+  const sha = await getFileSha(path)
+
+  const response = await fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,
+    {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        Accept: 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `Delete image ${path}`,
+        sha,
+        branch: BRANCH
+      })
+    }
+  )
+
+  if (!response.ok) {
+    const text = await response.text()
+    throw new Error(`Image delete failed: ${text}`)
+  }
+
+  return true
+}
+
+async function getFileSha(path) {
+  const response = await fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        Accept: 'application/vnd.github+json'
+      }
+    }
+  )
+
+  if (!response.ok) {
+    const text = await response.text()
+    throw new Error(`Failed to get file SHA: ${text}`)
+  }
+
+  const data = await response.json()
+  return data.sha
+}
+
+
