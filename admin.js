@@ -399,7 +399,20 @@ async function processItem () {
     return showToast('Preco vazio', 'danger')
   }
 
+  const itens = menus[cIdx]?.itens
+
+  const labelExists =
+    Array.isArray(itens) &&
+    itens.some(item => item.label.toLowerCase() === name.toLowerCase())
+
   let urlImagem = urldefaultpath
+
+  if (labelExists) {
+    const iIdx = document.getElementById('itemSelect').value
+    urlImagem = menus[cIdx].itens[iIdx].urlImagem || urldefaultpath
+  } else {
+    urlImagem = urldefaultpath
+  }
 
   if (selectedImageFile) {
     urlImagem = await uploadImageToRepo(selectedImageFile)
@@ -415,12 +428,6 @@ async function processItem () {
     active,
     urlImagem
   })
-
-  const itens = menus[cIdx]?.itens
-
-  const labelExists =
-    Array.isArray(itens) &&
-    itens.some(item => item.label.toLowerCase() === name.toLowerCase())
 
   if (labelExists) {
     const iIdx = document.getElementById('itemSelect').value
