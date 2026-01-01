@@ -284,7 +284,8 @@ function refreshItems () {
   ul.innerHTML = ''
   itemSelect.innerHTML = ''
 
-  const itens = menus[idx]?.itens || []
+  const itens = (menus[idx]?.itens || [])
+  .sort((a, b) => a.label.localeCompare(b.label));
 
   itens.forEach((item, index) => {
     // Lista visual
