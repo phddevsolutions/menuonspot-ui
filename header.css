@@ -21,12 +21,12 @@
 .navbar a.active {
     display: inline-block;
     padding: 6px 14px;
-    background-color: #FFF4E6;
+    background-color: #EDFFEE;
     border-radius: 5px;
 
     font-weight: 600;
     font-size: 13px;
-    color: #FF9900;
+    color: #66221E;
 
     box-shadow: 0 0 4px rgba(255, 153, 48, 0.45);
 }
@@ -38,7 +38,7 @@
   left: 0;
   height: 1px;
   width: 100%;
-  background-color: #ff6600;
+  background-color: #66221E;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -46,7 +46,7 @@
 .navbar a:before {
     content: "\f006";
     font: normal normal normal 14px/1 FontAwesome;
-    color:#FF9900;
+    color:#66221E;
     padding-right: 7px;
 }
 
@@ -57,13 +57,13 @@
     border-radius: 12px;
     font-weight: 600;
     font-size: 16px;
-    color: #FFA500; /* fallback para browsers sem gradiente */
+    color: #66221E; /* fallback para browsers sem gradiente */
 
     /* Texto com gradiente */
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    background-image: linear-gradient(90deg, #FF9900, #FFB84D);
+    background-image: linear-gradient(90deg, #66221E, #FFB84D);
 
     /* Sombra suave */
     box-shadow: 0 0 4px rgba(0,0,0,0.05);

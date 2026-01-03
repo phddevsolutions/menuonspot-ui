@@ -1,7 +1,7 @@
 .menu-item {
   display: flex;
   align-items: flex-start; /* align text and image at top */
-  border-top:1px dashed #e0e0e0
+  border-top:1px dashed #66221E
 }
 
 .menu-item .flex-grow-1 {
@@ -18,14 +18,15 @@
     font-size: 24px;
     font-weight: 700;
     text-transform: capitalize;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
+    border-bottom: 1px solid #66221E;
+    border-top: 1px solid #66221E;
+    color: #66221E;
     
 }
 .text-section{
     font-size: 20px;
     font-weight: 700;
-    background-color: #FFF4e6;
+    background-color: #EDFFEE;
 }
 
 .item-description {
@@ -57,7 +58,7 @@
 }
 
 .item-price {
-    color: #ff6600;
+    font-size: 0.8em;
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
