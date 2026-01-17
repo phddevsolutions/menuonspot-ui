@@ -12,6 +12,10 @@ async function buildArchitecture (callback) {
     document.getElementById('index-section-placeholder').innerHTML =
       await sectionRes.text()
 
+    const modalRes = await fetch('modal.html')
+    document.getElementById('modal-placeholder').innerHTML =
+      await modalRes.text()
+
     // 3️⃣ Now load nested sections (they exist now)
     const [menuRes] = await Promise.all([
       // fetch('filter-section.html'),
