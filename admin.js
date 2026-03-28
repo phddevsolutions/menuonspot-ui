@@ -39,7 +39,7 @@ let temp_newProduct = false
 // 🔹 Login GitHub
 // =====================================================
 loginBtn.onclick = () => {
-  const url = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=repo`
+  const url = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=public_repo`
   window.location.href = url
 }
 
@@ -284,8 +284,9 @@ function refreshItems () {
   ul.innerHTML = ''
   itemSelect.innerHTML = ''
 
-  const itens = (menus[idx]?.itens || [])
-  .sort((a, b) => a.label.localeCompare(b.label));
+  const itens = (menus[idx]?.itens || []).sort((a, b) =>
+    a.label.localeCompare(b.label)
+  )
 
   itens.forEach((item, index) => {
     // Lista visual
@@ -410,7 +411,7 @@ async function processItem () {
 
   if (labelExists) {
     const iIdx = document.getElementById('itemSelect').value
-    urlImagem = menus[cIdx].itens[iIdx].urlImagem 
+    urlImagem = menus[cIdx].itens[iIdx].urlImagem
   } else {
     urlImagem = urldefaultpath
   }
@@ -745,7 +746,7 @@ function RemoveImage () {
   }
 }
 
-async function removeImageFromRepo(fileId) {
+async function removeImageFromRepo (fileId) {
   const path = fileId.replace(/^.\//, '') // removes leading "./" if present
   const sha = await getFileSha(path)
 
@@ -774,7 +775,7 @@ async function removeImageFromRepo(fileId) {
   return true
 }
 
-async function getFileSha(path) {
+async function getFileSha (path) {
   const response = await fetch(
     `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`,
     {
@@ -793,5 +794,3 @@ async function getFileSha(path) {
   const data = await response.json()
   return data.sha
 }
-
-
